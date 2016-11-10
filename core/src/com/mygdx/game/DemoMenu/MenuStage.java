@@ -20,9 +20,10 @@ import com.mygdx.game.MyGdxGame;
  * Created by tuskeb on 2016. 09. 30..
  */
 public class MenuStage extends MyStage {
-    private TextButton textButton, textButton2, textButton3, textButton4;
-    private Label utkozesMyLabel;
 
+    private TextButton textButton, textButton2, textButton3;
+
+    private float width, heigthBetween, heigth; //menüpontok pozicionálása
 
     public MenuStage(Viewport viewport, Batch batch, MyGdxGame game) {
         super(viewport, batch, game);
@@ -31,8 +32,15 @@ public class MenuStage extends MyStage {
 
     public void init()
     {
+        width = (getViewport().getScreenWidth())/2; //vízszintesen középre
+        heigthBetween = (getViewport().getScreenHeight())/4; //egyenletesen elosztva 3 menüponthoz
+        heigth = (getViewport().getScreenHeight()); //magasság
+
+
+
+        //Játék
         addBackEventStackListener();
-        textButton = new MyButton("Előre", game.getTextButtonStyle());
+        textButton = new MyButton("Play", game.getTextButtonStyle());
         textButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -40,10 +48,41 @@ public class MenuStage extends MyStage {
                 game.setScreen(new OtherScreen(game));
             }
         });
-
-        textButton.setPosition(200,100);
+        heigth -= heigthBetween;
+        textButton.setPosition(width-((textButton.getWidth())/2),heigth);
         textButton.debug();
         addActor(textButton);
+        System.out.println(textButton.getWidth());
+
+        //Extrák
+        addBackEventStackListener();
+        textButton2 = new MyButton("Extras", game.getTextButtonStyle());
+        textButton2.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                game.setScreen(new OtherScreen(game));
+            }
+        });
+        heigth -= heigthBetween;
+        textButton2.setPosition(width-((textButton2.getWidth())/2),heigth);
+        textButton2.debug();
+        addActor(textButton2);
+
+        //Készítők
+        addBackEventStackListener();
+        textButton3 = new MyButton("Credits", game.getTextButtonStyle());
+        textButton3.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                game.setScreen(new OtherScreen(game));
+            }
+        });
+        heigth -= heigthBetween;
+        textButton3.setPosition(width-((textButton3.getWidth())/2),heigth);
+        textButton3.debug();
+        addActor(textButton3);
     }
 
 
