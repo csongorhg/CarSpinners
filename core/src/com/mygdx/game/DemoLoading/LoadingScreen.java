@@ -3,19 +3,43 @@ package com.mygdx.game.DemoLoading;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.DemoMenu.MenuScreen;
 import com.mygdx.game.MyBaseClasses.MyScreen;
 import com.mygdx.game.GlobalClasses.*;
+import com.mygdx.game.MyBaseClasses.OneSpriteAnimatedActor;
+import com.mygdx.game.MyBaseClasses.OneSpriteStaticActor;
 import com.mygdx.game.MyGdxGame;
 
 
 public class LoadingScreen extends MyScreen {
 
 
+	Stage stage;
+	OneSpriteStaticActor text;
+
     public LoadingScreen(MyGdxGame game) {
 		super(game);
+		stage = new Stage();
+		OneSpriteAnimatedActor pic = new OneSpriteAnimatedActor("load.txt")
+		{
+			@Override
+			public void init() {
+				super.init();
+				setFps(12);
+			}
+		};
+		stage.addActor(pic);
+
+		pic.setPosition(stage.getWidth()/2-pic.getWidth()/2,stage.getHeight()/2-pic.getHeight()/2);
+
+		text = new OneSpriteStaticActor("justszoveg.png");
+		stage.addActor(text);
+		text.setPosition(stage.getWidth()/2-text.getWidth()/2,stage.getHeight()/2-text.getHeight()/2);
     }
-	BitmapFont bitmapFont = new BitmapFont();
+
 
     @Override
 	public void show() {
@@ -26,14 +50,14 @@ public class LoadingScreen extends MyScreen {
 	@Override
 	public void render(float delta) {
 		super.render(delta);
-
-		spriteBatch.begin();
-		bitmapFont.draw(spriteBatch,"Betöltés: " + Assets.manager.getLoadedAssets() + "/" + (Assets.manager.getQueuedAssets()+ Assets.manager.getLoadedAssets()) + " (" + ((int)(Assets.manager.getProgress()*100f)) + "%)", Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2);
-		spriteBatch.end();
-		if (Assets.manager.update()) {
+		stage.act(delta);
+		stage.draw();
+		/*if (Assets.manager.update()) {
 			Assets.afterLoaded();
 			game.setScreen(new MenuScreen(game));
-		}
+		}*/
+
+
 	}
 
 	@Override
@@ -44,5 +68,7 @@ public class LoadingScreen extends MyScreen {
 	@Override
 	public void init() {
 		setBackGroundColor(0f, 0f, 0f);
+
+
 	}
 }
