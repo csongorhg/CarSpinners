@@ -17,13 +17,15 @@ import com.mygdx.game.MyGdxGame;
 public class LoadingScreen extends MyScreen {
 
 
-	Stage stage;
-	OneSpriteStaticActor text;
+	private Stage stage;
+	private OneSpriteStaticActor text;
+	private float elapsedTime = 0;
+	private OneSpriteAnimatedActor pic;
 
     public LoadingScreen(MyGdxGame game) {
 		super(game);
 		stage = new Stage();
-		OneSpriteAnimatedActor pic = new OneSpriteAnimatedActor("load.txt")
+		pic = new OneSpriteAnimatedActor("load.txt")
 		{
 			@Override
 			public void init() {
@@ -52,11 +54,11 @@ public class LoadingScreen extends MyScreen {
 		super.render(delta);
 		stage.act(delta);
 		stage.draw();
-		/*if (Assets.manager.update()) {
+		if (elapsedTime > 4.0 && Assets.manager.update()) {
 			Assets.afterLoaded();
 			game.setScreen(new MenuScreen(game));
-		}*/
-
+		}
+		elapsedTime+=delta;
 
 	}
 

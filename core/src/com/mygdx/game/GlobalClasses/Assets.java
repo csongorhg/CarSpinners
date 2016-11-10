@@ -16,6 +16,13 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader;
 
 
 public class Assets {
+	//zenék
+	//http://www.bensound.com/royalty-free-music/track/pop-dance
+	//http://www.bensound.com/royalty-free-music/track/moose
+	//http://www.bensound.com/royalty-free-music/track/happy-rock
+	//http://www.bensound.com/royalty-free-music/track/extreme-action
+
+
 	// https://github.com/libgdx/libgdx/wiki/Managing-your-assets
 	// http://www.jacobplaster.net/using-libgdx-asset-manager
 	// https://www.youtube.com/watch?v=JXThbQir2gU
