@@ -1,6 +1,5 @@
-package com.mygdx.game.DemoOtherScr;
+package com.mygdx.game.Play;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -13,11 +12,11 @@ import com.mygdx.game.MyGdxGame;
 /**
  * Created by tuskeb on 2016. 09. 30..
  */
-public class OtherStage extends MyStage {
+public class PlayStage extends MyStage {
     private TextButton textButton;
 
 
-    public OtherStage(Viewport viewport, Batch batch, MyGdxGame game) {
+    public PlayStage(Viewport viewport, Batch batch, MyGdxGame game) {
         super(viewport, batch, game);
     }
 
