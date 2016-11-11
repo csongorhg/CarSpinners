@@ -47,6 +47,8 @@ public class Assets {
 			= new AssetDescriptor<Texture>("images/cursor.png", Texture.class);
 	public static final AssetDescriptor<Texture> TEXTBOX_TEXTURE
 			= new AssetDescriptor<Texture>("images/textbox.png", Texture.class);
+	public static final AssetDescriptor<Texture> BACKGROUND_TEXTURE
+			= new AssetDescriptor<Texture>("background.png", Texture.class);
 
 
 
@@ -65,6 +67,7 @@ public class Assets {
 		manager.load(FONT_C64);
 		manager.load(TEXTBOX_TEXTURE);
 		manager.load(CURSOR_TEXTURE);
+		manager.load(BACKGROUND_TEXTURE);
 	}
 
     public static void afterLoaded() {

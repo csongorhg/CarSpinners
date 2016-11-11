@@ -13,13 +13,13 @@ public class Buttons {
     private static float buttonEdge = 0.1f;
     private static int diff = 25;
 
-    private static int r = 98;
-    private static int g = 185;
-    private static int b = 63;
+    private static int r = 10;
+    private static int g = 10;
+    private static int b = 10;
 
-    private static int rA = 121;
-    private static int gA = 192;
-    private static int bA = 57;
+    private static int rA = 222;
+    private static int gA = 222;
+    private static int bA = 222;
 
     private static Color bcNormal = new Color(getColor(r),getColor(g),getColor(b),1f);
     private static Color bcShadow = new Color(getColor(r-diff),getColor(g-diff),getColor(b-diff),1f);

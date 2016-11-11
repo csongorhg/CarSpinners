@@ -8,8 +8,10 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Credits.CreditsScreen;
 import com.mygdx.game.Extras.ExtrasScreen;
+import com.mygdx.game.GlobalClasses.Assets;
 import com.mygdx.game.MyBaseClasses.MyButton;
 import com.mygdx.game.MyBaseClasses.MyStage;
+import com.mygdx.game.MyBaseClasses.OneSpriteStaticActor;
 import com.mygdx.game.Play.PlayScreen;
 import com.mygdx.game.MyGdxGame;
 
@@ -33,6 +35,8 @@ public class MenuStage extends MyStage {
 
         addBackEventStackListener();
 
+
+
         //Játék
         textButton = new MyButton("Play", game.getTextButtonStyle());
         textButton.addListener(new ClickListener(){
@@ -44,6 +48,7 @@ public class MenuStage extends MyStage {
         });
         textButton.debug();
         addActor(textButton);
+
 
 
 
@@ -79,6 +84,7 @@ public class MenuStage extends MyStage {
     @Override
     public void act(float delta) {
         super.act(delta);
+
     }
 
     @Override
@@ -101,5 +107,6 @@ public class MenuStage extends MyStage {
         heigth -= heigthBetween;
 
         textButton2.setPosition(width - ((textButton2.getWidth())/2),heigth);
+
     }
 }
