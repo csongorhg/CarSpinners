@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Credits.CreditsScreen;
 import com.mygdx.game.Extras.ExtrasScreen;
@@ -28,9 +29,7 @@ public class MenuStage extends MyStage {
 
     public void init()
     {
-        width = (getViewport().getScreenWidth())/2; //vízszintesen középre
-        heigthBetween = (getViewport().getScreenHeight())/4; //egyenletesen elosztva 3 menüponthoz
-        heigth = (getViewport().getScreenHeight()); //magasság
+
 
         addBackEventStackListener();
 
@@ -43,10 +42,6 @@ public class MenuStage extends MyStage {
                 game.setScreen(new PlayScreen(game));
             }
         });
-
-        heigth -= heigthBetween;
-
-        textButton.setPosition(width - ((textButton.getWidth())/2),heigth);
         textButton.debug();
         addActor(textButton);
 
@@ -61,10 +56,6 @@ public class MenuStage extends MyStage {
                 game.setScreen(new ExtrasScreen(game));
             }
         });
-
-        heigth -= heigthBetween;
-
-        textButton2.setPosition(width - ((textButton2.getWidth())/2),heigth);
         textButton2.debug();
         addActor(textButton2);
 
@@ -79,12 +70,9 @@ public class MenuStage extends MyStage {
                 game.setScreen(new CreditsScreen(game));
             }
         });
-
-        heigth -= heigthBetween;
-
-        textButton3.setPosition(width - ((textButton3.getWidth())/2),heigth);
         textButton3.debug();
         addActor(textButton3);
+        resized();
     }
 
 
@@ -97,5 +85,21 @@ public class MenuStage extends MyStage {
     public void dispose() {
         super.dispose();
 
+    }
+
+    @Override
+    protected void resized() {
+        super.resized();
+        width = (((ExtendViewport)getViewport()).getMinWorldWidth())/2; //vízszintesen középre
+        heigthBetween = (((ExtendViewport)getViewport()).getMinWorldHeight())/4; //egyenletesen elosztva 3 menüponthoz
+        heigth = (((ExtendViewport)getViewport()).getMinWorldHeight()); //magasság
+        heigth -= heigthBetween;
+        textButton.setPosition(width - ((textButton.getWidth())/2),heigth);
+        heigth -= heigthBetween;
+
+        textButton3.setPosition(width - ((textButton3.getWidth())/2),heigth);
+        heigth -= heigthBetween;
+
+        textButton2.setPosition(width - ((textButton2.getWidth())/2),heigth);
     }
 }
