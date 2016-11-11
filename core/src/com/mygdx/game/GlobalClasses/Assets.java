@@ -62,7 +62,10 @@ public class Assets {
 			= new AssetDescriptor<Music>("music/bensound-moose.mp3", Music.class);
 	public static final AssetDescriptor<Music> POPDANCE
 			= new AssetDescriptor<Music>("music/bensound-popdance.mp3", Music.class);
-
+	public static final AssetDescriptor<Music> DANCE
+			= new AssetDescriptor<Music>("music/bensound-dance.mp3", Music.class);
+	public static final AssetDescriptor<Music> BADASS
+			= new AssetDescriptor<Music>("music/bensound-badass.mp3", Music.class);
 
 	public static void prepare() {
 		manager = new AssetManager();
@@ -82,6 +85,8 @@ public class Assets {
 		manager.load(HAPPYROCK);
 		manager.load(MOOSE);
 		manager.load(POPDANCE);
+		manager.load(BADASS);
+		manager.load(DANCE);
 		manager.load(BACKGROUND_TEXTURE);
 		manager.load(CAR_TEXTURE);
 	}

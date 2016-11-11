@@ -19,30 +19,44 @@ import com.mygdx.game.MyGdxGame;
  */
 abstract public class MyStage extends Stage implements InitableInterface {
     public final MyGdxGame game;
-    private int x = (int)(Math.random()*(3-1+1)+1);
+    private int x = (random(1,5));
     public boolean menue = true;
     public final Music menumusic = Assets.manager.get(Assets.MOOSE);
     public final Music gamemusic1 = Assets.manager.get(Assets.POPDANCE);
     public final Music gamemusic2 = Assets.manager.get(Assets.HAPPYROCK);
     public final Music gamemusic3 = Assets.manager.get(Assets.EXTREMEACTION);
+    public final Music gamemusic4 = Assets.manager.get(Assets.DANCE);
+    public final Music gamemusic5 = Assets.manager.get(Assets.BADASS);
 
+
+
+    public int random(int a,int b){return (int)Math.round(Math.random()*(b-a+1)+a);}
 
     public void gamemusicgenerator(){
         int a = 0;
-        if(!menue && !(gamemusic1.isPlaying() || gamemusic2.isPlaying() || gamemusic3.isPlaying())){
+        if(!menue && !(gamemusic1.isPlaying() || gamemusic2.isPlaying() || gamemusic3.isPlaying() || gamemusic4.isPlaying() || gamemusic5.isPlaying())){
             gamemusic1.stop();
             gamemusic2.stop();
             gamemusic3.stop();
-            while(x!=a)
-                a = (int)(Math.random()*(3-1+1)+1);
+            gamemusic4.stop();
+            gamemusic5.stop();
+            while(true) {
+                a = random(1,5);
+                if(x!=a)break;
+            }
         }
         if(a==1 && !menue){gamemusic1.play();x=a;}
         else if(a==2 && !menue){gamemusic2.play();x=a;}
         else if(a==3 && !menue){gamemusic3.play();x=a;}
+        else if(a==4 && !menue){gamemusic4.play();x=a;}
+        else if(a==5 && !menue){gamemusic5.play();x=a;}
         else if(menue) {
             gamemusic1.stop();
             gamemusic2.stop();
             gamemusic3.stop();
+            gamemusic4.stop();
+            gamemusic5.stop();
+            menumusic.play();
         }
     }
 
