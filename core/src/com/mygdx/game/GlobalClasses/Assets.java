@@ -5,6 +5,7 @@ import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.FileHandleResolver;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -50,7 +51,15 @@ public class Assets {
 	public static final AssetDescriptor<Texture> BACKGROUND_TEXTURE
 			= new AssetDescriptor<Texture>("background.png", Texture.class);
 
-
+	//zenék
+	public static final AssetDescriptor<Music> EXTREMEACTION
+			= new AssetDescriptor<Music>("music/bensound-extremeaction.mp3", Music.class);
+	public static final AssetDescriptor<Music> HAPPYROCK
+			= new AssetDescriptor<Music>("music/bensound-happyrock.mp3", Music.class);
+	public static final AssetDescriptor<Music> MOOSE
+			= new AssetDescriptor<Music>("music/bensound-moose.mp3", Music.class);
+	public static final AssetDescriptor<Music> POPDANCE
+			= new AssetDescriptor<Music>("music/bensound-popdance.mp3", Music.class);
 
 
 	public static void prepare() {
@@ -67,6 +76,10 @@ public class Assets {
 		manager.load(FONT_C64);
 		manager.load(TEXTBOX_TEXTURE);
 		manager.load(CURSOR_TEXTURE);
+		manager.load(EXTREMEACTION);
+		manager.load(HAPPYROCK);
+		manager.load(MOOSE);
+		manager.load(POPDANCE);
 		manager.load(BACKGROUND_TEXTURE);
 	}
 

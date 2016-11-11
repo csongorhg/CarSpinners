@@ -27,24 +27,23 @@ public class PlayStage extends MyStage {
 
 
     public void init() {
-
+        menumusic.stop();
         addBackEventStackListener();
-
         textButton = new MyButton("Vissza", game.getTextButtonStyle());
         textButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
+                menue = true;
+                gamemusicgenerator();
                 game.setScreenBackByStackPop();
             }
         });
 
         addActor(textButton);
 
-
-
-
         resized();
+
     }
 
     @Override

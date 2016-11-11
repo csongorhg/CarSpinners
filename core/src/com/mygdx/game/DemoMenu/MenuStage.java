@@ -43,7 +43,11 @@ public class MenuStage extends MyStage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
+                menumusic.stop();
+                menue = false;
+                gamemusicgenerator();
                 game.setScreen(new PlayScreen(game));
+
             }
         });
         textButton.debug();

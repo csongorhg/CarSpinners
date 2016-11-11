@@ -1,6 +1,7 @@
 package com.mygdx.game.MyBaseClasses;
 
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -9,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.game.GlobalClasses.Assets;
 import com.mygdx.game.MyGdxGame;
 
 
@@ -17,11 +19,39 @@ import com.mygdx.game.MyGdxGame;
  */
 abstract public class MyStage extends Stage implements InitableInterface {
     public final MyGdxGame game;
+    private int x = (int)(Math.random()*(3-1+1)+1);
+    public boolean menue = true;
+    public final Music menumusic = Assets.manager.get(Assets.MOOSE);
+    public final Music gamemusic1 = Assets.manager.get(Assets.POPDANCE);
+    public final Music gamemusic2 = Assets.manager.get(Assets.HAPPYROCK);
+    public final Music gamemusic3 = Assets.manager.get(Assets.EXTREMEACTION);
+
+
+    public void gamemusicgenerator(){
+        int a = 0;
+        if(!menue && !(gamemusic1.isPlaying() || gamemusic2.isPlaying() || gamemusic3.isPlaying())){
+            gamemusic1.stop();
+            gamemusic2.stop();
+            gamemusic3.stop();
+            while(x!=a)
+                a = (int)(Math.random()*(3-1+1)+1);
+        }
+        if(a==1 && !menue){gamemusic1.play();x=a;}
+        else if(a==2 && !menue){gamemusic2.play();x=a;}
+        else if(a==3 && !menue){gamemusic3.play();x=a;}
+        else if(menue) {
+            gamemusic1.stop();
+            gamemusic2.stop();
+            gamemusic3.stop();
+        }
+    }
+
 
     public MyStage(Viewport viewport, Batch batch, MyGdxGame game) {
         super(viewport, batch);
         this.game = game;
         setCameraResetToCenterOfScreen();
+        menumusic.play();
         init();
     }
 
@@ -128,4 +158,6 @@ abstract public class MyStage extends Stage implements InitableInterface {
         }
 
     }
+
+
 }
