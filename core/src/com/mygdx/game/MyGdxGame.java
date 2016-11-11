@@ -33,6 +33,7 @@ public class MyGdxGame extends Game {
 		return style;
 	}
 
+
 	public TextField.TextFieldStyle getTextFieldStyle() {
 		TextField.TextFieldStyle style = new TextField.TextFieldStyle();
 		style.background = new TextureRegionDrawable(new TextureRegion(Assets.manager.get(Assets.TEXTBOX_TEXTURE)));

@@ -1,5 +1,6 @@
 package com.mygdx.game.DemoMenu;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -20,7 +21,7 @@ import com.mygdx.game.MyGdxGame;
  */
 public class MenuStage extends MyStage {
 
-    private TextButton textButton, textButton2, textButton3;
+    private TextButton textButton, textButton2, textButton3, textButton4;
 
     private float width, heigthBetween, heigth; //menüpontok pozicionálása
 
@@ -81,6 +82,22 @@ public class MenuStage extends MyStage {
         });
         textButton3.debug();
         addActor(textButton3);
+
+
+
+        //Kilépés
+        textButton4 = new MyButton("Exit", game.getTextButtonStyle());
+        textButton4.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                game.setScreenBackByStackPop();
+            }
+        });
+        textButton4.debug();
+        addActor(textButton4);
+
+
         resized();
     }
 
@@ -112,5 +129,6 @@ public class MenuStage extends MyStage {
 
         textButton2.setPosition(width - ((textButton2.getWidth())/2),heigth);
 
+        textButton4.setPosition(width - ((textButton4.getWidth())/2),0);
     }
 }
