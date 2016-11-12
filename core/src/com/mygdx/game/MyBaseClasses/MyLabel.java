@@ -33,6 +33,6 @@ public class MyLabel extends Label implements InitableInterface{
         super.act(delta);
         elapsedtime += delta;
 
-        //setFontScale(Math.abs((float)Math.sin(elapsedtime*2f))/2f+0.8f);
+        setFontScale(Math.abs((float)Math.sin(elapsedtime*2f))/2f+0.8f);
     }
 }

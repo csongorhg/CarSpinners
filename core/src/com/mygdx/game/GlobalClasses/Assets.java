@@ -17,12 +17,6 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader;
 
 
 public class Assets {
-	//zenék
-	//http://www.bensound.com/royalty-free-music/track/pop-dance
-	//http://www.bensound.com/royalty-free-music/track/moose
-	//http://www.bensound.com/royalty-free-music/track/happy-rock
-	//http://www.bensound.com/royalty-free-music/track/extreme-action
-
 
 	// https://github.com/libgdx/libgdx/wiki/Managing-your-assets
 	// http://www.jacobplaster.net/using-libgdx-asset-manager
@@ -52,6 +46,8 @@ public class Assets {
 			= new AssetDescriptor<Texture>("background.png", Texture.class);
 	public static final AssetDescriptor<Texture> CAR_TEXTURE
 			= new AssetDescriptor<Texture>("ratyitutu.png", Texture.class);
+	public static final AssetDescriptor<Texture> MONEY_TEXTURE
+			= new AssetDescriptor<Texture>("money.png", Texture.class);
 
 	//zenék
 	public static final AssetDescriptor<Music> EXTREMEACTION
@@ -89,6 +85,7 @@ public class Assets {
 		manager.load(DANCE);
 		manager.load(BACKGROUND_TEXTURE);
 		manager.load(CAR_TEXTURE);
+		manager.load(MONEY_TEXTURE);
 	}
 
     public static void afterLoaded() {

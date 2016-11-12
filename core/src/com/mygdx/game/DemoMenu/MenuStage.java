@@ -27,6 +27,8 @@ public class MenuStage extends MyStage {
 
     private float width, heigthBetween, heigth; //menüpontok pozicionálása
 
+    private OneSpriteStaticActor moneyStream;
+
     public MenuStage(Viewport viewport, Batch batch, MyGdxGame game) {
         super(viewport, batch, game);
     }
@@ -34,9 +36,10 @@ public class MenuStage extends MyStage {
 
     public void init()
     {
+
         addBackEventStackListener();
 
-
+        moneyStream();
 
         //Játék
         textButton = new MyButton("Play", game.getTextButtonStyle());
@@ -99,34 +102,54 @@ public class MenuStage extends MyStage {
         resized();
     }
 
+    private void moneyStream() {
+
+        int heigth = Math.round(((ExtendViewport)getViewport()).getMinWorldHeight());
+
+            moneyStream = new OneSpriteStaticActor(Assets.manager.get(Assets.MONEY_TEXTURE));
+            moneyStream.setSize(57, 25);
+            moneyStream.setPosition(0 - moneyStream.getWidth(), new Random(0, heigth).getGenNumber());
+            addActor(moneyStream);
+            moneyStream.act(Gdx.graphics.getDeltaTime());
+
+    }
 
     @Override
     public void act(float delta) {
         super.act(delta);
-
+        //ha véget ér előről
+        moneyStream.setPosition(moneyStream.getX()+((delta*new Random(50,100).getGenNumber())),moneyStream.getY());
+        if (moneyStream.getX()>(((ExtendViewport)getViewport()).getMinWorldWidth())) {
+            moneyStream.setPosition(0-moneyStream.getWidth(),
+            new Random(0,(((ExtendViewport)getViewport()).getMinWorldHeight())).getGenNumber());
+        }
     }
 
     @Override
     public void dispose() {
         super.dispose();
-
     }
 
     @Override
     protected void resized() {
         super.resized();
+
         width = (((ExtendViewport)getViewport()).getMinWorldWidth())/2; //vízszintesen középre
-        heigthBetween = (((ExtendViewport)getViewport()).getMinWorldHeight())/4; //egyenletesen elosztva 3 menüponthoz
+        heigthBetween = (((ExtendViewport)getViewport()).getMinWorldHeight())/5; //egyenletesen elosztva 3 menüponthoz
         heigth = (((ExtendViewport)getViewport()).getMinWorldHeight()); //magasság
-        heigth -= heigthBetween;
-        textButton.setPosition(width - ((textButton.getWidth())/2),heigth);
-        heigth -= heigthBetween;
 
-        textButton3.setPosition(width - ((textButton3.getWidth())/2),heigth);
         heigth -= heigthBetween;
+        textButton.setPosition(width - ((textButton.getWidth())/2),heigth- ((textButton.getHeight())/2));
 
-        textButton2.setPosition(width - ((textButton2.getWidth())/2),heigth);
+        heigth -= heigthBetween;
+        textButton3.setPosition(width - ((textButton3.getWidth())/2),heigth- ((textButton.getHeight())/2));
 
-        textButton4.setPosition(width - ((textButton4.getWidth())/2),0);
+        heigth -= heigthBetween;
+        textButton2.setPosition(width - ((textButton2.getWidth())/2),heigth- ((textButton.getHeight())/2));
+
+        heigth -= heigthBetween;
+        textButton4.setPosition(width - ((textButton4.getWidth())/2),heigth- ((textButton.getHeight())/2));
     }
+
+
 }

@@ -9,6 +9,12 @@ import com.mygdx.game.Math.Random;
  */
 public class MusicSetter {
 
+    //zenék
+    //http://www.bensound.com/royalty-free-music/track/pop-dance
+    //http://www.bensound.com/royalty-free-music/track/moose
+    //http://www.bensound.com/royalty-free-music/track/happy-rock
+    //http://www.bensound.com/royalty-free-music/track/extreme-action
+
     //zenéket private-ra raktam, minek tudjanak róla a többiek x)
     private final Music menumusic = Assets.manager.get(Assets.MOOSE);
     private final Music gamemusic1 = Assets.manager.get(Assets.POPDANCE);

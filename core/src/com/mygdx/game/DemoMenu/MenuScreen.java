@@ -52,7 +52,10 @@ public class MenuScreen extends MyScreen {
     @Override
     public void init() {
          bgStage = new MyStage(new StretchViewport(90,160, new OrthographicCamera(90,160)), spriteBatch, game) {
+
             private OneSpriteStaticActor backGroudActor;
+            private OneSpriteStaticActor money;
+
             @Override
             public void init() {
                 addActor(backGroudActor = new OneSpriteStaticActor(Assets.manager.get(Assets.BACKGROUND_TEXTURE)));

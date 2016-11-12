@@ -22,29 +22,6 @@ abstract public class MyStage extends Stage implements InitableInterface {
 
     public final MyGdxGame game;
 
-    public void gameMusicGenerator(){
-
-        /*if(music==1 && !isMenuScreen){gamemusic1.play();
-            }
-        else if(music==2 && !isMenuScreen){gamemusic2.play();
-            }
-        else if(music==3 && !isMenuScreen){gamemusic3.play();
-            }
-        else if(music==4 && !isMenuScreen){gamemusic4.play();
-            }
-        else if(music==5 && !isMenuScreen){gamemusic5.play();
-            }
-        else if(!isMenuScreen && !(gamemusic1.isPlaying() || gamemusic2.isPlaying()
-                || gamemusic3.isPlaying() || gamemusic4.isPlaying() || gamemusic5.isPlaying())) {
-
-            stopMusics();
-            do{
-                music = random(1,5);
-            }while(isSameMusic == music);
-            isSameMusic = music;
-        }*/
-    }
-
     public MyStage(Viewport viewport, Batch batch, MyGdxGame game) {
         super(viewport, batch);
         this.game = game;
