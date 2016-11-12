@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.CarClasses.CarTunningScreen;
 import com.mygdx.game.GlobalClasses.Assets;
+import com.mygdx.game.MyBaseClasses.Car;
 import com.mygdx.game.MyBaseClasses.MyButton;
 import com.mygdx.game.MyBaseClasses.MyStage;
 import com.mygdx.game.MyBaseClasses.OneSpriteStaticActor;
@@ -52,7 +53,7 @@ public class ExtrasStage extends MyStage {
         });
         addActor(textButton3);
 
-        car = new OneSpriteStaticActor(Assets.manager.get(Assets.CAR_TEXTURE));
+        car = new OneSpriteStaticActor(Car.carTexture.getPaint());
         addActor(car);
         car.addListener(new ClickListener(){
             @Override

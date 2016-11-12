@@ -45,7 +45,7 @@ public class Assets {
 	public static final AssetDescriptor<Texture> BACKGROUND_TEXTURE
 			= new AssetDescriptor<Texture>("background2.png", Texture.class);
 	public static final AssetDescriptor<Texture> CAR_TEXTURE
-			= new AssetDescriptor<Texture>("ratyitutu.png", Texture.class);
+			= new AssetDescriptor<Texture>("car-1.png", Texture.class);
 	public static final AssetDescriptor<Texture> MONEY_TEXTURE
 			= new AssetDescriptor<Texture>("money.png", Texture.class);
 
