@@ -17,6 +17,7 @@ import com.mygdx.game.MyBaseClasses.MyStage;
 import com.mygdx.game.MyBaseClasses.OneSpriteStaticActor;
 import com.mygdx.game.Play.PlayScreen;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.Settings.SettingsStage;
 
 /**
  * Created by tuskeb on 2016. 09. 30..
@@ -47,7 +48,7 @@ public class MenuStage extends MyStage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                new MusicSetter(new Random(1,5).getGenNumber());
+                if(SettingsStage.isB())new MusicSetter(new Random(1,5).getGenNumber());
                 game.setScreen(new PlayScreen(game));
 
             }

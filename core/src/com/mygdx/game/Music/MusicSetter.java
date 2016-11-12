@@ -25,12 +25,9 @@ public class MusicSetter {
 
     private static int isSameMusic; //ugyan az a zene, melyik zene
 
-    public MusicSetter() {
-
+    public MusicSetter(boolean b) {
         stopMusics();
-
-        menumusic.play();
-
+        if(b) menumusic.play();
     }
 
     public MusicSetter(int whichMusic) {

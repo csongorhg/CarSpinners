@@ -1,4 +1,4 @@
-package com.mygdx.game.CarClasses;
+package com.mygdx.game.Settings;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -11,16 +11,17 @@ import com.mygdx.game.MyBaseClasses.OneSpriteStaticActor;
 import com.mygdx.game.MyGdxGame;
 
 /**
- * Created by Kicsi on 2016. 11. 11..
+ * Created by Kicsi on 2016. 11. 12..
  */
 
-public class CarTunningScreen extends MyScreen{
+public class SettingsScreen extends MyScreen{
 
-    protected CarTunningStage carTunningStage;
+
+    protected SettingsStage settingsStage;
     protected MyStage bgStage;
 
 
-    public CarTunningScreen(MyGdxGame game) {
+    public SettingsScreen(MyGdxGame game) {
         super(game);
     }
 
@@ -31,28 +32,28 @@ public class CarTunningScreen extends MyScreen{
         bgStage.act(delta);
         bgStage.draw();
 
-        spriteBatch.setProjectionMatrix(carTunningStage.getCamera().combined);
-        carTunningStage.act(delta);
-        carTunningStage.draw();
+        spriteBatch.setProjectionMatrix(settingsStage.getCamera().combined);
+        settingsStage.act(delta);
+        settingsStage.draw();
     }
 
     @Override
     public void resize(int width, int height) {
         super.resize(width, height);
 
-        carTunningStage.resize(width, height);
+        settingsStage.resize(width, height);
         bgStage.resize(width, height);
     }
 
     @Override
     public void dispose() {
-        carTunningStage.dispose();
+        settingsStage.dispose();
         super.dispose();
     }
 
     @Override
     public void init() {
-        bgStage = new MyStage(new StretchViewport(72,128, new OrthographicCamera(72,128)), spriteBatch, game) {
+        bgStage = new MyStage(new StretchViewport(90,160, new OrthographicCamera(90,160)), spriteBatch, game) {
             private OneSpriteStaticActor backGroudActor;
             @Override
             public void init() {
@@ -64,8 +65,9 @@ public class CarTunningScreen extends MyScreen{
 
             }
         };
-        carTunningStage  = new CarTunningStage(new ExtendViewport(270,480,new OrthographicCamera(270,480)), spriteBatch, game);
-        Gdx.input.setInputProcessor(carTunningStage);
+        settingsStage  = new SettingsStage(new ExtendViewport(270,480,new OrthographicCamera(270,480)), spriteBatch, game);
+        Gdx.input.setInputProcessor(settingsStage);
     }
+
 
 }
