@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.GlobalClasses.Assets;
+import com.mygdx.game.Music.MusicSetter;
 import com.mygdx.game.MyGdxGame;
 
 
@@ -18,54 +19,36 @@ import com.mygdx.game.MyGdxGame;
  * Created by tuskeb on 2016. 09. 30..
  */
 abstract public class MyStage extends Stage implements InitableInterface {
+
     public final MyGdxGame game;
-    private int x = (random(1,5));
-    public boolean menue = true;
-    public final Music menumusic = Assets.manager.get(Assets.MOOSE);
-    public final Music gamemusic1 = Assets.manager.get(Assets.POPDANCE);
-    public final Music gamemusic2 = Assets.manager.get(Assets.HAPPYROCK);
-    public final Music gamemusic3 = Assets.manager.get(Assets.EXTREMEACTION);
-    public final Music gamemusic4 = Assets.manager.get(Assets.DANCE);
-    public final Music gamemusic5 = Assets.manager.get(Assets.BADASS);
 
+    public void gameMusicGenerator(){
 
-
-    public int random(int a,int b){return (int)Math.round(Math.random()*(b-a+1)+a);}
-
-    public void gamemusicgenerator(){
-        int a = 0;
-        if(!menue && !(gamemusic1.isPlaying() || gamemusic2.isPlaying() || gamemusic3.isPlaying() || gamemusic4.isPlaying() || gamemusic5.isPlaying())){
-            gamemusic1.stop();
-            gamemusic2.stop();
-            gamemusic3.stop();
-            gamemusic4.stop();
-            gamemusic5.stop();
-            while(true) {
-                a = random(1,5);
-                if(x!=a)break;
+        /*if(music==1 && !isMenuScreen){gamemusic1.play();
             }
-        }
-        if(a==1 && !menue){gamemusic1.play();x=a;}
-        else if(a==2 && !menue){gamemusic2.play();x=a;}
-        else if(a==3 && !menue){gamemusic3.play();x=a;}
-        else if(a==4 && !menue){gamemusic4.play();x=a;}
-        else if(a==5 && !menue){gamemusic5.play();x=a;}
-        else if(menue) {
-            gamemusic1.stop();
-            gamemusic2.stop();
-            gamemusic3.stop();
-            gamemusic4.stop();
-            gamemusic5.stop();
-            menumusic.play();
-        }
-    }
+        else if(music==2 && !isMenuScreen){gamemusic2.play();
+            }
+        else if(music==3 && !isMenuScreen){gamemusic3.play();
+            }
+        else if(music==4 && !isMenuScreen){gamemusic4.play();
+            }
+        else if(music==5 && !isMenuScreen){gamemusic5.play();
+            }
+        else if(!isMenuScreen && !(gamemusic1.isPlaying() || gamemusic2.isPlaying()
+                || gamemusic3.isPlaying() || gamemusic4.isPlaying() || gamemusic5.isPlaying())) {
 
+            stopMusics();
+            do{
+                music = random(1,5);
+            }while(isSameMusic == music);
+            isSameMusic = music;
+        }*/
+    }
 
     public MyStage(Viewport viewport, Batch batch, MyGdxGame game) {
         super(viewport, batch);
         this.game = game;
         setCameraResetToCenterOfScreen();
-        menumusic.play();
         init();
     }
 

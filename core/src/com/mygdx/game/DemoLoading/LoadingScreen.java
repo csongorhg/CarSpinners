@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.DemoMenu.MenuScreen;
+import com.mygdx.game.Music.MusicSetter;
 import com.mygdx.game.MyBaseClasses.MyScreen;
 import com.mygdx.game.GlobalClasses.*;
 import com.mygdx.game.MyBaseClasses.OneSpriteAnimatedActor;
@@ -56,6 +57,9 @@ public class LoadingScreen extends MyScreen {
 		stage.draw();
 		if (elapsedTime > 4.0 && Assets.manager.update()) {
 			Assets.afterLoaded();
+
+			new MusicSetter(); //menüzene hívás
+
 			game.setScreen(new MenuScreen(game));
 		}
 		elapsedTime+=delta;

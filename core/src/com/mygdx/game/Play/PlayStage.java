@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.mygdx.game.GlobalClasses.Assets;
+import com.mygdx.game.Music.MusicSetter;
 import com.mygdx.game.MyBaseClasses.MyButton;
 import com.mygdx.game.MyBaseClasses.MyStage;
 import com.mygdx.game.MyGdxGame;
@@ -27,15 +27,13 @@ public class PlayStage extends MyStage {
 
 
     public void init() {
-        menumusic.stop();
         addBackEventStackListener();
         textButton = new MyButton("Vissza", game.getTextButtonStyle());
         textButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                menue = true;
-                gamemusicgenerator();
+                new MusicSetter(); //menüzene hívás
                 game.setScreenBackByStackPop();
             }
         });

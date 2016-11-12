@@ -10,6 +10,8 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Credits.CreditsScreen;
 import com.mygdx.game.Extras.ExtrasScreen;
 import com.mygdx.game.GlobalClasses.Assets;
+import com.mygdx.game.Math.Random;
+import com.mygdx.game.Music.MusicSetter;
 import com.mygdx.game.MyBaseClasses.MyButton;
 import com.mygdx.game.MyBaseClasses.MyStage;
 import com.mygdx.game.MyBaseClasses.OneSpriteStaticActor;
@@ -32,8 +34,6 @@ public class MenuStage extends MyStage {
 
     public void init()
     {
-
-
         addBackEventStackListener();
 
 
@@ -44,6 +44,7 @@ public class MenuStage extends MyStage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
+                new MusicSetter(new Random(1,5).getGenNumber());
                 game.setScreen(new PlayScreen(game));
 
             }

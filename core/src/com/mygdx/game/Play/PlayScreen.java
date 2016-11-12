@@ -3,8 +3,8 @@ package com.mygdx.game.Play;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.mygdx.game.Music.MusicSetter;
 import com.mygdx.game.MyBaseClasses.MyScreen;
-import com.mygdx.game.MyBaseClasses.MyStage;
 import com.mygdx.game.MyGdxGame;
 
 /**
@@ -22,7 +22,6 @@ public class PlayScreen extends MyScreen {
         super.render(delta);
         playStage.act(delta);
         playStage.draw();
-        playStage.gamemusicgenerator();
 
     }
 
@@ -33,6 +32,6 @@ public class PlayScreen extends MyScreen {
         b = 0.3f;
         playStage = new PlayStage(new ExtendViewport(270,480,new OrthographicCamera(270,480)), spriteBatch, game);
         Gdx.input.setInputProcessor(playStage);
-        playStage.menue = false;
+        //playStage.isMenuScreen = false;
     }
 }
