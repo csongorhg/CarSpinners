@@ -48,6 +48,10 @@ public class Assets {
 			= new AssetDescriptor<Texture>("ratyitutu.png", Texture.class);
 	public static final AssetDescriptor<Texture> MONEY_TEXTURE
 			= new AssetDescriptor<Texture>("money.png", Texture.class);
+	public static final AssetDescriptor<Texture> MUTE_ICON
+			= new AssetDescriptor<Texture>("mute_icon.png", Texture.class);
+	public static final AssetDescriptor<Texture> SOUND_ICON
+			= new AssetDescriptor<Texture>("sound_icon.png", Texture.class);
 
 	//zenék
 	public static final AssetDescriptor<Music> EXTREMEACTION
@@ -86,6 +90,8 @@ public class Assets {
 		manager.load(BACKGROUND_TEXTURE);
 		manager.load(CAR_TEXTURE);
 		manager.load(MONEY_TEXTURE);
+		manager.load(MUTE_ICON);
+		manager.load(SOUND_ICON);
 	}
 
     public static void afterLoaded() {

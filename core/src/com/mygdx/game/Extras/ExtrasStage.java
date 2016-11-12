@@ -12,6 +12,7 @@ import com.mygdx.game.MyBaseClasses.MyButton;
 import com.mygdx.game.MyBaseClasses.MyStage;
 import com.mygdx.game.MyBaseClasses.OneSpriteStaticActor;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.Settings.SettingsScreen;
 
 /**
  * Created by tuskeb on 2016. 09. 30..
@@ -37,7 +38,7 @@ public class ExtrasStage extends MyStage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-
+                game.setScreen(new SettingsScreen(game));
             }
         });
         addActor(textButton2);
@@ -89,6 +90,7 @@ public class ExtrasStage extends MyStage {
 
         textButton.setPosition(width - ((textButton.getWidth())/2),0);
 
+        car.setWidth(width*2 - 10);
         car.setPosition(width - ((car.getWidth())/2), ((textButton3.getY()-textButton.getHeight())/2 - car.getHeight()/2)+textButton.getHeight());
 
     }

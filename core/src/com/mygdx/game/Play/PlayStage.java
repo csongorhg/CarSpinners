@@ -10,6 +10,7 @@ import com.mygdx.game.Music.MusicSetter;
 import com.mygdx.game.MyBaseClasses.MyButton;
 import com.mygdx.game.MyBaseClasses.MyStage;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.Settings.SettingsStage;
 
 /**
  * Created by tuskeb on 2016. 09. 30..
@@ -33,7 +34,7 @@ public class PlayStage extends MyStage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                new MusicSetter(); //menüzene hívás
+                new MusicSetter(SettingsStage.isB()); //menüzene hívás
                 game.setScreenBackByStackPop();
             }
         });

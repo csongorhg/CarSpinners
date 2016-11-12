@@ -13,6 +13,7 @@ import com.mygdx.game.GlobalClasses.*;
 import com.mygdx.game.MyBaseClasses.OneSpriteAnimatedActor;
 import com.mygdx.game.MyBaseClasses.OneSpriteStaticActor;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.Settings.SettingsStage;
 
 
 public class LoadingScreen extends MyScreen {
@@ -58,7 +59,7 @@ public class LoadingScreen extends MyScreen {
 		if (elapsedTime > 4.0 && Assets.manager.update()) {
 			Assets.afterLoaded();
 
-			new MusicSetter(); //menüzene hívás
+			new MusicSetter(true); //menüzene hívás
 
 			game.setScreen(new MenuScreen(game));
 		}
