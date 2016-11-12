@@ -118,7 +118,7 @@ public class MenuStage extends MyStage {
     public void act(float delta) {
         super.act(delta);
         //ha véget ér előről
-        moneyStream.setPosition(moneyStream.getX()+((delta*new Random(50,100).getGenNumber())),moneyStream.getY());
+        moneyStream.setPosition(moneyStream.getX()+2,moneyStream.getY());
         if (moneyStream.getX()>(((ExtendViewport)getViewport()).getMinWorldWidth())) {
             moneyStream.setPosition(0-moneyStream.getWidth(),
             new Random(0,(((ExtendViewport)getViewport()).getMinWorldHeight())).getGenNumber());
