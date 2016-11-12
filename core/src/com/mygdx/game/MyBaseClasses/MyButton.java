@@ -27,7 +27,5 @@ public class MyButton extends TextButton implements InitableInterface{
     @Override
     public void act(float delta) {
         super.act(delta);
-        float colour = (Math.abs((float)Math.sin(delta*2f))/2f+0.8f);
-        setColor(255f, 255f, 255f, 0f);
     }
 }
