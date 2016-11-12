@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.mygdx.game.GlobalClasses.Assets;
+import com.mygdx.game.Graphics.Buttons;
 import com.mygdx.game.Math.Random;
 
 /**
@@ -13,12 +15,13 @@ import com.mygdx.game.Math.Random;
  */
 public class MyButton extends TextButton implements InitableInterface{
 
-    public MyButton(String text, TextButtonStyle style) {
-        super(text, style);
+    public MyButton(String text, TextButtonStyle textButtonStyle) {
+        super(text, textButtonStyle);
         init();
     }
 
     public void init() {
+
     }
 
     @Override
