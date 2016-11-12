@@ -26,4 +26,9 @@ public class MyTextField extends TextField implements InitableInterface{
     public void init() {
 
     }
+
+    @Override
+    public void act(float delta) {
+        super.act(delta);
+    }
 }

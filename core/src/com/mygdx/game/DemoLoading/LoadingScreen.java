@@ -60,6 +60,7 @@ public class LoadingScreen extends MyScreen {
 
 			new MusicSetter(); //menüzene hívás
 
+
 			game.setScreen(new MenuScreen(game));
 		}
 		elapsedTime+=delta;
