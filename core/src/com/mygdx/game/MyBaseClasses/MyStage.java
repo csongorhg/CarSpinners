@@ -1,17 +1,18 @@
 package com.mygdx.game.MyBaseClasses;
 
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.GlobalClasses.Assets;
-import com.mygdx.game.Music.MusicSetter;
+import com.mygdx.game.Graphics.ButtonCaller;
 import com.mygdx.game.MyGdxGame;
 
 
@@ -21,6 +22,7 @@ import com.mygdx.game.MyGdxGame;
 abstract public class MyStage extends Stage implements InitableInterface {
 
     public final MyGdxGame game;
+    protected TextButton textButton5;
 
     public MyStage(Viewport viewport, Batch batch, MyGdxGame game) {
         super(viewport, batch);

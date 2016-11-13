@@ -58,6 +58,8 @@ public class Assets {
 			= new AssetDescriptor<Texture>("gaz.png", Texture.class);
 	public static final AssetDescriptor<Texture> FEK_ICON
 			= new AssetDescriptor<Texture>("fek.png", Texture.class);
+	public static final AssetDescriptor<Texture> CONF_ICON
+			= new AssetDescriptor<Texture>("cog.png", Texture.class);
 
 	//zenék
 	public static final AssetDescriptor<Music> EXTREMEACTION
@@ -101,6 +103,7 @@ public class Assets {
 		manager.load(CITY_ACTION_BACKGROUND);
 		manager.load(GAZ_ICON);
 		manager.load(FEK_ICON);
+		manager.load(CONF_ICON);
 	}
 
     public static void afterLoaded() {

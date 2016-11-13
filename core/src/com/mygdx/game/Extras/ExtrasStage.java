@@ -35,16 +35,6 @@ public class ExtrasStage extends MyStage {
 
         addBackEventStackListener();
 
-        textButton2 = new MyButton("Settings", game.getTextButtonStyle());
-        textButton2.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                super.clicked(event, x, y);
-                game.setScreen(new SettingsScreen(game));
-            }
-        });
-        addActor(textButton2);
-
 
 
         textButton3 = new MyButton("Car tunning", game.getTextButtonStyle());

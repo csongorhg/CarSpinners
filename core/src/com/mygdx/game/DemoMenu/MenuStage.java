@@ -16,8 +16,10 @@ import com.mygdx.game.Music.MusicSetter;
 import com.mygdx.game.MyBaseClasses.MyButton;
 import com.mygdx.game.MyBaseClasses.MyStage;
 import com.mygdx.game.MyBaseClasses.OneSpriteStaticActor;
+import com.mygdx.game.Graphics.ButtonCaller;
 import com.mygdx.game.Play.PlayScreen;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.Settings.SettingsScreen;
 import com.mygdx.game.Settings.SettingsStage;
 
 /**
@@ -25,7 +27,7 @@ import com.mygdx.game.Settings.SettingsStage;
  */
 public class MenuStage extends MyStage {
 
-    private TextButton textButton, textButton2, textButton3, textButton4;
+    private TextButton textButton, textButton2, textButton3, textButton4, textButton5;
 
     private MusicSetter music = new MusicSetter();
 
@@ -49,8 +51,27 @@ public class MenuStage extends MyStage {
 
         addBackEventStackListener();
 
+
         cityStream(); //városfolyam
         moneyStream(); //pénzfolyam
+
+
+
+        //fogaskerék
+        textButton5 = new ButtonCaller("", Assets.CONF_ICON);
+        textButton5.setSize(45,45);
+        textButton5.setY((((ExtendViewport)getViewport()).getMinWorldHeight())
+        - textButton5.getHeight());
+        textButton5.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                game.setScreen(new SettingsScreen(game));
+            }
+        });
+
+        addActor(textButton5);
+
 
         //Játék
         textButton = new MyButton("Play", game.getTextButtonStyle());
@@ -58,7 +79,6 @@ public class MenuStage extends MyStage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                //if(SettingsStage.isB())new MusicSetter(new Random(1,5).getGenNumber());
                 game.setScreen(new PlayScreen(game));
 
             }

@@ -1,4 +1,4 @@
-package com.mygdx.game.Play;
+package com.mygdx.game.Graphics;
 
 import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -13,11 +13,11 @@ import com.mygdx.game.MyBaseClasses.InitableInterface;
  * Created by Pocok on 2016.11.13..
  */
 
-public class Pedal extends TextButton implements InitableInterface {
+public class ButtonCaller extends TextButton implements InitableInterface {
 
 
 
-    public Pedal(String text, AssetDescriptor<Texture> assets) {
+    public ButtonCaller(String text, AssetDescriptor<Texture> assets) {
         super(text, getTextButtonStyle(assets));
         init();
     }
