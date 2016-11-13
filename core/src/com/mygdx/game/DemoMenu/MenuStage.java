@@ -122,7 +122,7 @@ public class MenuStage extends MyStage {
         moneySpeeds = new int[numberOfMoney];
         moneySpeedsinterval = new int[2];
         moneySpeedsinterval[0] = 2; // legkisebb sebessége a pénznek
-        moneySpeedsinterval[1] = 4; //legnagyobb sebessége a pénznek
+        moneySpeedsinterval[1] = 5; //legnagyobb sebessége a pénznek
         int i = 0; //segédváltozó
 
         while (i != numberOfMoney) {
@@ -186,7 +186,7 @@ public class MenuStage extends MyStage {
         cityStream.setX(cityStream.getX()+cityStreamSpeed);
 
         if (cityStream2.getX() > ((ExtendViewport)getViewport()).getMinWorldWidth()) {
-            cityStream2.setX(0+cityStream.getX() - cityStream.getWidth());
+            cityStream2.setX(cityStream.getX() - cityStream.getWidth());
         }
         cityStream2.setX(cityStream2.getX()+cityStreamSpeed);
     }

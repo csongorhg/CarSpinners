@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.game.GlobalClasses.Assets;
 import com.mygdx.game.Music.MusicSetter;
 import com.mygdx.game.MyBaseClasses.MyButton;
 import com.mygdx.game.MyBaseClasses.MyStage;
@@ -17,10 +18,12 @@ import com.mygdx.game.Settings.SettingsStage;
  */
 public class PlayStage extends MyStage {
 
-    private TextButton textButton;
+    //private TextButton textButton;
 
     //itt kell megadni, a pozicionálást!!!
     private float width, heigthBetween, heigth;
+
+    private Pedal p, f; //gáz, fékpedál
 
     public PlayStage(Viewport viewport, Batch batch, MyGdxGame game) {
         super(viewport, batch, game);
@@ -28,7 +31,9 @@ public class PlayStage extends MyStage {
 
 
     public void init() {
-        addBackEventStackListener();
+
+        /*addBackEventStackListener();
+
         textButton = new MyButton("Vissza", game.getTextButtonStyle());
         textButton.addListener(new ClickListener(){
             @Override
@@ -39,12 +44,22 @@ public class PlayStage extends MyStage {
             }
         });
 
-        addActor(textButton);
+        addActor(textButton);*/
 
 
-        Pedal p = new Pedal("");
-        p.setSize(18*3,19*3);
+
+        //gázpedál
+        p = new Pedal("", Assets.GAZ_ICON);
+        p.setSize(54,57); //18*3, 19*3
+        p.setX((((ExtendViewport)getViewport()).getMinWorldWidth()) - p.getWidth());
+
         addActor(p);
+
+        //fékpedál
+        f = new Pedal("", Assets.FEK_ICON);
+        f.setSize(54,57); //18*3, 19*3
+
+        addActor(f);
 
         resized();
 
@@ -57,6 +72,6 @@ public class PlayStage extends MyStage {
         //heigthBetween = (((ExtendViewport)getViewport()).getMinWorldHeight())/4; //egyenletesen elosztva 3 menüponthoz
         heigth = 0; //magasság
         //heigth -= heigthBetween;
-        textButton.setPosition(width - ((textButton.getWidth())/2),heigth);
+        //textButton.setPosition(width - ((textButton.getWidth())/2),heigth);
     }
 }
