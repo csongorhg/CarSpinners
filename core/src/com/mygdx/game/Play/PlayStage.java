@@ -20,6 +20,8 @@ public class PlayStage extends MyStage {
     //itt kell megadni, a pozicionálást!!!
     private float width, heigthBetween, heigth;
 
+    public boolean settingclick = false;
+
     private ButtonCaller p, f, textButton5; //gáz, fékpedál
 
     public PlayStage(Viewport viewport, Batch batch, MyGdxGame game) {
@@ -42,6 +44,7 @@ public class PlayStage extends MyStage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
+                settingclick = true;
                 //new MusicSetter(SettingsStage.isB()); //menüzene hívás
                 //game.setScreenBackByStackPop();
             }
