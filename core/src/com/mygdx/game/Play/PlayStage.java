@@ -41,6 +41,11 @@ public class PlayStage extends MyStage {
 
         addActor(textButton);
 
+
+        Pedal p = new Pedal("");
+        p.setSize(18*3,19*3);
+        addActor(p);
+
         resized();
 
     }
