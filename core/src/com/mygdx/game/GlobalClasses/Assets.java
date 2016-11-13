@@ -52,6 +52,8 @@ public class Assets {
 			= new AssetDescriptor<Texture>("mute_icon.png", Texture.class);
 	public static final AssetDescriptor<Texture> SOUND_ICON
 			= new AssetDescriptor<Texture>("sound_icon.png", Texture.class);
+	public static final AssetDescriptor<Texture> CITY_ACTION_BACKGROUND
+			= new AssetDescriptor<Texture>("city.png", Texture.class);
 
 	//zenék
 	public static final AssetDescriptor<Music> EXTREMEACTION
@@ -92,6 +94,7 @@ public class Assets {
 		manager.load(MONEY_TEXTURE);
 		manager.load(MUTE_ICON);
 		manager.load(SOUND_ICON);
+		manager.load(CITY_ACTION_BACKGROUND);
 	}
 
     public static void afterLoaded() {

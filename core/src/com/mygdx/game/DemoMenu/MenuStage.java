@@ -32,9 +32,12 @@ public class MenuStage extends MyStage {
     private float width, heigthBetween, heigth; //menüpontok pozicionálása
 
     private  Array <OneSpriteStaticActor> moneyStream; //úszó pénzek
-    private int numberOfMoney;
-    private int moneySpeeds[];
-    private int moneySpeedsinterval[];
+    private int numberOfMoney; //pénzek száma
+    private int moneySpeeds[]; //pénzek sebbesége
+    private int moneySpeedsinterval[]; //pénzek sebességének intervalluma
+
+    private OneSpriteStaticActor cityStream, cityStream2; //úszó város
+    private int cityStreamSpeed;
 
     public MenuStage(Viewport viewport, Batch batch, MyGdxGame game) {
         super(viewport, batch, game);
@@ -46,7 +49,8 @@ public class MenuStage extends MyStage {
 
         addBackEventStackListener();
 
-        moneyStream();
+        cityStream(); //városfolyam
+        moneyStream(); //pénzfolyam
 
         //Játék
         textButton = new MyButton("Play", game.getTextButtonStyle());
@@ -112,6 +116,7 @@ public class MenuStage extends MyStage {
     private void moneyStream() {
 
         int heigth = Math.round(((ExtendViewport)getViewport()).getMinWorldHeight());
+
         moneyStream = new Array<OneSpriteStaticActor>();
         numberOfMoney = 10; //párhuzamosan futó pénzek száma
         moneySpeeds = new int[numberOfMoney];
@@ -120,33 +125,70 @@ public class MenuStage extends MyStage {
         moneySpeedsinterval[1] = 4; //legnagyobb sebessége a pénznek
         int i = 0; //segédváltozó
 
-        while (i!=numberOfMoney) {
+        while (i != numberOfMoney) {
+
             moneyStream.add(new OneSpriteStaticActor(Assets.manager.get(Assets.MONEY_TEXTURE)));
             moneyStream.get(i).setSize(57, 25);
             moneyStream.get(i).setPosition(0 - moneyStream.get(i).getWidth(),
-                    new Random(0, heigth).getGenNumber());
+                    new Random(cityStream.getHeight(), heigth).getGenNumber());
+
             addActor(moneyStream.get(i));
+
             moneySpeeds[i] =  new Random(moneySpeedsinterval[0],moneySpeedsinterval[1]).getGenNumber();
             moneyStream.get(i).act(Gdx.graphics.getDeltaTime());
             i++;
         }
     }
 
+
+
+    private void cityStream() {
+
+        cityStreamSpeed = 1; //városfolyam sebessége
+
+        cityStream = new OneSpriteStaticActor(Assets.manager.get(Assets.CITY_ACTION_BACKGROUND));
+        cityStream.setWidth(((ExtendViewport)getViewport()).getMinWorldWidth());
+        addActor(cityStream);
+
+        cityStream2 = new OneSpriteStaticActor(Assets.manager.get(Assets.CITY_ACTION_BACKGROUND));
+        cityStream2.setWidth(((ExtendViewport)getViewport()).getMinWorldWidth());
+        cityStream2.setX(0 - cityStream.getWidth());
+        addActor(cityStream2);
+
+        cityStream.act(Gdx.graphics.getDeltaTime());
+        cityStream2.act(Gdx.graphics.getDeltaTime());
+    }
+
     @Override
     public void act(float delta) {
         super.act(delta);
+
         music.MenuMusic();
+
+        //pénzfolyam
         for (int i = 0; i < moneyStream.size; i++) {
             //ha véget ér előről
             int random = moneySpeeds[i];
             moneyStream.get(i).setPosition(moneyStream.get(i).getX()+random,moneyStream.get(i).getY());
             if (moneyStream.get(i).getX()>(((ExtendViewport)getViewport()).getMinWorldWidth())) {
                 moneyStream.get(i).setPosition(0-moneyStream.get(i).getWidth(),
-                new Random(0,(((ExtendViewport)getViewport()).getMinWorldHeight())).getGenNumber());
+                new Random(cityStream.getHeight(),(((ExtendViewport)getViewport()).getMinWorldHeight())).getGenNumber());
                 moneySpeeds[i] = new Random(moneySpeedsinterval[0],moneySpeedsinterval[1]).getGenNumber();
             }
         }
 
+        //városfolyam
+        if (cityStream.getX() > ((ExtendViewport)getViewport()).getMinWorldWidth()) {
+            cityStream.setX(cityStream2.getX()-cityStream.getWidth());
+            System.out.println(1);
+        }
+        cityStream.setX(cityStream.getX()+cityStreamSpeed);
+
+        if (cityStream2.getX() > ((ExtendViewport)getViewport()).getMinWorldWidth()) {
+            System.out.println(2);
+            cityStream2.setX(0+cityStream.getX() - cityStream.getWidth());
+        }
+        cityStream2.setX(cityStream2.getX()+cityStreamSpeed);
     }
 
     @Override

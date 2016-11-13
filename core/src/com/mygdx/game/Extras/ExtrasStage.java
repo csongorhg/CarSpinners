@@ -32,6 +32,7 @@ public class ExtrasStage extends MyStage {
 
 
     public void init() {
+
         addBackEventStackListener();
 
         textButton2 = new MyButton("Settings", game.getTextButtonStyle());
@@ -44,6 +45,8 @@ public class ExtrasStage extends MyStage {
         });
         addActor(textButton2);
 
+
+
         textButton3 = new MyButton("Car tunning", game.getTextButtonStyle());
         textButton3.addListener(new ClickListener(){
             @Override
@@ -54,15 +57,6 @@ public class ExtrasStage extends MyStage {
         });
         addActor(textButton3);
 
-        car = new OneSpriteStaticActor(Car.carTexture.getPaint());
-        addActor(car);
-        car.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                super.clicked(event, x, y);
-
-            }
-        });
 
 
         textButton = new MyButton("Back", game.getTextButtonStyle());
@@ -76,23 +70,36 @@ public class ExtrasStage extends MyStage {
         addActor(textButton);
 
         resized();
+
+        car = new OneSpriteStaticActor(Car.carTexture.getPaint());
+        car.setSize(10,50);
+        car.setPosition(width-car.getWidth()/2,heigth);
+        addActor(car);
+        car.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+
+            }
+        });
     }
 
     @Override
     protected void resized() {
         super.resized();
+
         width = (((ExtendViewport)getViewport()).getMinWorldWidth())/2; //vízszintesen középre
         heigthBetween = (((ExtendViewport)getViewport()).getMinWorldHeight())/5; //egyenletesen elosztva 3 menüponthoz
         heigth = (((ExtendViewport)getViewport()).getMinWorldHeight()); //magasság
         heigth -= heigthBetween;
+
         textButton2.setPosition(width - ((textButton2.getWidth())/2), heigth);
+
         heigth -= heigthBetween;
+
         textButton3.setPosition(width - ((textButton3.getWidth())/2), heigth);
 
         textButton.setPosition(width - ((textButton.getWidth())/2),0);
-
-        car.setWidth(width*2 - 10);
-        car.setPosition(width - ((car.getWidth())/2), ((textButton3.getY()-textButton.getHeight())/2 - car.getHeight()/2)+textButton.getHeight());
 
     }
 }
