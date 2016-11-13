@@ -3,9 +3,11 @@ package com.mygdx.game.Play;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.mygdx.game.Math.Random;
 import com.mygdx.game.Music.MusicSetter;
 import com.mygdx.game.MyBaseClasses.MyScreen;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.Settings.SettingsStage;
 
 /**
  * Created by tuskeb on 2016. 09. 30..
@@ -20,8 +22,10 @@ public class PlayScreen extends MyScreen {
     @Override
     public void render(float delta) {
         super.render(delta);
+        if(SettingsStage.isB())new MusicSetter(new Random(1,5).getGenNumber());
         playStage.act(delta);
         playStage.draw();
+
 
     }
 

@@ -3,6 +3,8 @@ package com.mygdx.game.Music;
 import com.badlogic.gdx.audio.Music;
 import com.mygdx.game.GlobalClasses.Assets;
 import com.mygdx.game.Math.Random;
+import com.mygdx.game.Settings.SettingsScreen;
+import com.mygdx.game.Settings.SettingsStage;
 
 /**
  * Created by mordes on 2016.11.12..
@@ -30,21 +32,48 @@ public class MusicSetter {
         if(b) menumusic.play();
     }
 
+    public MusicSetter(){
+    }
+
+    public void MenuMusic(){
+        if(!menumusic.isPlaying() && SettingsStage.isB()){
+            menumusic.stop();
+            menumusic.play();
+        }
+    }
+
     public MusicSetter(int whichMusic) {
 
-        while (isSameMusic == whichMusic){ //amíg nem lesz más mint az előbb játszott zene
-            //kiraktam egy osztályba a random fv.-t, mivel több helyen is használjuk
-            whichMusic = new Random(1,5).getGenNumber();
-        }
+        if(!(gamemusic1.isPlaying() || gamemusic2.isPlaying() || gamemusic3.isPlaying() || gamemusic4.isPlaying() || gamemusic5.isPlaying())) {
+            while (isSameMusic == whichMusic) { //amíg nem lesz más mint az előbb játszott zene
+                //kiraktam egy osztályba a random fv.-t, mivel több helyen is használjuk
+                whichMusic = new Random(1, 5).getGenNumber();
+            }
 
-        stopMusics();
+            stopMusics();
 
-        switch (whichMusic) {
-            case 1: gamemusic1.play(); isSameMusic = 1; break;
-            case 2: gamemusic2.play(); isSameMusic = 2; break;
-            case 3: gamemusic3.play(); isSameMusic = 3; break;
-            case 4: gamemusic4.play(); isSameMusic = 4; break;
-            case 5: gamemusic5.play(); isSameMusic = 5; break;
+            switch (whichMusic) {
+                case 1:
+                    gamemusic1.play();
+                    isSameMusic = 1;
+                    break;
+                case 2:
+                    gamemusic2.play();
+                    isSameMusic = 2;
+                    break;
+                case 3:
+                    gamemusic3.play();
+                    isSameMusic = 3;
+                    break;
+                case 4:
+                    gamemusic4.play();
+                    isSameMusic = 4;
+                    break;
+                case 5:
+                    gamemusic5.play();
+                    isSameMusic = 5;
+                    break;
+            }
         }
     }
 

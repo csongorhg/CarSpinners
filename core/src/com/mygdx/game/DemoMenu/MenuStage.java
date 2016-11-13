@@ -27,6 +27,8 @@ public class MenuStage extends MyStage {
 
     private TextButton textButton, textButton2, textButton3, textButton4;
 
+    private MusicSetter music = new MusicSetter();
+
     private float width, heigthBetween, heigth; //menüpontok pozicionálása
 
     private  Array <OneSpriteStaticActor> moneyStream; //úszó pénzek
@@ -52,7 +54,7 @@ public class MenuStage extends MyStage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                if(SettingsStage.isB())new MusicSetter(new Random(1,5).getGenNumber());
+                //if(SettingsStage.isB())new MusicSetter(new Random(1,5).getGenNumber());
                 game.setScreen(new PlayScreen(game));
 
             }
@@ -133,6 +135,7 @@ public class MenuStage extends MyStage {
     @Override
     public void act(float delta) {
         super.act(delta);
+        music.MenuMusic();
         for (int i = 0; i < moneyStream.size; i++) {
             //ha véget ér előről
             int random = moneySpeeds[i];
