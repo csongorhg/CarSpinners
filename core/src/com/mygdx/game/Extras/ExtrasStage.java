@@ -80,18 +80,6 @@ public class ExtrasStage extends MyStage {
         addActor(textButton);
 
         resized();
-
-        car = new OneSpriteStaticActor(Car.carTexture.getPaint());
-        car.setSize(10,50);
-        car.setPosition(width-car.getWidth()/2,heigth);
-        addActor(car);
-        car.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                super.clicked(event, x, y);
-
-            }
-        });
     }
 
     @Override

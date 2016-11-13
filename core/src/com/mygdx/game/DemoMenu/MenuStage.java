@@ -182,12 +182,10 @@ public class MenuStage extends MyStage {
         //városfolyam
         if (cityStream.getX() > ((ExtendViewport)getViewport()).getMinWorldWidth()) {
             cityStream.setX(cityStream2.getX()-cityStream.getWidth());
-            System.out.println(1);
         }
         cityStream.setX(cityStream.getX()+cityStreamSpeed);
 
         if (cityStream2.getX() > ((ExtendViewport)getViewport()).getMinWorldWidth()) {
-            System.out.println(2);
             cityStream2.setX(0+cityStream.getX() - cityStream.getWidth());
         }
         cityStream2.setX(cityStream2.getX()+cityStreamSpeed);

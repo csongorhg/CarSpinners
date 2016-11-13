@@ -30,7 +30,7 @@ public class Assets {
 	static final FreetypeFontLoader.FreeTypeFontLoaderParameter fontParameter = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
 	static {
 		fontParameter.fontFileName = "c64.ttf";
-		fontParameter.fontParameters.size = 50;
+		fontParameter.fontParameters.size = 30;
 		fontParameter.fontParameters.characters = CHARS;
 		fontParameter.fontParameters.color = Color.WHITE;
 	}
