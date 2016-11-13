@@ -35,6 +35,15 @@ public class MusicSetter {
     public MusicSetter(){
     }
 
+    public void musicVolume(float f){
+        menumusic.setVolume(f);
+        gamemusic1.setVolume(f);
+        gamemusic2.setVolume(f);
+        gamemusic3.setVolume(f);
+        gamemusic4.setVolume(f);
+        gamemusic5.setVolume(f);
+    }
+
     public void MenuMusic(){
         if(!menumusic.isPlaying() && SettingsStage.isB()){
             menumusic.stop();

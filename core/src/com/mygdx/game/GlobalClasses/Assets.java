@@ -49,9 +49,9 @@ public class Assets {
 	public static final AssetDescriptor<Texture> MONEY_TEXTURE
 			= new AssetDescriptor<Texture>("money.png", Texture.class);
 	public static final AssetDescriptor<Texture> MUTE_ICON
-			= new AssetDescriptor<Texture>("mute_icon.png", Texture.class);
+			= new AssetDescriptor<Texture>("mute.png", Texture.class);
 	public static final AssetDescriptor<Texture> SOUND_ICON
-			= new AssetDescriptor<Texture>("sound_icon.png", Texture.class);
+			= new AssetDescriptor<Texture>("sound.png", Texture.class);
 	public static final AssetDescriptor<Texture> CITY_ACTION_BACKGROUND
 			= new AssetDescriptor<Texture>("city.png", Texture.class);
 	public static final AssetDescriptor<Texture> GAZ_ICON
