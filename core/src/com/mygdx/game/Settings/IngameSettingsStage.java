@@ -1,8 +1,10 @@
 package com.mygdx.game.Settings;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
@@ -13,15 +15,17 @@ import com.mygdx.game.MyBaseClasses.MyButton;
 import com.mygdx.game.MyBaseClasses.MyStage;
 import com.mygdx.game.MyBaseClasses.OneSpriteStaticActor;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.Play.PlayScreen;
+import com.mygdx.game.Play.PlayStage;
 
 /**
- * Created by Kicsi on 2016. 11. 12..
+ * Created by Vince on 2016. 11. 13..
  */
 
-public class SettingsStage extends MyStage{
+public class IngameSettingsStage extends MyStage {
 
-    private TextButton textButton;
-    private OneSpriteStaticActor hang, fel, le, ures, teli;
+    private TextButton textButton, textButton2;
+    private OneSpriteStaticActor hang, fel, le, ures, teli, a;
     private Array<OneSpriteStaticActor> hangero;
     public static float actualVol = 1;
     static boolean b = true;
@@ -29,7 +33,7 @@ public class SettingsStage extends MyStage{
 
     private float width, heigth;
 
-    public SettingsStage(Viewport viewport, Batch batch, MyGdxGame game) {
+    public IngameSettingsStage(Viewport viewport, Batch batch, MyGdxGame game) {
         super(viewport, batch, game);
     }
 
@@ -37,13 +41,31 @@ public class SettingsStage extends MyStage{
     public void init() {
         addBackEventStackListener();
 
-        textButton = new MyButton("Back", game.getTextButtonStyle());
+        a = new OneSpriteStaticActor(Assets.manager.get(Assets.BACKGROUND_TEXTURE));
+        a.setWidth(((ExtendViewport) getViewport()).getMinWorldWidth());
+        a.setHeight(((ExtendViewport) getViewport()).getMinWorldHeight()/2);
+        a.setY(((ExtendViewport) getViewport()).getMinWorldHeight()/4);
+        addActor(a);
+
+        textButton2 = new MyButton("Back to Game", game.getTextButtonStyle());
+        textButton2.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                PlayStage.setSettingclick(false);
+            }
+        });
+        addActor(textButton2);
+
+        textButton = new MyButton("Back to Menu", game.getTextButtonStyle());
         textButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
+                musicSetter.stopMusics();
+                if(b)musicSetter.MenuMusic();
+                SettingsStage.b=b;
                 game.setScreenBackByStackPop();
-
             }
         });
         addActor(textButton);
@@ -58,12 +80,10 @@ public class SettingsStage extends MyStage{
     protected void resized() {
         super.resized();
         width = (((ExtendViewport)getViewport()).getMinWorldWidth())/2; //vízszintesen középre
-        //heigthBetween = (((ExtendViewport)getViewport()).getMinWorldHeight())/5; //egyenletesen elosztva 3 menüponthoz
         heigth = (((ExtendViewport)getViewport()).getMinWorldHeight()); //magasság
-        //heigth -= heigthBetween;
 
-        textButton.setPosition(width - ((textButton.getWidth()) / 2), 0);
-
+        textButton.setPosition(width - ((textButton.getWidth()) / 2), heigth-((ExtendViewport)getViewport()).getMinWorldHeight()/4*3);
+        textButton2.setPosition(width - ((textButton.getWidth()) / 2),heigth-((ExtendViewport)getViewport()).getMinWorldHeight()/5*3);
     }
 
     void musicOnOff(){
@@ -75,13 +95,14 @@ public class SettingsStage extends MyStage{
                 super.clicked(event, x, y);
                 hang.remove();
                 b = !b;
-                IngameSettingsStage.b = b;
-                new MusicSetter(b);
+                if(!b) {
+                    musicSetter.stopMusics();
+                }
                 musicOnOff();
             }
         });
         hang.setSize(width / 3, width / 3);
-        hang.setPosition(0, heigth - hang.getHeight());
+        hang.setPosition(0, heigth - hang.getHeight()-((ExtendViewport)getViewport()).getMinWorldHeight()/4);
     }
 
 

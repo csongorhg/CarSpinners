@@ -2,6 +2,7 @@ package com.mygdx.game.Play;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -22,7 +23,7 @@ public class PlayStage extends MyStage {
     //itt kell megadni, a pozicionálást!!!
     private float width, heigthBetween, heigth;
 
-    public boolean settingclick = false;
+    public static boolean settingclick = false;
 
     private ButtonCaller p, f, textButton5; //gáz, fékpedál
 
@@ -33,10 +34,12 @@ public class PlayStage extends MyStage {
     }
 
 
+    public static boolean setSettingclick(boolean b){
+        settingclick = b;
+        return settingclick;
+    }
+
     public void init() {
-        SettingsStage.gamee = false;
-
-
         addBackEventStackListener();
 
         //út
@@ -62,7 +65,7 @@ public class PlayStage extends MyStage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                settingclick = true;
+                setSettingclick(true);
                 //new MusicSetter(SettingsStage.isB()); //menüzene hívás
                 //game.setScreenBackByStackPop();
             }
@@ -70,9 +73,7 @@ public class PlayStage extends MyStage {
 
         addActor(textButton5);
 
-
-
-        //gázpedál
+       //gázpedál
         p = new ButtonCaller("", Assets.GAZ_ICON);
         p.setSize(54,57); //18*3, 19*3
         p.setX((((ExtendViewport)getViewport()).getMinWorldWidth()) - p.getWidth());
@@ -84,11 +85,6 @@ public class PlayStage extends MyStage {
         f.setSize(54,57); //18*3, 19*3
 
         addActor(f);
-
-
-
-        //út
-
 
         resized();
 
