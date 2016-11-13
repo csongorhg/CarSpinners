@@ -22,6 +22,8 @@ public class SettingsStage extends MyStage{
     private TextButton textButton;
     private OneSpriteStaticActor hang;
     private static boolean b = true;
+    public static boolean gamee = false;
+    MusicSetter musicSetter = new MusicSetter();
 
     private float width, heigthBetween, heigth;
 
@@ -38,7 +40,13 @@ public class SettingsStage extends MyStage{
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
+                gamee = true;
+                if(game.getScreen().toString().indexOf("PlayScreen") > -1){
+                    musicSetter.stopMusics();
+                    musicSetter.MenuMusic();
+                }
                 game.setScreenBackByStackPop();
+
             }
         });
         addActor(textButton);

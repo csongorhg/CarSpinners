@@ -35,8 +35,6 @@ public class ExtrasStage extends MyStage {
 
         addBackEventStackListener();
 
-
-
         textButton3 = new MyButton("Car tunning", game.getTextButtonStyle());
         textButton3.addListener(new ClickListener(){
             @Override
@@ -81,9 +79,9 @@ public class ExtrasStage extends MyStage {
         heigth = (((ExtendViewport)getViewport()).getMinWorldHeight()); //magasság
         heigth -= heigthBetween;
 
-        textButton2.setPosition(width - ((textButton2.getWidth())/2), heigth);
+        //textButton2.setPosition(width - ((textButton2.getWidth())/2), heigth);
 
-        heigth -= heigthBetween;
+        //heigth -= heigthBetween;
 
         textButton3.setPosition(width - ((textButton3.getWidth())/2), heigth);
 

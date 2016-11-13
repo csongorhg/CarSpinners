@@ -77,7 +77,7 @@ public class MusicSetter {
         }
     }
 
-    private void stopMusics() {
+    public void stopMusics() {
         menumusic.stop();
         gamemusic1.stop();
         gamemusic2.stop();

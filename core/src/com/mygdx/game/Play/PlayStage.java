@@ -9,6 +9,7 @@ import com.mygdx.game.GlobalClasses.Assets;
 import com.mygdx.game.Graphics.ButtonCaller;
 import com.mygdx.game.MyBaseClasses.MyStage;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.Settings.SettingsStage;
 
 /**
  * Created by tuskeb on 2016. 09. 30..
@@ -30,7 +31,7 @@ public class PlayStage extends MyStage {
 
 
     public void init() {
-
+        SettingsStage.gamee = false;
 
 
         addBackEventStackListener();
