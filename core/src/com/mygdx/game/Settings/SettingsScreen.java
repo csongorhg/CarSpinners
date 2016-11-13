@@ -53,7 +53,7 @@ public class SettingsScreen extends MyScreen{
 
     @Override
     public void init() {
-        bgStage = new MyStage(new StretchViewport(90,160, new OrthographicCamera(90,160)), spriteBatch, game) {
+        bgStage = new MyStage(new StretchViewport(72,128, new OrthographicCamera(72,128)), spriteBatch, game) {
             private OneSpriteStaticActor backGroudActor;
             @Override
             public void init() {

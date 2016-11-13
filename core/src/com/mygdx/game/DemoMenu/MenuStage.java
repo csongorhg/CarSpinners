@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Credits.CreditsScreen;
@@ -28,7 +29,10 @@ public class MenuStage extends MyStage {
 
     private float width, heigthBetween, heigth; //menüpontok pozicionálása
 
-    private OneSpriteStaticActor moneyStream;
+    private  Array <OneSpriteStaticActor> moneyStream; //úszó pénzek
+    private int numberOfMoney;
+    private int moneySpeeds[];
+    private int moneySpeedsinterval[];
 
     public MenuStage(Viewport viewport, Batch batch, MyGdxGame game) {
         super(viewport, batch, game);
@@ -106,24 +110,40 @@ public class MenuStage extends MyStage {
     private void moneyStream() {
 
         int heigth = Math.round(((ExtendViewport)getViewport()).getMinWorldHeight());
+        moneyStream = new Array<OneSpriteStaticActor>();
+        numberOfMoney = 10; //párhuzamosan futó pénzek száma
+        moneySpeeds = new int[numberOfMoney];
+        moneySpeedsinterval = new int[2];
+        moneySpeedsinterval[0] = 2; // legkisebb sebessége a pénznek
+        moneySpeedsinterval[1] = 4; //legnagyobb sebessége a pénznek
+        int i = 0; //segédváltozó
 
-            moneyStream = new OneSpriteStaticActor(Assets.manager.get(Assets.MONEY_TEXTURE));
-            moneyStream.setSize(57, 25);
-            moneyStream.setPosition(0 - moneyStream.getWidth(), new Random(0, heigth).getGenNumber());
-            addActor(moneyStream);
-            moneyStream.act(Gdx.graphics.getDeltaTime());
-
+        while (i!=numberOfMoney) {
+            moneyStream.add(new OneSpriteStaticActor(Assets.manager.get(Assets.MONEY_TEXTURE)));
+            moneyStream.get(i).setSize(57, 25);
+            moneyStream.get(i).setPosition(0 - moneyStream.get(i).getWidth(),
+                    new Random(0, heigth).getGenNumber());
+            addActor(moneyStream.get(i));
+            moneySpeeds[i] =  new Random(moneySpeedsinterval[0],moneySpeedsinterval[1]).getGenNumber();
+            moneyStream.get(i).act(Gdx.graphics.getDeltaTime());
+            i++;
+        }
     }
 
     @Override
     public void act(float delta) {
         super.act(delta);
-        //ha véget ér előről
-        moneyStream.setPosition(moneyStream.getX()+2,moneyStream.getY());
-        if (moneyStream.getX()>(((ExtendViewport)getViewport()).getMinWorldWidth())) {
-            moneyStream.setPosition(0-moneyStream.getWidth(),
-            new Random(0,(((ExtendViewport)getViewport()).getMinWorldHeight())).getGenNumber());
+        for (int i = 0; i < moneyStream.size; i++) {
+            //ha véget ér előről
+            int random = moneySpeeds[i];
+            moneyStream.get(i).setPosition(moneyStream.get(i).getX()+random,moneyStream.get(i).getY());
+            if (moneyStream.get(i).getX()>(((ExtendViewport)getViewport()).getMinWorldWidth())) {
+                moneyStream.get(i).setPosition(0-moneyStream.get(i).getWidth(),
+                new Random(0,(((ExtendViewport)getViewport()).getMinWorldHeight())).getGenNumber());
+                moneySpeeds[i] = new Random(moneySpeedsinterval[0],moneySpeedsinterval[1]).getGenNumber();
+            }
         }
+
     }
 
     @Override
