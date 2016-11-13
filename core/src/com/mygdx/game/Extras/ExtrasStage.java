@@ -57,6 +57,16 @@ public class ExtrasStage extends MyStage {
         });
         addActor(textButton3);
 
+        car = new OneSpriteStaticActor(Car.carTexture.getPaint());
+        addActor(car);
+
+        car.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+
+            }
+        });
 
 
         textButton = new MyButton("Back", game.getTextButtonStyle());
@@ -101,5 +111,7 @@ public class ExtrasStage extends MyStage {
 
         textButton.setPosition(width - ((textButton.getWidth())/2),0);
 
+        car.setSize(car.getWidth()*3,car.getHeight()*3);
+        car.setPosition(width-(car.getWidth()/2), (float) (heigth/3.5));
     }
 }

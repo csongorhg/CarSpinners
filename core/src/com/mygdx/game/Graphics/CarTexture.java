@@ -9,14 +9,14 @@ import com.mygdx.game.GlobalClasses.Assets;
 
 public class CarTexture {
 
-    Pixmap p;
+    public Pixmap p;
 
     Color c;
     int cartype = 0;
 
     public CarTexture(){
         //setCarType(0);
-        setColor(255,255,255); //itt lehet beállítani a színt most még hirtelen
+        setColor(100,100,255); //itt lehet beállítani a színt most még hirtelen
     }
 
     public void setCarType(int i) {

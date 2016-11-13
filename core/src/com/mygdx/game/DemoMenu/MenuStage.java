@@ -147,12 +147,14 @@ public class MenuStage extends MyStage {
         cityStreamSpeed = 1; //városfolyam sebessége
 
         cityStream = new OneSpriteStaticActor(Assets.manager.get(Assets.CITY_ACTION_BACKGROUND));
+        cityStream.setSize(cityStream.getWidth()*3,cityStream.getHeight()*3);
         cityStream.setWidth(((ExtendViewport)getViewport()).getMinWorldWidth());
         addActor(cityStream);
 
         cityStream2 = new OneSpriteStaticActor(Assets.manager.get(Assets.CITY_ACTION_BACKGROUND));
+        cityStream2.setSize(cityStream2.getWidth()*3,cityStream2.getHeight()*3);
         cityStream2.setWidth(((ExtendViewport)getViewport()).getMinWorldWidth());
-        cityStream2.setX(0 - cityStream.getWidth());
+        cityStream2.setX(0 - cityStream2.getWidth());
         addActor(cityStream2);
 
         cityStream.act(Gdx.graphics.getDeltaTime());
