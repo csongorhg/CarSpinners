@@ -62,6 +62,14 @@ public class Assets {
 			= new AssetDescriptor<Texture>("cog.png", Texture.class);
 	public static final AssetDescriptor<Texture> ROAD_BLOCK
 			= new AssetDescriptor<Texture>("ut.png", Texture.class);
+	public static final AssetDescriptor<Texture> PLUS_VOL
+			= new AssetDescriptor<Texture>("vol/plusz.png", Texture.class);
+	public static final AssetDescriptor<Texture> MINUS_VOL
+			= new AssetDescriptor<Texture>("vol/minusz.png", Texture.class);
+	public static final AssetDescriptor<Texture> FILLED_VOL
+			= new AssetDescriptor<Texture>("vol/teli.png", Texture.class);
+	public static final AssetDescriptor<Texture> EMPTY_VOL
+			= new AssetDescriptor<Texture>("vol/ures.png", Texture.class);
 
 	//zenék
 	public static final AssetDescriptor<Music> EXTREMEACTION
@@ -106,6 +114,10 @@ public class Assets {
 		manager.load(GAZ_ICON);
 		manager.load(FEK_ICON);
 		manager.load(CONF_ICON);
+		manager.load(PLUS_VOL);
+		manager.load(MINUS_VOL);
+		manager.load(FILLED_VOL);
+		manager.load(EMPTY_VOL);
 		manager.load(ROAD_BLOCK);
 	}
 

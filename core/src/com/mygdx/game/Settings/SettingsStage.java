@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.GlobalClasses.Assets;
@@ -20,7 +21,9 @@ import com.mygdx.game.MyGdxGame;
 public class SettingsStage extends MyStage{
 
     private TextButton textButton;
-    private OneSpriteStaticActor hang;
+    private OneSpriteStaticActor hang, fel, le, ures, teli;
+    private Array<OneSpriteStaticActor> hangero;
+    public static float actualVol = 1;
     private static boolean b = true;
     public static boolean gamee = false;
     MusicSetter musicSetter = new MusicSetter();
@@ -51,9 +54,10 @@ public class SettingsStage extends MyStage{
         });
         addActor(textButton);
 
-        musicOnOff();
-
         resized();
+
+        musicOnOff();
+        musicVolume();
     }
 
     @Override
@@ -66,8 +70,6 @@ public class SettingsStage extends MyStage{
 
         textButton.setPosition(width - ((textButton.getWidth()) / 2), 0);
 
-        hang.setSize(width / 3, width / 3);
-        hang.setPosition(0, heigth - hang.getHeight());
     }
 
     void musicOnOff(){
@@ -83,7 +85,64 @@ public class SettingsStage extends MyStage{
                 musicOnOff();
             }
         });
-        resized();
+        hang.setSize(width / 3, width / 3);
+        hang.setPosition(0, heigth - hang.getHeight());
+    }
+
+
+    void musicVolume(){
+        fel = new OneSpriteStaticActor(Assets.manager.get(Assets.PLUS_VOL));
+        le = new OneSpriteStaticActor(Assets.manager.get(Assets.MINUS_VOL));
+        addActor(fel); addActor(le);
+        fel.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                if(actualVol<=1){
+                    actualVol+=0.1;
+                    cuclik();
+                }
+            }
+        });
+        le.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                if(actualVol>=0){
+                    actualVol-=0.1;
+                    cuclik();
+                }
+            }
+        });
+        cuclik();
+    }
+
+    void cuclik(){
+        ures = new OneSpriteStaticActor(Assets.manager.get(Assets.EMPTY_VOL));
+        teli = new OneSpriteStaticActor(Assets.manager.get(Assets.FILLED_VOL));
+        hangero = new Array<OneSpriteStaticActor>();
+        for(float i=0; i<=1; i+=0.1){
+            if(i<=actualVol){
+                hangero.add(teli);
+                addActor(hangero.get((int)i*10));
+            }else{
+                hangero.add(ures);
+                addActor(hangero.get((int)i*10));
+            }
+        }
+        meretezes(width, heigth);
+    }
+
+    void meretezes(float width, float heigth){
+        float meretGomb = heigth/4;
+        le.setSize(meretGomb, meretGomb);
+        fel.setSize(meretGomb, meretGomb);
+        le.setPosition(0,heigth);
+        fel.setPosition(width*2, heigth);
+        for(int i=0; i<hangero.size; i++){
+            hangero.get(i).setSize((width*2-(le.getWidth()+fel.getX()))/10,meretGomb);
+            hangero.get(i).setPosition(le.getWidth()+i*hangero.get(i).getWidth(),heigth);
+        }
     }
 
     public static boolean isB() {
