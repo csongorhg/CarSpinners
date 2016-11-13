@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.GlobalClasses.Assets;
 import com.mygdx.game.Graphics.ButtonCaller;
 import com.mygdx.game.MyBaseClasses.MyStage;
+import com.mygdx.game.MyBaseClasses.OneSpriteStaticActor;
 import com.mygdx.game.MyGdxGame;
 
 /**
@@ -24,6 +25,9 @@ public class PlayStage extends MyStage {
 
     private ButtonCaller p, f, textButton5; //gáz, fékpedál
 
+    private OneSpriteStaticActor oneSpriteStaticActor; //út
+    private int numberOfRoads;
+
     public PlayStage(Viewport viewport, Batch batch, MyGdxGame game) {
         super(viewport, batch, game);
     }
@@ -34,6 +38,23 @@ public class PlayStage extends MyStage {
 
 
         addBackEventStackListener();
+
+        //út
+        oneSpriteStaticActor = new OneSpriteStaticActor(Assets.manager.get(Assets.ROAD_BLOCK));
+        numberOfRoads = Math.round((((ExtendViewport)getViewport()).getMinWorldHeight())
+                /oneSpriteStaticActor.getHeight());
+
+        float blockHeight = 0;
+
+        for (int i = 0; i < numberOfRoads; i++) {
+            oneSpriteStaticActor = new OneSpriteStaticActor(Assets.manager.get(Assets.ROAD_BLOCK));
+            oneSpriteStaticActor.setY(blockHeight);
+            oneSpriteStaticActor.setWidth(((ExtendViewport)getViewport()).getMinWorldWidth());
+            blockHeight += oneSpriteStaticActor.getHeight();
+            addActor(oneSpriteStaticActor);
+        }
+
+
 
         //fogaskerék
         textButton5 = new ButtonCaller("", Assets.CONF_ICON);
@@ -66,6 +87,11 @@ public class PlayStage extends MyStage {
         f.setSize(54,57); //18*3, 19*3
 
         addActor(f);
+
+
+
+        //út
+
 
         resized();
 
