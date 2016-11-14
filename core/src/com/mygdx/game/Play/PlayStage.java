@@ -43,15 +43,15 @@ public class PlayStage extends MyStage {
         addBackEventStackListener();
 
         //út
-        oneSpriteStaticActor = new OneSpriteStaticActor(Assets.manager.get(Assets.ROAD_BLOCK));
 
         float blockHeight = (((ExtendViewport)getViewport()).getMinWorldHeight());
 
-        while (blockHeight>=0) {
+        for(int i = 0; i<4 ;i++){
             oneSpriteStaticActor = new OneSpriteStaticActor(Assets.manager.get(Assets.ROAD_BLOCK));
-            oneSpriteStaticActor.setY(blockHeight);
-            oneSpriteStaticActor.setWidth(((ExtendViewport)getViewport()).getMinWorldWidth());
+            float arany = (((ExtendViewport)getViewport()).getMinWorldWidth())/oneSpriteStaticActor.getWidth();
+            oneSpriteStaticActor.setSize(oneSpriteStaticActor.getWidth()*arany,oneSpriteStaticActor.getHeight()*arany);
             blockHeight -= oneSpriteStaticActor.getHeight();
+            oneSpriteStaticActor.setPosition(0,blockHeight);
             addActor(oneSpriteStaticActor);
         }
 
