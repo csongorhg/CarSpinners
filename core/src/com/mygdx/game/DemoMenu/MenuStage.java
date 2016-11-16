@@ -2,6 +2,7 @@ package com.mygdx.game.DemoMenu;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -38,8 +39,8 @@ public class MenuStage extends MyStage {
     private int moneySpeeds[]; //pénzek sebbesége
     private int moneySpeedsinterval[]; //pénzek sebességének intervalluma
 
-    private OneSpriteStaticActor cityStream, cityStream2; //úszó város
-    private int cityStreamSpeed;
+    //private OneSpriteStaticActor cityStream, cityStream2; //úszó város
+    //private int cityStreamSpeed;
 
     public MenuStage(Viewport viewport, Batch batch, MyGdxGame game) {
         super(viewport, batch, game);
@@ -52,8 +53,9 @@ public class MenuStage extends MyStage {
         addBackEventStackListener();
 
 
-        cityStream(); //városfolyam
-        moneyStream(); //pénzfolyam
+        //cityStream(); //városfolyam
+        addActor(new CityStream());
+        moneyStream(getCityStreamHeight()); //pénzfolyam
 
 
 
@@ -130,10 +132,11 @@ public class MenuStage extends MyStage {
         addActor(textButton4);
 
 
+
         resized();
     }
 
-    private void moneyStream() {
+    private void moneyStream(float bottom) {
 
         int heigth = Math.round(((ExtendViewport)getViewport()).getMinWorldHeight());
 
@@ -150,7 +153,7 @@ public class MenuStage extends MyStage {
             moneyStream.add(new OneSpriteStaticActor(Assets.manager.get(Assets.MONEY_TEXTURE)));
             moneyStream.get(i).setSize(57, 25);
             moneyStream.get(i).setPosition(0 - moneyStream.get(i).getWidth(),
-                    new Random(cityStream.getHeight(), heigth).getGenNumber());
+                    new Random(bottom, heigth).getGenNumber());
 
             addActor(moneyStream.get(i));
 
@@ -162,7 +165,7 @@ public class MenuStage extends MyStage {
 
 
 
-    private void cityStream() {
+   /* private void cityStream() {
 
         cityStreamSpeed = 2; //városfolyam sebessége
 
@@ -178,6 +181,16 @@ public class MenuStage extends MyStage {
         cityStream.act(Gdx.graphics.getDeltaTime());
         cityStream2.act(Gdx.graphics.getDeltaTime());
     }
+*/
+
+    private float getCityStreamHeight(){
+        for (Actor a: getActors()) {
+            if (a instanceof CityStream){
+                return a.getHeight();
+            }
+        }
+        return 0;
+    }
 
     @Override
     public void act(float delta) {
@@ -190,14 +203,15 @@ public class MenuStage extends MyStage {
             //ha véget ér előről
             int random = moneySpeeds[i];
             moneyStream.get(i).setPosition(moneyStream.get(i).getX()+random,moneyStream.get(i).getY());
-            if (moneyStream.get(i).getX()>(((ExtendViewport)getViewport()).getMinWorldWidth())) {
+            if (moneyStream.get(i).getX()>(((ExtendViewport)getViewport()).getWorldWidth())) {
                 moneyStream.get(i).setPosition(0-moneyStream.get(i).getWidth(),
-                new Random(cityStream.getHeight(),(((ExtendViewport)getViewport()).getMinWorldHeight())).getGenNumber());
+                new Random(getCityStreamHeight(),(((ExtendViewport)getViewport()).getMinWorldHeight())).getGenNumber());
                 moneySpeeds[i] = new Random(moneySpeedsinterval[0],moneySpeedsinterval[1]).getGenNumber();
             }
         }
 
         //városfolyam
+        /*
         if (cityStream.getX() > ((ExtendViewport)getViewport()).getMinWorldWidth()) {
             cityStream.setX(cityStream2.getX()-cityStream.getWidth());
         }
@@ -206,7 +220,7 @@ public class MenuStage extends MyStage {
         if (cityStream2.getX() > ((ExtendViewport)getViewport()).getMinWorldWidth()) {
             cityStream2.setX(cityStream.getX() - cityStream.getWidth());
         }
-        cityStream2.setX(cityStream2.getX()+cityStreamSpeed);
+        cityStream2.setX(cityStream2.getX()+cityStreamSpeed);*/
     }
 
     @Override
@@ -217,8 +231,8 @@ public class MenuStage extends MyStage {
     @Override
     protected void resized() {
         super.resized();
-
-        width = (((ExtendViewport)getViewport()).getMinWorldWidth())/2; //vízszintesen középre
+        setCameraResetToLeftBottomOfScreen();
+        width = (((ExtendViewport)getViewport()).getWorldWidth())/2; //vízszintesen középre
         heigthBetween = (((ExtendViewport)getViewport()).getMinWorldHeight())/5; //egyenletesen elosztva 3 menüponthoz
         heigth = (((ExtendViewport)getViewport()).getMinWorldHeight()); //magasság
 

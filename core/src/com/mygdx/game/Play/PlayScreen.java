@@ -63,4 +63,10 @@ public class PlayScreen extends MyScreen {
 
         //playStage.isMenuScreen = false;
     }
+
+    @Override
+    public void resize(int width, int height) {
+        super.resize(width, height);
+        playStage.resize(width,height);
+    }
 }
