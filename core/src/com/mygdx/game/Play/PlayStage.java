@@ -1,6 +1,7 @@
 package com.mygdx.game.Play;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -35,6 +36,14 @@ public class PlayStage extends MyStage {
         super(viewport, batch, game);
     }
 
+    @Override
+    public boolean keyDown(int keyCode) {
+        if (keyCode == Input.Keys.BACK)
+        {
+            settingclick = true;
+        }
+        return false;
+    }
 
     public static boolean setSettingclick(boolean b){
         settingclick = b;

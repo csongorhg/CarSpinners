@@ -1,5 +1,6 @@
 package com.mygdx.game.Settings;
 
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -37,6 +38,20 @@ public class IngameSettingsStage extends MyStage {
         super(viewport, batch, game);
     }
 
+
+    @Override
+    public boolean keyDown(int keyCode) {
+        if (keyCode == Input.Keys.BACK)
+        {
+            game.setScreenBackByStackPop();
+            SettingsStage.b=b;
+            musicSetter.stopMusics();
+            if(b)musicSetter.MenuMusic();
+
+
+        }
+        return false;
+    }
 
     public void init() {
         addBackEventStackListener();
