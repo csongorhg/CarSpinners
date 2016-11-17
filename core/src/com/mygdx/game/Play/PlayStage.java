@@ -1,17 +1,17 @@
 package com.mygdx.game.Play;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.GlobalClasses.Assets;
 import com.mygdx.game.Graphics.ButtonCaller;
+import com.mygdx.game.Physics.Car;
 import com.mygdx.game.MyBaseClasses.MyStage;
 import com.mygdx.game.MyBaseClasses.OneSpriteStaticActor;
 import com.mygdx.game.MyGdxGame;
-import com.mygdx.game.Settings.SettingsStage;
 
 /**
  * Created by tuskeb on 2016. 09. 30..
@@ -28,6 +28,8 @@ public class PlayStage extends MyStage {
     private ButtonCaller p, f, textButton5; //gáz, fékpedál
 
     private OneSpriteStaticActor oneSpriteStaticActor; //út
+
+    private Car car;
 
     public PlayStage(Viewport viewport, Batch batch, MyGdxGame game) {
         super(viewport, batch, game);
@@ -54,7 +56,6 @@ public class PlayStage extends MyStage {
             oneSpriteStaticActor.setPosition(0,blockHeight);
             addActor(oneSpriteStaticActor);
         }
-
 
         //fogaskerék
         textButton5 = new ButtonCaller("", Assets.CONF_ICON);
@@ -88,14 +89,26 @@ public class PlayStage extends MyStage {
 
         resized();
 
+        car = new Car(width/2 - Car.carTexture.getPaint().getWidth()/2,heigth/10,Car.carTexture.getPaint().getWidth(),Car.carTexture.getPaint().getHeight());
+        addActor(car.carActor);
+        car.carActor.act(Gdx.graphics.getDeltaTime());
+    }
+
+    @Override
+    public void act(float delta) {
+        super.act(delta);
+        //
+        car.carActor.setPosition(car.carActor.getX()-(Gdx.input.getAccelerometerX()/10),car.carActor.getY());
+        if(car.carActor.getX()+car.carActor.getWidth() > width) car.carActor.setPosition(width-car.carActor.getWidth(),car.carActor.getY());
+        if(car.carActor.getX()< 0) car.carActor.setPosition(0,car.carActor.getY());
     }
 
     @Override
     protected void resized() {
         super.resized();
-        width = (((ExtendViewport)getViewport()).getMinWorldWidth())/2; //vízszintesen középre
+        width = (((ExtendViewport)getViewport()).getMinWorldWidth()); //vízszintesen középre
         //heigthBetween = (((ExtendViewport)getViewport()).getMinWorldHeight())/4; //egyenletesen elosztva 3 menüponthoz
-        heigth = 0; //magasság
+        heigth = (((ExtendViewport)getViewport()).getMinWorldHeight()); //magasság
         //heigth -= heigthBetween;
         //textButton.setPosition(width - ((textButton.getWidth())/2),heigth);
     }

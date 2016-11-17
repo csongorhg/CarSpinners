@@ -7,13 +7,11 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.CarClasses.CarTunningScreen;
-import com.mygdx.game.GlobalClasses.Assets;
-import com.mygdx.game.MyBaseClasses.Car;
+import com.mygdx.game.Physics.Car;
 import com.mygdx.game.MyBaseClasses.MyButton;
 import com.mygdx.game.MyBaseClasses.MyStage;
 import com.mygdx.game.MyBaseClasses.OneSpriteStaticActor;
 import com.mygdx.game.MyGdxGame;
-import com.mygdx.game.Settings.SettingsScreen;
 
 /**
  * Created by tuskeb on 2016. 09. 30..
