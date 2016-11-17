@@ -21,7 +21,7 @@ import com.mygdx.game.MyGdxGame;
 public class SettingsStage extends MyStage{
 
     private TextButton textButton;
-    private OneSpriteStaticActor hang, fel, le, ures, teli;
+    private OneSpriteStaticActor hang, fel, le;
     private Array<OneSpriteStaticActor> hangero;
     public static float actualVol = 1;
     static boolean b = true;
@@ -93,8 +93,9 @@ public class SettingsStage extends MyStage{
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                if(actualVol<=1){
+                if(actualVol<=0.9){
                     actualVol+=0.1;
+                    musicSetter.musicVolume(actualVol);
                     cuclik();
                 }
             }
@@ -105,6 +106,7 @@ public class SettingsStage extends MyStage{
                 super.clicked(event, x, y);
                 if(actualVol>=0){
                     actualVol-=0.1;
+                    musicSetter.musicVolume(actualVol<=0?0:actualVol);
                     cuclik();
                 }
             }
@@ -113,30 +115,30 @@ public class SettingsStage extends MyStage{
     }
 
     void cuclik(){
-        ures = new OneSpriteStaticActor(Assets.manager.get(Assets.EMPTY_VOL));
-        teli = new OneSpriteStaticActor(Assets.manager.get(Assets.FILLED_VOL));
         hangero = new Array<OneSpriteStaticActor>();
-        for(float i=0; i<=1; i+=0.1){
+        for(float i=0; i<1; i+=0.1){
             if(i<=actualVol){
-                hangero.add(teli);
-                addActor(hangero.get((int)i*10));
+                hangero.add(new OneSpriteStaticActor(Assets.manager.get(Assets.FILLED_VOL)));
+                addActor(hangero.get((int)(i*10)));
             }else{
-                hangero.add(ures);
-                addActor(hangero.get((int)i*10));
+                hangero.add(new OneSpriteStaticActor(Assets.manager.get(Assets.EMPTY_VOL)));
+                addActor(hangero.get((int)(i*10)));
             }
         }
-        meretezes(width, heigth);
+        meretezes(width, heigth/2);
     }
 
     void meretezes(float width, float heigth){
-        float meretGomb = heigth/4;
+        float meretGomb = heigth/6;
         le.setSize(meretGomb, meretGomb);
         fel.setSize(meretGomb, meretGomb);
         le.setPosition(0,heigth);
-        fel.setPosition(width*2, heigth);
+        fel.setPosition(width*2-fel.getWidth(), heigth);
         for(int i=0; i<hangero.size; i++){
-            hangero.get(i).setSize((width*2-(le.getWidth()+fel.getX()))/10,meretGomb);
+            hangero.get(i).setSize((fel.getX()-le.getWidth())/10, meretGomb);
+            //hangero.get(i).setSize((fel.getX()-le.getWidth())/10,(fel.getX()-le.getWidth())/10);
             hangero.get(i).setPosition(le.getWidth()+i*hangero.get(i).getWidth(),heigth);
+            //hangero.get(i).setPosition(le.getWidth()+i*hangero.get(i).getWidth(), heigth+hangero.get(i).getHeight()/2);
         }
     }
 
