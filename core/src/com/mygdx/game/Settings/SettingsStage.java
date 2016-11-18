@@ -95,6 +95,7 @@ public class SettingsStage extends MyStage{
                 super.clicked(event, x, y);
                 if(actualVol<=0.9){
                     actualVol+=0.1;
+                    //if(actualVol>0){b=true; hang.remove(); musicOnOff();}
                     musicSetter.musicVolume(actualVol);
                     cuclik();
                 }
@@ -106,6 +107,7 @@ public class SettingsStage extends MyStage{
                 super.clicked(event, x, y);
                 if(actualVol>=0){
                     actualVol-=0.1;
+                    //if(actualVol<=0){b=false; hang.remove(); musicOnOff();}
                     musicSetter.musicVolume(actualVol<=0?0:actualVol);
                     cuclik();
                 }
@@ -135,10 +137,10 @@ public class SettingsStage extends MyStage{
         le.setPosition(0,heigth);
         fel.setPosition(width*2-fel.getWidth(), heigth);
         for(int i=0; i<hangero.size; i++){
-            hangero.get(i).setSize((fel.getX()-le.getWidth())/10, meretGomb);
-            //hangero.get(i).setSize((fel.getX()-le.getWidth())/10,(fel.getX()-le.getWidth())/10);
-            hangero.get(i).setPosition(le.getWidth()+i*hangero.get(i).getWidth(),heigth);
-            //hangero.get(i).setPosition(le.getWidth()+i*hangero.get(i).getWidth(), heigth+hangero.get(i).getHeight()/2);
+            //hangero.get(i).setSize((fel.getX()-le.getWidth())/10, meretGomb);
+            //hangero.get(i).setPosition(le.getWidth()+i*hangero.get(i).getWidth(),heigth);
+            hangero.get(i).setSize((fel.getX()-le.getWidth())/10,(fel.getX()-le.getWidth())/10);
+            hangero.get(i).setPosition(le.getWidth()+i*hangero.get(i).getWidth(), heigth+hangero.get(i).getHeight()/2);
         }
     }
 
