@@ -129,9 +129,8 @@ public class PlayStage extends MyStage {
     @Override
     public void act(float delta) {
         super.act(delta);
-        //
         car.carActor.setPosition(car.carActor.getX()-(Gdx.input.getAccelerometerX()/5),car.carActor.getY());
-        if(car.carActor.getX()+car.carActor.getWidth() > width/5*3) car.carActor.setPosition(width/5*3-car.carActor.getWidth(),car.carActor.getY());
+        if(car.carActor.getX()+car.carActor.getWidth() > width/5*4) car.carActor.setPosition(width/5*4-car.carActor.getWidth(),car.carActor.getY());
         if(car.carActor.getX()< width/5) car.carActor.setPosition(width/5,car.carActor.getY());
     }
 
