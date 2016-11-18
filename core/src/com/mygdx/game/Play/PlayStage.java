@@ -109,6 +109,11 @@ public class PlayStage extends MyStage {
 
         int x = 30;
 
+        OneSpriteStaticActor kocka = new OneSpriteStaticActor(Assets.manager.get(Assets.MONEY_TEXTURE));
+        kocka.setWidth(width/5);
+        kocka.setPosition(width/5*3,350);
+        addActor(kocka);
+
         for (int i = 0; i < Car.maxheart; i++){
             OneSpriteStaticActor heart;
             if(i<car.getHeart()) heart = new OneSpriteStaticActor(Assets.manager.get(Assets.HEART));
@@ -125,9 +130,9 @@ public class PlayStage extends MyStage {
     public void act(float delta) {
         super.act(delta);
         //
-        car.carActor.setPosition(car.carActor.getX()-(Gdx.input.getAccelerometerX()/10),car.carActor.getY());
-        if(car.carActor.getX()+car.carActor.getWidth() > width) car.carActor.setPosition(width-car.carActor.getWidth(),car.carActor.getY());
-        if(car.carActor.getX()< 0) car.carActor.setPosition(0,car.carActor.getY());
+        car.carActor.setPosition(car.carActor.getX()-(Gdx.input.getAccelerometerX()/5),car.carActor.getY());
+        if(car.carActor.getX()+car.carActor.getWidth() > width/5*3) car.carActor.setPosition(width/5*3-car.carActor.getWidth(),car.carActor.getY());
+        if(car.carActor.getX()< width/5) car.carActor.setPosition(width/5,car.carActor.getY());
     }
 
     @Override
