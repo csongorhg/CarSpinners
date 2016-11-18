@@ -54,7 +54,10 @@ public class MenuStage extends MyStage {
 
 
         //cityStream(); //városfolyam
-        addActor(new CityStream());
+        CityStream cityStream;
+        addActor(cityStream = new CityStream());
+        cityStream.setX(getViewport().getWorldWidth()-cityStream.getWidth());
+
         moneyStream(getCityStreamHeight()); //pénzfolyam
 
 
