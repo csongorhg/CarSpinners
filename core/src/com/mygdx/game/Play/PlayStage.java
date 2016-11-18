@@ -53,6 +53,8 @@ public class PlayStage extends MyStage {
     public void init() {
         addBackEventStackListener();
 
+        resized();
+
         //út
 
         float blockHeight = (((ExtendViewport)getViewport()).getMinWorldHeight());
@@ -83,10 +85,15 @@ public class PlayStage extends MyStage {
 
         addActor(textButton5);
 
+        OneSpriteStaticActor felulet = new OneSpriteStaticActor(Assets.manager.get(Assets.ROAD_MENU));
+        float arany = width/felulet.getWidth();
+        felulet.setSize(felulet.getWidth()*arany,felulet.getHeight()*arany);
+        addActor(felulet);
+
        //gázpedál
         p = new ButtonCaller("", Assets.GAZ_ICON);
         p.setSize(54,57); //18*3, 19*3
-        p.setX((((ExtendViewport)getViewport()).getMinWorldWidth()) - p.getWidth());
+        p.setX((((ExtendViewport)getViewport()).getMinWorldWidth()) - p.getWidth()*0.90f);
 
         addActor(p);
 
@@ -96,11 +103,22 @@ public class PlayStage extends MyStage {
 
         addActor(f);
 
-        resized();
-
         car = new Car(width/2 - Car.carTexture.getPaint().getWidth()/2,heigth/10,Car.carTexture.getPaint().getWidth(),Car.carTexture.getPaint().getHeight());
         addActor(car.carActor);
         car.carActor.act(Gdx.graphics.getDeltaTime());
+
+        int x = 30;
+
+        for (int i = 0; i < Car.maxheart; i++){
+            OneSpriteStaticActor heart;
+            if(i<car.getHeart()) heart = new OneSpriteStaticActor(Assets.manager.get(Assets.HEART));
+            else heart = new OneSpriteStaticActor(Assets.manager.get(Assets.NOHEART));
+            heart.setSize(30,30);
+            heart.setX(width-x);
+            heart.setY(heigth-30);
+            addActor(heart);
+            x+=30;
+        }
     }
 
     @Override
@@ -115,10 +133,8 @@ public class PlayStage extends MyStage {
     @Override
     protected void resized() {
         super.resized();
-        width = (((ExtendViewport)getViewport()).getMinWorldWidth()); //vízszintesen középre
-        //heigthBetween = (((ExtendViewport)getViewport()).getMinWorldHeight())/4; //egyenletesen elosztva 3 menüponthoz
-        heigth = (((ExtendViewport)getViewport()).getMinWorldHeight()); //magasság
-        //heigth -= heigthBetween;
-        //textButton.setPosition(width - ((textButton.getWidth())/2),heigth);
+        width = (((ExtendViewport)getViewport()).getMinWorldWidth());
+        heigth = (((ExtendViewport)getViewport()).getMinWorldHeight());
+
     }
 }

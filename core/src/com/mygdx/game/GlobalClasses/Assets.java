@@ -62,6 +62,12 @@ public class Assets {
 			= new AssetDescriptor<Texture>("cog.png", Texture.class);
 	public static final AssetDescriptor<Texture> ROAD_BLOCK
 			= new AssetDescriptor<Texture>("ut.png", Texture.class);
+	public static final AssetDescriptor<Texture> ROAD_MENU
+			= new AssetDescriptor<Texture>("felulet.png", Texture.class);
+	public static final AssetDescriptor<Texture> HEART
+			= new AssetDescriptor<Texture>("heart.png", Texture.class);
+	public static final AssetDescriptor<Texture> NOHEART
+			= new AssetDescriptor<Texture>("noheart.png", Texture.class);
 	public static final AssetDescriptor<Texture> PLUS_VOL
 			= new AssetDescriptor<Texture>("vol/plusz.png", Texture.class);
 	public static final AssetDescriptor<Texture> MINUS_VOL
@@ -119,6 +125,9 @@ public class Assets {
 		manager.load(FILLED_VOL);
 		manager.load(EMPTY_VOL);
 		manager.load(ROAD_BLOCK);
+		manager.load(ROAD_MENU);
+		manager.load(HEART);
+		manager.load(NOHEART);
 	}
 
     public static void afterLoaded() {
