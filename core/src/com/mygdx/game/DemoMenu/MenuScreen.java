@@ -2,6 +2,7 @@ package com.mygdx.game.DemoMenu;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
@@ -16,9 +17,12 @@ import com.mygdx.game.MyGdxGame;
  * Created by tuskeb on 2016. 09. 30..
  */
 public class MenuScreen extends MyScreen {
+
     protected MenuStage menuStage;
     protected MyStage bgStage;
 
+    public static final String PREFS = "Score";
+    private Preferences preferences = Gdx.app.getPreferences(PREFS);
 
     public MenuScreen(MyGdxGame game) {
         super(game);
@@ -47,7 +51,14 @@ public class MenuScreen extends MyScreen {
     @Override
     public void dispose() {
         menuStage.dispose();
+        preferences.flush();
         super.dispose();
+    }
+
+    @Override
+    public void hide() {
+        preferences.flush();
+        super.hide();
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.mygdx.game.DemoMenu;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -15,6 +16,7 @@ import com.mygdx.game.GlobalClasses.Assets;
 import com.mygdx.game.Math.Random;
 import com.mygdx.game.Music.MusicSetter;
 import com.mygdx.game.MyBaseClasses.MyButton;
+import com.mygdx.game.MyBaseClasses.MyLabel;
 import com.mygdx.game.MyBaseClasses.MyStage;
 import com.mygdx.game.MyBaseClasses.OneSpriteStaticActor;
 import com.mygdx.game.Graphics.ButtonCaller;
@@ -39,6 +41,10 @@ public class MenuStage extends MyStage {
     private int moneySpeeds[]; //pénzek sebbesége
     private int moneySpeedsinterval[]; //pénzek sebességének intervalluma
 
+    private Preferences preferences = Gdx.app.getPreferences(MenuScreen.PREFS);
+    private MyLabel deadufocountLabel;
+    public static final String DEAD_UFO_COUNT = "DEAD_UFO_COUNT";
+
     //private OneSpriteStaticActor cityStream, cityStream2; //úszó város
     //private int cityStreamSpeed;
 
@@ -52,6 +58,17 @@ public class MenuStage extends MyStage {
 
         addBackEventStackListener();
 
+        addActor(deadufocountLabel = new MyLabel("", game.getLabelStyle()){
+            @Override
+            public void init() {
+                super.init();
+
+                setFontScale(0.5f);
+                setWidth(50);
+                setHeight(50);
+            }
+
+        });
 
         //cityStream(); //városfolyam
         CityStream cityStream;
@@ -72,6 +89,8 @@ public class MenuStage extends MyStage {
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
                 game.setScreen(new SettingsScreen(game));
+                preferences.putInteger(MenuStage.DEAD_UFO_COUNT, preferences.getInteger(MenuStage.DEAD_UFO_COUNT,0)+1);
+
             }
         });
 
@@ -166,26 +185,6 @@ public class MenuStage extends MyStage {
         }
     }
 
-
-
-   /* private void cityStream() {
-
-        cityStreamSpeed = 2; //városfolyam sebessége
-
-        cityStream = new OneSpriteStaticActor(Assets.manager.get(Assets.CITY_ACTION_BACKGROUND));
-        cityStream.setSize(cityStream.getWidth()*3,cityStream.getHeight()*3);
-        addActor(cityStream);
-
-        cityStream2 = new OneSpriteStaticActor(Assets.manager.get(Assets.CITY_ACTION_BACKGROUND));
-        cityStream2.setSize(cityStream2.getWidth()*3,cityStream2.getHeight()*3);
-        cityStream2.setX(0 - cityStream2.getWidth());
-        addActor(cityStream2);
-
-        cityStream.act(Gdx.graphics.getDeltaTime());
-        cityStream2.act(Gdx.graphics.getDeltaTime());
-    }
-*/
-
     private float getCityStreamHeight(){
         for (Actor a: getActors()) {
             if (a instanceof CityStream){
@@ -198,6 +197,8 @@ public class MenuStage extends MyStage {
     @Override
     public void act(float delta) {
         super.act(delta);
+
+        deadufocountLabel.setText(preferences.getInteger(MenuStage.DEAD_UFO_COUNT, 0) + "");
 
         music.MenuMusic();
 
