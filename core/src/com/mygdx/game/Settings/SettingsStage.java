@@ -21,10 +21,10 @@ import com.mygdx.game.MyGdxGame;
 public class SettingsStage extends MyStage{
 
     private TextButton textButton;
-    private OneSpriteStaticActor hang, fel, le;
-    private Array<OneSpriteStaticActor> hangero;
+    private OneSpriteStaticActor volumeIconSpriteActor, volumePlusSpriteActor,volumeMinusSpriteActor;
+    private Array<OneSpriteStaticActor> volumeArray;
     public static float actualVol = 1;
-    static boolean b = true;
+    static boolean musicPlay = true;
     MusicSetter musicSetter = new MusicSetter();
 
     private float width, heigth;
@@ -67,85 +67,85 @@ public class SettingsStage extends MyStage{
     }
 
     void musicOnOff(){
-        hang = new OneSpriteStaticActor(Assets.manager.get(b?Assets.SOUND_ICON:Assets.MUTE_ICON));
-        addActor(hang);
-        hang.addListener(new ClickListener(){
+        volumeIconSpriteActor = new OneSpriteStaticActor(Assets.manager.get(musicPlay?Assets.SOUND_ICON:Assets.MUTE_ICON));
+        addActor(volumeIconSpriteActor);
+        volumeIconSpriteActor.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                hang.remove();
-                b = !b;
-                IngameSettingsStage.b = b;
-                new MusicSetter(b);
+                volumeIconSpriteActor.remove();
+                musicPlay = !musicPlay;
+                IngameSettingsStage.musicPlay = musicPlay;
+                new MusicSetter(musicPlay);
                 musicOnOff();
             }
         });
-        hang.setSize(width / 3, width / 3);
-        hang.setPosition(0, heigth - hang.getHeight());
+        volumeIconSpriteActor.setSize(width / 3, width / 3);
+        volumeIconSpriteActor.setPosition(0, heigth - volumeIconSpriteActor.getHeight());
     }
 
 
     void musicVolume(){
-        fel = new OneSpriteStaticActor(Assets.manager.get(Assets.PLUS_VOL));
-        le = new OneSpriteStaticActor(Assets.manager.get(Assets.MINUS_VOL));
-        addActor(fel); addActor(le);
-        fel.addListener(new ClickListener(){
+        volumePlusSpriteActor = new OneSpriteStaticActor(Assets.manager.get(Assets.PLUS_VOL));
+        volumeMinusSpriteActor = new OneSpriteStaticActor(Assets.manager.get(Assets.MINUS_VOL));
+        addActor(volumePlusSpriteActor); addActor(volumeMinusSpriteActor);
+        volumePlusSpriteActor.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
                 if(actualVol<=0.9){
                     actualVol+=0.1;
-                    //if(actualVol>0){b=true; hang.remove(); musicOnOff();}
+                    IngameSettingsStage.actualVol = actualVol;
                     musicSetter.musicVolume(actualVol);
-                    cuclik();
+                    volumeArraySettings();
                 }
             }
         });
-        le.addListener(new ClickListener(){
+        volumeMinusSpriteActor.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
                 if(actualVol>=0){
                     actualVol-=0.1;
-                    //if(actualVol<=0){b=false; hang.remove(); musicOnOff();}
+                    IngameSettingsStage.actualVol = actualVol;
                     musicSetter.musicVolume(actualVol<=0?0:actualVol);
-                    cuclik();
+                    volumeArraySettings();
                 }
             }
         });
-        cuclik();
+        volumeArraySettings();
     }
 
-    void cuclik(){
-        hangero = new Array<OneSpriteStaticActor>();
+    void volumeArraySettings(){
+        volumeArray = new Array<OneSpriteStaticActor>();
         for(float i=0; i<1; i+=0.1){
             if(i<=actualVol){
-                hangero.add(new OneSpriteStaticActor(Assets.manager.get(Assets.FILLED_VOL)));
-                addActor(hangero.get((int)(i*10)));
+                volumeArray.add(new OneSpriteStaticActor(Assets.manager.get(Assets.FILLED_VOL)));
+                addActor(volumeArray.get((int)(i*10)));
             }else{
-                hangero.add(new OneSpriteStaticActor(Assets.manager.get(Assets.EMPTY_VOL)));
-                addActor(hangero.get((int)(i*10)));
+                volumeArray.add(new OneSpriteStaticActor(Assets.manager.get(Assets.EMPTY_VOL)));
+                addActor(volumeArray.get((int)(i*10)));
             }
         }
-        meretezes(width, heigth/2);
+        volumeSize(width, heigth/2);
     }
 
-    void meretezes(float width, float heigth){
+    void volumeSize(float width, float heigth){
         float meretGomb = heigth/6;
-        le.setSize(meretGomb, meretGomb);
-        fel.setSize(meretGomb, meretGomb);
-        le.setPosition(0,heigth);
-        fel.setPosition(width*2-fel.getWidth(), heigth);
-        for(int i=0; i<hangero.size; i++){
+        volumeMinusSpriteActor.setSize(meretGomb, meretGomb);
+        volumePlusSpriteActor.setSize(meretGomb, meretGomb);
+        volumeMinusSpriteActor.setPosition(0,heigth);
+        volumePlusSpriteActor.setPosition(width*2-volumePlusSpriteActor.getWidth(), heigth);
+        for(int i=0; i<volumeArray.size; i++){
             //hangero.get(i).setSize((fel.getX()-le.getWidth())/10, meretGomb);
             //hangero.get(i).setPosition(le.getWidth()+i*hangero.get(i).getWidth(),heigth);
-            hangero.get(i).setSize((fel.getX()-le.getWidth())/10,(fel.getX()-le.getWidth())/10);
-            hangero.get(i).setPosition(le.getWidth()+i*hangero.get(i).getWidth(), heigth+hangero.get(i).getHeight()/2);
+            volumeArray.get(i).setSize((volumePlusSpriteActor.getX()-volumeMinusSpriteActor.getWidth())/10,(volumePlusSpriteActor.getX()-volumeMinusSpriteActor.getWidth())/10);
+            volumeArray.get(i).setPosition(volumeMinusSpriteActor.getWidth()+i*volumeArray.get(i).getWidth(), heigth+volumeArray.get(i).getHeight()/2);
         }
     }
 
     public static boolean isB() {
-        return b;
+        return musicPlay;
     }
 
 
