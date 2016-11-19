@@ -30,6 +30,9 @@ public class PlayStage extends MyStage {
 
     private OneSpriteStaticActor oneSpriteStaticActor; //út
 
+    private OneSpriteStaticActor heart[]; //szivek eltárolása
+    private int currentHeart; //jelenlegi szív
+
     private Car car;
 
     public PlayStage(Viewport viewport, Batch batch, MyGdxGame game) {
@@ -55,8 +58,9 @@ public class PlayStage extends MyStage {
 
         resized();
 
-        //út
+        heart = new OneSpriteStaticActor[Car.maxheart]; //szivek
 
+        //út
         float blockHeight = (((ExtendViewport)getViewport()).getMinWorldHeight());
 
         for(int i = 0; i<4 ;i++){
@@ -77,9 +81,19 @@ public class PlayStage extends MyStage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
+
+                //TESZT szívcsökkentés
+                if (currentHeart < Car.maxheart) {
+                    OneSpriteStaticActor emptyHeart = new OneSpriteStaticActor(Assets.manager.get(Assets.NOHEART));
+                    emptyHeart.setPosition(heart[currentHeart].getX(), heart[currentHeart].getY());
+                    emptyHeart.setSize(heart[currentHeart].getWidth(), heart[currentHeart].getHeight());
+                    heart[currentHeart].remove();
+                    addActor(emptyHeart);
+                    currentHeart++;
+                }
+                //TESZT szívcsökkentés
+
                 setSettingclick(true);
-                //new MusicSetter(SettingsStage.isB()); //menüzene hívás
-                //game.setScreenBackByStackPop();
             }
         });
 
@@ -107,22 +121,22 @@ public class PlayStage extends MyStage {
         addActor(car.carActor);
         car.carActor.act(Gdx.graphics.getDeltaTime());
 
-        int x = 30;
-
         OneSpriteStaticActor kocka = new OneSpriteStaticActor(Assets.manager.get(Assets.MONEY_TEXTURE));
         kocka.setWidth(width/5);
         kocka.setPosition(width/5*3,350);
         addActor(kocka);
 
-        for (int i = 0; i < Car.maxheart; i++){
-            OneSpriteStaticActor heart;
-            if(i<car.getHeart()) heart = new OneSpriteStaticActor(Assets.manager.get(Assets.HEART));
-            else heart = new OneSpriteStaticActor(Assets.manager.get(Assets.NOHEART));
-            heart.setSize(30,30);
-            heart.setX(width-x);
-            heart.setY(heigth-30);
-            addActor(heart);
-            x+=30;
+        //szivek
+        int x = 30 * Car.maxheart; //szivek szélessége
+        currentHeart = 0; //jelenlegi szív
+
+        for (int i = 0; i < Car.maxheart; i++){ //tömbként generálom
+            heart[i] = new OneSpriteStaticActor(Assets.manager.get(Assets.HEART));
+            heart[i].setSize(30,30);
+            heart[i].setX(width-x);
+            heart[i].setY(heigth-30);
+            addActor(heart[i]);
+            x-=30;
         }
     }
 
