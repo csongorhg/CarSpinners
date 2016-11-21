@@ -27,7 +27,7 @@ public class IngameSettingsStage extends MyStage {
 
     private TextButton textButton, textButton2;
     private OneSpriteStaticActor volumeIconSpriteActor,volumePlusSpriteActor, volumeMinusSpriteActor, backgroundSpriteActor;
-    static boolean musicPlay = true;
+    public static boolean musicPlay = true;
     MusicSetter musicSetter = new MusicSetter();
     private Array<OneSpriteStaticActor> volumeArray;
     public static float actualVol = 1;

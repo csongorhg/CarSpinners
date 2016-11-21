@@ -45,11 +45,11 @@ public class SettingsScreen extends MyScreen{
         bgStage.resize(width, height);
     }
 
-    @Override
+    /*@Override
     public void dispose() {
         settingsStage.dispose();
         super.dispose();
-    }
+    }*/
 
     @Override
     public void init() {

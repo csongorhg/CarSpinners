@@ -11,7 +11,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ObjectSet;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.mygdx.game.GlobalClasses.Assets;
+import com.mygdx.game.Music.MusicSetter;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.Settings.IngameSettingsStage;
+import com.mygdx.game.Settings.SettingsStage;
 
 /**
  * Created by tuskeb on 2016. 09. 30..
@@ -78,7 +81,7 @@ abstract public class MyScreen implements Screen, InitableInterface {
 
     @Override
     public void show() {
-
+        SettingsStage.actualVol = 1;
     }
 
     public Game getGame() {

@@ -24,7 +24,7 @@ public class SettingsStage extends MyStage{
     private OneSpriteStaticActor volumeIconSpriteActor, volumePlusSpriteActor,volumeMinusSpriteActor;
     private Array<OneSpriteStaticActor> volumeArray;
     public static float actualVol = 1;
-    static boolean musicPlay = true;
+    public static boolean musicPlay = true;
     MusicSetter musicSetter = new MusicSetter();
 
     private float width, heigth;
