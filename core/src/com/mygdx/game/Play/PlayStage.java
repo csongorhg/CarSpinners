@@ -13,6 +13,10 @@ import com.mygdx.game.Physics.Car;
 import com.mygdx.game.MyBaseClasses.MyStage;
 import com.mygdx.game.MyBaseClasses.OneSpriteStaticActor;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.Physics.Line;
+import com.mygdx.game.Physics.Physic;
+
+import java.util.Vector;
 
 /**
  * Created by tuskeb on 2016. 09. 30..
@@ -33,7 +37,11 @@ public class PlayStage extends MyStage {
     private OneSpriteStaticActor heart[]; //szivek eltárolása
     private int currentHeart; //jelenlegi szív
 
+    private boolean fekisdown = false;
+    private boolean gazisdown = false;
+
     private Car car;
+    private Vector<Line> lines = new Vector();
 
     public PlayStage(Viewport viewport, Batch batch, MyGdxGame game) {
         super(viewport, batch, game);
@@ -108,23 +116,44 @@ public class PlayStage extends MyStage {
         p = new ButtonCaller("", Assets.GAZ_ICON);
         p.setSize(54,57); //18*3, 19*3
         p.setX((((ExtendViewport)getViewport()).getMinWorldWidth()) - p.getWidth()*0.90f);
+        p.addListener(new ClickListener(){
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                gazisdown = true;
+                return super.touchDown(event, x, y, pointer, button);
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                gazisdown = false;
+                super.touchUp(event, x, y, pointer, button);
+            }
+        });
 
         addActor(p);
 
         //fékpedál
         f = new ButtonCaller("", Assets.FEK_ICON);
         f.setSize(54,57); //18*3, 19*3
+        f.addListener(new ClickListener(){
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                fekisdown = true;
+                return super.touchDown(event, x, y, pointer, button);
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                fekisdown = false;
+                super.touchUp(event, x, y, pointer, button);
+            }
+        });
 
         addActor(f);
 
         car = new Car(width/2 - Car.carTexture.getPaint().getWidth()/2,heigth/10,Car.carTexture.getPaint().getWidth(),Car.carTexture.getPaint().getHeight());
         addActor(car.carActor);
         car.carActor.act(Gdx.graphics.getDeltaTime());
-
-        OneSpriteStaticActor kocka = new OneSpriteStaticActor(Assets.manager.get(Assets.MONEY_TEXTURE));
-        kocka.setWidth(width/5);
-        kocka.setPosition(width/5*3,350);
-        addActor(kocka);
 
         //szivek
         int x = 30 * Car.maxheart; //szivek szélessége
@@ -143,9 +172,59 @@ public class PlayStage extends MyStage {
     @Override
     public void act(float delta) {
         super.act(delta);
+        carPysic();
+        linePhysic();
+    }
+
+    private void linePhysic(){
+        float speed = Physic.carspeed;
+        try{
+            if(!fekisdown && !gazisdown) speed *= 0.99;
+            else if(fekisdown) speed *= Physic.breakpower;
+            else if(gazisdown) speed *= Physic.acceleration;
+
+            if(speed < Physic.MINcarspeed) speed = Physic.MINcarspeed;
+            else if(speed > Physic.MAXcarspeed) speed = Physic.MAXcarspeed;
+
+            Physic.carspeed = speed;
+
+            for (int i = 0; i < lines.size(); i++){
+                lines.get(i).addHeight(speed);
+            }
+            if(lines.get(0).heightpoz+lines.get(0).size < 0){
+                removeLine();
+            }
+            if(width - lines.get(lines.size()-1).heightpoz > lines.get(lines.size()-1).size){
+                addLine();
+            }
+        }catch(Exception e){
+            if(lines.size() == 0){
+                addLine();
+            }
+        }
+    }
+
+    private void removeLine() {
+        for (int i = 0; i < 3; i++){
+            lines.get(0).blocks[i].actor.remove();
+        }
+        lines.remove(0);
+    }
+
+    private void addLine() {
+        Line l = new Line(width,heigth);
+        for (int i = 0; i < 3; i++){
+            addActor(l.blocks[i].actor);
+        }
+        lines.add(l);
+    }
+
+    private void carPysic(){
         car.carActor.setPosition(car.carActor.getX()-(Gdx.input.getAccelerometerX()/4),car.carActor.getY());
         if(car.carActor.getX()+car.carActor.getWidth() > width/5*4) car.carActor.setPosition(width/5*4-car.carActor.getWidth(),car.carActor.getY());
         if(car.carActor.getX()< width/5) car.carActor.setPosition(width/5,car.carActor.getY());
+
+
     }
 
     @Override

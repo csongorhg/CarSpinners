@@ -80,6 +80,10 @@ public class Assets {
 			= new AssetDescriptor<Texture>("vol/teli.png", Texture.class);
 	public static final AssetDescriptor<Texture> EMPTY_VOL
 			= new AssetDescriptor<Texture>("vol/ures.png", Texture.class);
+	public static final AssetDescriptor<Texture> BLOCAKDE_0
+			= new AssetDescriptor<Texture>("blockade-0.png", Texture.class);
+	public static final AssetDescriptor<Texture> BLOCAKDE_1
+			= new AssetDescriptor<Texture>("blockade-1.png", Texture.class);
 
 	//zenék
 	public static final AssetDescriptor<Music> EXTREMEACTION
@@ -132,6 +136,8 @@ public class Assets {
 		manager.load(ROAD_MENU);
 		manager.load(HEART);
 		manager.load(NOHEART);
+		manager.load(BLOCAKDE_0);
+		manager.load(BLOCAKDE_1);
 	}
 
     public static void afterLoaded() {

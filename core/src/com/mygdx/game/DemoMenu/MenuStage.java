@@ -85,14 +85,14 @@ public class MenuStage extends MyStage {
         textButton5.setY((((ExtendViewport)getViewport()).getMinWorldHeight())
         - textButton5.getHeight());
         textButton5.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                super.clicked(event, x, y);
-                game.setScreen(new SettingsScreen(game));
-                preferences.putInteger(MenuStage.DEAD_UFO_COUNT, preferences.getInteger(MenuStage.DEAD_UFO_COUNT,0)+1);
+        @Override
+        public void clicked(InputEvent event, float x, float y) {
+            super.clicked(event, x, y);
+            game.setScreen(new SettingsScreen(game));
+            preferences.putInteger(MenuStage.DEAD_UFO_COUNT, preferences.getInteger(MenuStage.DEAD_UFO_COUNT,0)+1);
 
-            }
-        });
+        }
+    });
 
         addActor(textButton5);
 

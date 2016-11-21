@@ -1,17 +1,30 @@
 package com.mygdx.game.Physics;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.mygdx.game.GlobalClasses.Assets;
+import com.mygdx.game.MyBaseClasses.OneSpriteStaticActor;
+
 /**
  * Created by tanulo on 2016. 11. 17..
  */
 public class Block {
 
-    Pont poz = new Pont(0f,0f);
-    Pont size = new Pont(0f,0f);
+    Texture t;
+    public OneSpriteStaticActor actor;
     float weight = 0;
+    int id;
 
-    Block(float x,float y,float w,float h){
-        poz = new Pont(x,y);
-        size = new Pont(w,h);
+    Block(Block b){
+        this.id = b.id;
+        this.weight = b.weight;
+        this.actor = new OneSpriteStaticActor(b.t);
+    }
+
+    Block(int id, float weight, Texture t){
+        this.id = id;
+        this.weight = weight;
+        this.t = t;
     }
 
     public void setWeight(float weight) {
@@ -19,24 +32,21 @@ public class Block {
     }
 
     public void setPoz(float f1,float f2) {
-        poz.setX(f1);
-        poz.setY(f2);
+        actor.setPosition(f1,f2);
     }
 
     public void setSize(float f1,float f2) {
-        size.setX(f1);
-        size.setY(f2);
-    }
-
-    public Pont getSize() {
-        return size;
-    }
-
-    public Pont getPoz() {
-        return poz;
+        actor.setSize(f1,f2);
     }
 
     public float getWeight() {
         return weight;
+    }
+
+    public float getWidth() {
+        return actor.getWidth();
+    }
+    public float getHeight() {
+        return actor.getHeight();
     }
 }
