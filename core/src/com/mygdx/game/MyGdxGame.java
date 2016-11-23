@@ -25,11 +25,8 @@ public class MyGdxGame extends Game {
 	public Label.LabelStyle getLabelStyle() {
 		Label.LabelStyle style;
 		style = new com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle();
-		style.font = Assets.manager.get(Assets.FONT_C64);
+		style.font = Assets.manager.get(Assets.FONT_C64_30);
 		style.fontColor = Color.YELLOW;
-		Pixmap p = new Pixmap(1,1, Pixmap.Format.RGB888);
-		p.setColor(0.4f,0.2f,0.8f, 0.5f);
-		p.fill();
 		return style;
 	}
 
@@ -39,7 +36,7 @@ public class MyGdxGame extends Game {
 		style.background = new TextureRegionDrawable(new TextureRegion(Assets.manager.get(Assets.TEXTBOX_TEXTURE)));
 		style.background.setLeftWidth(style.background.getLeftWidth()+20);
 		style.background.setRightWidth(style.background.getRightWidth()+20);
-		style.font = Assets.manager.get(Assets.FONT_C64);
+		style.font = Assets.manager.get(Assets.FONT_C64_30);
 		style.cursor = new TextureRegionDrawable(new TextureRegion(new TextureRegion(Assets.manager.get(Assets.CURSOR_TEXTURE))));
 		style.cursor.setMinWidth(50);
 		style.fontColor = Color.BLACK;
@@ -54,7 +51,7 @@ public class MyGdxGame extends Game {
 	public TextButton.TextButtonStyle getTextButtonStyle() {
 
 		TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
-		textButtonStyle.font = Assets.manager.get(Assets.FONT_C64);
+		textButtonStyle.font = Assets.manager.get(Assets.FONT_C64_30);
 
 		Pixmap p = new Pixmap(1,1, Pixmap.Format.RGB888);
 		p.setColor(0.1f,0.2f,0.2f, 0.5f);

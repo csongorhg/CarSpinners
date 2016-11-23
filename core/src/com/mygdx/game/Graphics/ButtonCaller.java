@@ -25,7 +25,7 @@ public class ButtonCaller extends TextButton implements InitableInterface {
      static TextButtonStyle getTextButtonStyle(AssetDescriptor<Texture> assets) {
 
          TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
-         textButtonStyle.font = Assets.manager.get(Assets.FONT_C64);
+         textButtonStyle.font = Assets.manager.get(Assets.FONT_C64_30);
 
 
          Pixmap p = new Pixmap(18,19, Pixmap.Format.RGBA8888);
