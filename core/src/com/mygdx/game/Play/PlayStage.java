@@ -308,7 +308,7 @@ public class PlayStage extends MyStage {
     }
 
     private void carPysic(){
-        car.carActor.setPosition(car.carActor.getX()-(Gdx.input.getAccelerometerX()/4),car.carActor.getY());
+        car.carActor.setPosition(car.carActor.getX()-(Gdx.input.getAccelerometerX()/3),car.carActor.getY());
         if(car.carActor.getX()+car.carActor.getWidth() > width/5*4){
             car.carActor.setPosition(width/5*4-car.carActor.getWidth(),car.carActor.getY());
         }
