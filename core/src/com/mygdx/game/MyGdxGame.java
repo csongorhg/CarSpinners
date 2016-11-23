@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -21,12 +22,23 @@ import java.util.Stack;
 public class MyGdxGame extends Game {
 
 	public final Stack<Class> backButtonStack = new Stack();
+	public final float WORLD_WIDTH = 270, WORLD_HEIGHT = 480;
 
 	public Label.LabelStyle getLabelStyle() {
 		Label.LabelStyle style;
 		style = new com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle();
 		style.font = Assets.manager.get(Assets.FONT_C64_30);
 		style.fontColor = Color.YELLOW;
+		return style;
+	}
+
+	public Slider.SliderStyle getSliderStyle(){
+		Slider.SliderStyle style;
+		style = new Slider.SliderStyle();
+		style.background = new TextureRegionDrawable(new TextureRegion(Assets.manager.get(Assets.BACKGROUND_TEXTURE)));
+		style.background.setMinHeight(WORLD_HEIGHT/20);
+		style.knob = new TextureRegionDrawable(new TextureRegion(Assets.manager.get(Assets.FILLED_VOL)));
+		style.knob.setMinHeight(WORLD_HEIGHT/20+10);
 		return style;
 	}
 
