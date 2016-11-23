@@ -6,8 +6,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.game.GlobalClasses.Assets;
 import com.mygdx.game.MyBaseClasses.MyButton;
 import com.mygdx.game.MyBaseClasses.MyStage;
+import com.mygdx.game.MyBaseClasses.OneSpriteStaticActor;
 import com.mygdx.game.MyGdxGame;
 
 /**
@@ -19,6 +21,7 @@ public class CarTunningStage extends MyStage {
     private TextButton textButton;
 
     private float width, heigthBetween, heigth;
+
 
     public CarTunningStage(Viewport viewport, Batch batch, MyGdxGame game) {
         super(viewport, batch, game);
@@ -37,6 +40,8 @@ public class CarTunningStage extends MyStage {
         });
 
         addActor(textButton);
+
+
 
         resized();
     }

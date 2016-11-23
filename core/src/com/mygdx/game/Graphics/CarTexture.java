@@ -37,4 +37,5 @@ public class CarTexture {
         c = Graphics.fullColor(i,i1,i2,1);
     }
 
+
 }
