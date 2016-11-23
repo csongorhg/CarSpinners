@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -46,7 +48,7 @@ public class PlayStage extends MyStage {
     private Car car;
     private Vector<Line> lines = new Vector();
 
-    private MyLabel myLabel; //pocoknak
+    private MyLabel kmh, policedistance, score; //pocoknak
 
     public PlayStage(Viewport viewport, Batch batch, MyGdxGame game) {
         super(viewport, batch, game);
@@ -178,13 +180,36 @@ public class PlayStage extends MyStage {
 
         Label.LabelStyle style;
         style = new com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle();
-        style.font = Assets.manager.get(Assets.FONT_C64_10);
         style.fontColor = Color.WHITE;
 
+        //átméretezés
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("c64.ttf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter meret = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        meret.size = 10;
+        meret.characters = Assets.CHARS;
+        BitmapFont font = generator.generateFont(meret);
+        generator.dispose();
+        style.font = font;
+        //átméretezés vége
 
-        //mylabel
-        myLabel = new MyLabel("asd", style);
-        addActor(myLabel);
+
+        //kilóméter/óra
+        kmh = new MyLabel("asd1", style);
+        //myLabel.setPosition(getViewport().getWorldWidth()/(590/100),getViewport().getWorldHeight()/24);
+        kmh.setPosition(75,19);
+        addActor(kmh);
+
+        //rendőr távolság
+        policedistance = new MyLabel("asd2",style);
+        policedistance.setPosition(75,4);
+        addActor(policedistance);
+
+        //score
+        score = new MyLabel("score",game.getLabelStyle());
+        score.setPosition(116,7);
+        addActor(score);
+
+
 
     }
 
@@ -224,7 +249,7 @@ public class PlayStage extends MyStage {
             if(width - lines.get(lines.size()-1).heightpoz > lines.get(lines.size()-1).size){
                 addLine();
             }
-        }catch(Exception e){
+        }catch(Exception e){//kicsi homokos #easter_egg
             if(lines.size() == 0){
                 addLine();
             }

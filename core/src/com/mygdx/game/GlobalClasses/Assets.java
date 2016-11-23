@@ -34,13 +34,12 @@ public class Assets {
 	static final FreetypeFontLoader.FreeTypeFontLoaderParameter fontParameter = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
 	static {
 		fontParameter.fontFileName = "c64.ttf";
-		fontParameter.fontParameters.size = 29;
+		fontParameter.fontParameters.size = 30;
 		fontParameter.fontParameters.characters = CHARS;
 		fontParameter.fontParameters.color = Color.WHITE;
 	}
-	public static final AssetDescriptor<BitmapFont> FONT_C64
+	public static final AssetDescriptor<BitmapFont> FONT_C64_30
 			= new AssetDescriptor<BitmapFont>(fontParameter.fontFileName, BitmapFont.class, fontParameter);
-
 
 	public static final AssetDescriptor<Texture> CURSOR_TEXTURE
 			= new AssetDescriptor<Texture>("images/cursor.png", Texture.class);
@@ -112,7 +111,7 @@ public class Assets {
 		manager.setLoader(BitmapFont.class, ".ttf", new FreetypeFontLoader(resolver));
 		manager.setLoader(BitmapFont.class, ".otf", new FreetypeFontLoader(resolver));
 
-		manager.load(FONT_C64);
+		manager.load(FONT_C64_30);
 		manager.load(TEXTBOX_TEXTURE);
 		manager.load(CURSOR_TEXTURE);
 		manager.load(EXTREMEACTION);
