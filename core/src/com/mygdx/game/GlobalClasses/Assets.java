@@ -88,6 +88,8 @@ public class Assets {
 			= new AssetDescriptor<Texture>("blockade-1.png", Texture.class);
 	public static final AssetDescriptor<Texture> ARROW
 			= new AssetDescriptor<Texture>("nyil.png", Texture.class);
+	public static final AssetDescriptor<Texture> BREAK
+			= new AssetDescriptor<Texture>("break.png", Texture.class);
 
 	//zenék
 	public static final AssetDescriptor<Music> EXTREMEACTION
@@ -144,6 +146,7 @@ public class Assets {
 		manager.load(BLOCAKDE_1);
 		manager.load(ARROW);
 		manager.load(EXPLOSION_TEXTUREATLAS);
+		manager.load(BREAK);
 	}
 
     public static void afterLoaded() {

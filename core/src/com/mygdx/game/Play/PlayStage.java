@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -13,6 +14,7 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.DemoMenu.ExplosionActor;
 import com.mygdx.game.GlobalClasses.Assets;
+import com.mygdx.game.Graphics.BreakActor;
 import com.mygdx.game.Graphics.ButtonCaller;
 import com.mygdx.game.MyBaseClasses.MyLabel;
 import com.mygdx.game.Physics.Car;
@@ -261,6 +263,9 @@ public class PlayStage extends MyStage {
             else if(fekisdown){
                 if(speed >= 0 && speed <= 1)speed -= 1.01;
                 speed *= Physic.breakpower;
+                if (speed>1) {
+                    car.breaking();
+                }
             }
             else if(gazisdown){
                 if(speed >= 0 && speed <= 1)speed += 1.01;
@@ -276,6 +281,11 @@ public class PlayStage extends MyStage {
 
             for (int i = 0; i < lines.size(); i++){
                 lines.get(i).addHeight(speed);
+            }
+            for (Actor a:getActors()) {
+                if (a instanceof BreakActor){
+                    a.setY(a.getY()-speed);
+                }
             }
             if(lines.get(0).heightpoz+lines.get(0).size < 0){
                 removeLine();

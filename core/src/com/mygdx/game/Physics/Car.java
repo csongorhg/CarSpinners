@@ -1,5 +1,6 @@
 package com.mygdx.game.Physics;
 
+import com.mygdx.game.Graphics.BreakActor;
 import com.mygdx.game.Graphics.CarTexture;
 import com.mygdx.game.MyBaseClasses.OneSpriteStaticActor;
 
@@ -38,4 +39,22 @@ public class Car{
         }
         return true;
     }
+
+    public void breaking(){
+        carActor.getStage().addActor(new BreakActor(){
+            @Override
+            public void init() {
+                super.init();
+                setPosition(carActor.getX(), carActor.getY());
+            }
+        });
+        carActor.getStage().addActor(new BreakActor(){
+            @Override
+            public void init() {
+                super.init();
+                setPosition(carActor.getX()+carActor.getWidth()-getWidth(), carActor.getY());
+            }
+        });
+    }
+
 }
