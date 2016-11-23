@@ -2,13 +2,16 @@ package com.mygdx.game.Play;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.GlobalClasses.Assets;
 import com.mygdx.game.Graphics.ButtonCaller;
+import com.mygdx.game.MyBaseClasses.MyLabel;
 import com.mygdx.game.Physics.Car;
 import com.mygdx.game.MyBaseClasses.MyStage;
 import com.mygdx.game.MyBaseClasses.OneSpriteStaticActor;
@@ -43,6 +46,8 @@ public class PlayStage extends MyStage {
     private Car car;
     private Vector<Line> lines = new Vector();
 
+    private MyLabel myLabel; //pocoknak
+
     public PlayStage(Viewport viewport, Batch batch, MyGdxGame game) {
         super(viewport, batch, game);
     }
@@ -65,6 +70,8 @@ public class PlayStage extends MyStage {
         addBackEventStackListener();
 
         resized();
+
+
 
         heart = new OneSpriteStaticActor[Car.maxheart]; //szivek
 
@@ -167,6 +174,18 @@ public class PlayStage extends MyStage {
             addActor(heart[i]);
             x-=30;
         }
+
+
+        Label.LabelStyle style;
+        style = new com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle();
+        style.font = Assets.manager.get(Assets.FONT_C64_10);
+        style.fontColor = Color.WHITE;
+
+
+        //mylabel
+        myLabel = new MyLabel("asd", style);
+        addActor(myLabel);
+
     }
 
     @Override
@@ -180,13 +199,21 @@ public class PlayStage extends MyStage {
         float speed = Physic.carspeed;
         try{
             if(!fekisdown && !gazisdown) speed *= 0.99;
-            else if(fekisdown) speed *= Physic.breakpower;
-            else if(gazisdown) speed *= Physic.acceleration;
+            else if(fekisdown){
+                if(speed >= 0 && speed <= 1)speed -= 1.01;
+                speed *= Physic.breakpower;
+            }
+            else if(gazisdown){
+                if(speed >= 0 && speed <= 1)speed += 1.01;
+                speed *= Physic.acceleration;
+            }
 
             if(speed < Physic.MINcarspeed) speed = Physic.MINcarspeed;
             else if(speed > Physic.MAXcarspeed) speed = Physic.MAXcarspeed;
 
             Physic.carspeed = speed;
+
+            Physic.policedis += speed - Physic.policespeed;
 
             for (int i = 0; i < lines.size(); i++){
                 lines.get(i).addHeight(speed);
@@ -221,8 +248,12 @@ public class PlayStage extends MyStage {
 
     private void carPysic(){
         car.carActor.setPosition(car.carActor.getX()-(Gdx.input.getAccelerometerX()/4),car.carActor.getY());
-        if(car.carActor.getX()+car.carActor.getWidth() > width/5*4) car.carActor.setPosition(width/5*4-car.carActor.getWidth(),car.carActor.getY());
-        if(car.carActor.getX()< width/5) car.carActor.setPosition(width/5,car.carActor.getY());
+        if(car.carActor.getX()+car.carActor.getWidth() > width/5*4){
+            car.carActor.setPosition(width/5*4-car.carActor.getWidth(),car.carActor.getY());
+        }
+        if(car.carActor.getX()< width/5){
+            car.carActor.setPosition(width/5,car.carActor.getY());
+        }
 
 
     }

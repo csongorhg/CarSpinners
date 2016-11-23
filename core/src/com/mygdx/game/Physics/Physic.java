@@ -7,11 +7,11 @@ package com.mygdx.game.Physics;
 public class Physic {
 
     public static float carspeed = 0;
-    public static float MINcarspeed = 1;
+    public static float MINcarspeed = 0;
     public static float MAXcarspeed = 10;
-    public static float breakpower = 0.98f;
-    public static float acceleration = 1.02f;
-    public static float policesped = 10;
+    public static float breakpower = 0.99f;
+    public static float acceleration = 1.01f;
+    public static float policespeed = 5;
     public static float policedis = 100;
 
 
