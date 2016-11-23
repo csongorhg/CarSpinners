@@ -216,6 +216,13 @@ public class PlayStage extends MyStage {
         carPysic();
         linePhysic();
         crashPhysic();
+        strings();
+    }
+
+    private void strings() {
+        kmh.setText(Physic.round(Physic.carspeed*10)+" km/h");
+        policedistance.setText(Physic.round(Physic.policedis)+" m");
+        score.setText("00000");
     }
 
     private void crashPhysic() {

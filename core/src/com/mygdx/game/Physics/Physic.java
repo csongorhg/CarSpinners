@@ -23,5 +23,10 @@ public class Physic {
                 a2.getY()+a2.getHeight() > a1.getY();
     }
 
+    public static int round(float f){
+        int a = (int)f;
+        return a;
+    }
+
 
 }
