@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.game.DemoMenu.ExplosionActor;
 import com.mygdx.game.GlobalClasses.Assets;
 import com.mygdx.game.Graphics.ButtonCaller;
 import com.mygdx.game.MyBaseClasses.MyLabel;
@@ -50,6 +51,8 @@ public class PlayStage extends MyStage {
 
     private MyLabel kmh, policedistance, score; //pocoknak
 
+    private ExplosionActor explosionActor;
+
     public PlayStage(Viewport viewport, Batch batch, MyGdxGame game) {
         super(viewport, batch, game);
     }
@@ -72,8 +75,6 @@ public class PlayStage extends MyStage {
         addBackEventStackListener();
 
         resized();
-
-
 
         heart = new OneSpriteStaticActor[Car.maxheart]; //szivek
 
@@ -231,6 +232,13 @@ public class PlayStage extends MyStage {
                         heart[currentHeart].remove();
                         addActor(emptyHeart);
                         currentHeart++;
+                        if (currentHeart == 5) {
+                            car.carActor.remove();
+                            explosionActor = new ExplosionActor();
+                            explosionActor.setPosition(car.carActor.getX() + car.carActor.getWidth()/2 - explosionActor.getWidth()/2,
+                                    car.carActor.getY() - car.carActor.getHeight()/2);
+                            addActor(explosionActor);
+                        }
                     }
                     l.blocks[i].setWeight(0);
                     l.blocks[i].actor.remove();

@@ -41,6 +41,9 @@ public class Assets {
 	public static final AssetDescriptor<BitmapFont> FONT_C64_30
 			= new AssetDescriptor<BitmapFont>(fontParameter.fontFileName, BitmapFont.class, fontParameter);
 
+	public static final AssetDescriptor<TextureAtlas> EXPLOSION_TEXTUREATLAS
+			= new AssetDescriptor<TextureAtlas>("explosion.atlas", TextureAtlas.class);
+
 	public static final AssetDescriptor<Texture> CURSOR_TEXTURE
 			= new AssetDescriptor<Texture>("images/cursor.png", Texture.class);
 	public static final AssetDescriptor<Texture> TEXTBOX_TEXTURE
@@ -140,6 +143,7 @@ public class Assets {
 		manager.load(BLOCAKDE_0);
 		manager.load(BLOCAKDE_1);
 		manager.load(ARROW);
+		manager.load(EXPLOSION_TEXTUREATLAS);
 	}
 
     public static void afterLoaded() {
