@@ -87,6 +87,7 @@ public class PlayStage extends MyStage {
             blockHeight -= oneSpriteStaticActor.getHeight();
             oneSpriteStaticActor.setPosition(0,blockHeight);
             addActor(oneSpriteStaticActor);
+            oneSpriteStaticActor.setZIndex(0);
         }
 
         //fogaskerék
@@ -99,27 +100,19 @@ public class PlayStage extends MyStage {
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
 
-                //TESZT szívcsökkentés
-                if (currentHeart < Car.maxheart) {
-                    OneSpriteStaticActor emptyHeart = new OneSpriteStaticActor(Assets.manager.get(Assets.NOHEART));
-                    emptyHeart.setPosition(heart[currentHeart].getX(), heart[currentHeart].getY());
-                    emptyHeart.setSize(heart[currentHeart].getWidth(), heart[currentHeart].getHeight());
-                    heart[currentHeart].remove();
-                    addActor(emptyHeart);
-                    currentHeart++;
-                }
-                //TESZT szívcsökkentés
 
                 setSettingclick(true);
             }
         });
 
         addActor(textButton5);
+        textButton5.setZIndex(Integer.MAX_VALUE);
 
         OneSpriteStaticActor felulet = new OneSpriteStaticActor(Assets.manager.get(Assets.ROAD_MENU));
         float arany = width/felulet.getWidth();
         felulet.setSize(felulet.getWidth()*arany,felulet.getHeight()*arany);
         addActor(felulet);
+        felulet.setZIndex(Integer.MAX_VALUE);
 
        //gázpedál
         p = new ButtonCaller("", Assets.GAZ_ICON);
@@ -140,6 +133,7 @@ public class PlayStage extends MyStage {
         });
 
         addActor(p);
+        p.setZIndex(Integer.MAX_VALUE);
 
         //fékpedál
         f = new ButtonCaller("", Assets.FEK_ICON);
@@ -159,9 +153,11 @@ public class PlayStage extends MyStage {
         });
 
         addActor(f);
+        f.setZIndex(Integer.MAX_VALUE);
 
         car = new Car(width/2 - Car.carTexture.getPaint().getWidth()/2,heigth/10,Car.carTexture.getPaint().getWidth(),Car.carTexture.getPaint().getHeight());
         addActor(car.carActor);
+        car.carActor.setZIndex(Integer.MAX_VALUE);
         car.carActor.act(Gdx.graphics.getDeltaTime());
 
         //szivek
@@ -174,6 +170,7 @@ public class PlayStage extends MyStage {
             heart[i].setX(width-x);
             heart[i].setY(heigth-30);
             addActor(heart[i]);
+            heart[i].setZIndex(Integer.MAX_VALUE);
             x-=30;
         }
 
@@ -218,6 +215,28 @@ public class PlayStage extends MyStage {
         super.act(delta);
         carPysic();
         linePhysic();
+        crashPhysic();
+    }
+
+    private void crashPhysic() {
+        Line l = lines.get(0);
+        for (int i=0; i<l.blocks.length;i++){
+            if(Physic.hit(l.blocks[i].actor,car.carActor)){
+                if(l.blocks[i].getWeight() == 1) {
+                    if (currentHeart < Car.maxheart) {
+                        car.damage();
+                        OneSpriteStaticActor emptyHeart = new OneSpriteStaticActor(Assets.manager.get(Assets.NOHEART));
+                        emptyHeart.setPosition(heart[currentHeart].getX(), heart[currentHeart].getY());
+                        emptyHeart.setSize(heart[currentHeart].getWidth(), heart[currentHeart].getHeight());
+                        heart[currentHeart].remove();
+                        addActor(emptyHeart);
+                        currentHeart++;
+                    }
+                    l.blocks[i].setWeight(0);
+                    l.blocks[i].actor.remove();
+                }
+            }
+        }
     }
 
     private void linePhysic(){
@@ -249,7 +268,7 @@ public class PlayStage extends MyStage {
             if(width - lines.get(lines.size()-1).heightpoz > lines.get(lines.size()-1).size){
                 addLine();
             }
-        }catch(Exception e){//kicsi homokos #easter_egg
+        }catch(Exception e){
             if(lines.size() == 0){
                 addLine();
             }
@@ -267,8 +286,10 @@ public class PlayStage extends MyStage {
         Line l = new Line(width,heigth);
         for (int i = 0; i < 3; i++){
             addActor(l.blocks[i].actor);
+            l.blocks[i].actor.setZIndex(5);
         }
         lines.add(l);
+
     }
 
     private void carPysic(){

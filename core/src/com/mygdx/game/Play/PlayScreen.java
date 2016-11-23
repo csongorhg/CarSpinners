@@ -16,9 +16,8 @@ import com.mygdx.game.Settings.SettingsStage;
  */
 public class PlayScreen extends MyScreen {
     protected PlayStage playStage;
-    //protected SettingsStage settingsStage;
     protected IngameSettingsStage settingsStage;
-    InputMultiplexer inputMultiplexer;
+    private MusicSetter musicSetter = new MusicSetter();
 
     public PlayScreen(MyGdxGame game) {
         super(game);
@@ -62,6 +61,18 @@ public class PlayScreen extends MyScreen {
         Gdx.input.setInputProcessor(inputMultiplexer);*/
 
         //playStage.isMenuScreen = false;
+    }
+
+    @Override
+    public void hide() {
+        super.hide();
+        SettingsStage.musicPlay = false;
+    }
+
+    @Override
+    public void show() {
+        super.show();
+        musicSetter.stopMusics();
     }
 
     @Override
