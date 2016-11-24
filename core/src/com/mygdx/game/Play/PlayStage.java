@@ -216,7 +216,7 @@ public class PlayStage extends MyStage {
     @Override
     public void act(float delta) {
         super.act(delta);
-        carPysic();
+        carPhysics();
         linePhysic();
         crashPhysic();
         strings();
@@ -317,7 +317,7 @@ public class PlayStage extends MyStage {
 
     }
 
-    private void carPysic(){
+    private void carPhysics(){
         car.carActor.setPosition(car.carActor.getX()-(Gdx.input.getAccelerometerX()/3),car.carActor.getY());
         if(car.carActor.getX()+car.carActor.getWidth() > width/5*4){
             car.carActor.setPosition(width/5*4-car.carActor.getWidth(),car.carActor.getY());
