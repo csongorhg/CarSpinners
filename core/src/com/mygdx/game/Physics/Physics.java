@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
  * Created by Pocok on 2016.11.18..
  */
 
-public class Physic {
+public class Physics {
 
     public static float carspeed = 0;
     public static float MINcarspeed = 0;

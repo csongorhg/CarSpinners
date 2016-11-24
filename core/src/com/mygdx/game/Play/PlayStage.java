@@ -22,7 +22,7 @@ import com.mygdx.game.MyBaseClasses.MyStage;
 import com.mygdx.game.MyBaseClasses.OneSpriteStaticActor;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Physics.Line;
-import com.mygdx.game.Physics.Physic;
+import com.mygdx.game.Physics.Physics;
 
 import java.util.Vector;
 
@@ -223,15 +223,15 @@ public class PlayStage extends MyStage {
     }
 
     private void strings() {
-        kmh.setText(Physic.round(Physic.carspeed*10)+" km/h");
-        policedistance.setText(Physic.round(Physic.policedis)+" m");
+        kmh.setText(Physics.round(Physics.carspeed*10)+" km/h");
+        policedistance.setText(Physics.round(Physics.policedis)+" m");
         score.setText("00000");
     }
 
     private void crashPhysic() {
         Line l = lines.get(0);
         for (int i=0; i<l.blocks.length;i++){
-            if(Physic.hit(l.blocks[i].actor,car.carActor)){
+            if(Physics.hit(l.blocks[i].actor,car.carActor)){
                 if(l.blocks[i].getWeight() == 1) {
                     if (currentHeart < Car.maxheart) {
                         car.damage();
@@ -257,27 +257,27 @@ public class PlayStage extends MyStage {
     }
 
     private void linePhysic(){
-        float speed = Physic.carspeed;
+        float speed = Physics.carspeed;
         try{
             if(!fekisdown && !gazisdown) speed *= 0.99;
             else if(fekisdown){
                 if(speed >= 0 && speed <= 1)speed -= 1.01;
-                speed *= Physic.breakpower;
+                speed *= Physics.breakpower;
                 if (speed>1) {
                     car.breaking();
                 }
             }
             else if(gazisdown){
                 if(speed >= 0 && speed <= 1)speed += 1.01;
-                speed *= Physic.acceleration;
+                speed *= Physics.acceleration;
             }
 
-            if(speed < Physic.MINcarspeed) speed = Physic.MINcarspeed;
-            else if(speed > Physic.MAXcarspeed) speed = Physic.MAXcarspeed;
+            if(speed < Physics.MINcarspeed) speed = Physics.MINcarspeed;
+            else if(speed > Physics.MAXcarspeed) speed = Physics.MAXcarspeed;
 
-            Physic.carspeed = speed;
+            Physics.carspeed = speed;
 
-            Physic.policedis += speed - Physic.policespeed;
+            Physics.policedis += speed - Physics.policespeed;
 
             for (int i = 0; i < lines.size(); i++){
                 lines.get(i).addHeight(speed);
