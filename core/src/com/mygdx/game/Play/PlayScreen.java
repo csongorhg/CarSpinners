@@ -80,4 +80,11 @@ public class PlayScreen extends MyScreen {
         super.resize(width, height);
         playStage.resize(width,height);
     }
+
+    @Override
+    public void dispose() {
+        playStage.dispose();
+        settingsStage.dispose();
+        super.dispose();
+    }
 }

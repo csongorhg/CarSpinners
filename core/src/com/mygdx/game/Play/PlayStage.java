@@ -232,7 +232,7 @@ public class PlayStage extends MyStage {
         elapseTime += delta;
         if (elapseTime > 3f) {
             explosionActor.remove();
-            //game.setScreen(new MenuScreen(game)); //itt akad ki
+            game.setScreen(new MenuScreen(game)); //itt akad ki
         }
     }
 
