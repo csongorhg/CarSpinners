@@ -12,7 +12,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.game.DemoLoading.LoadingScreen;
 import com.mygdx.game.DemoMenu.ExplosionActor;
+import com.mygdx.game.DemoMenu.MenuScreen;
 import com.mygdx.game.GlobalClasses.Assets;
 import com.mygdx.game.Graphics.BreakActor;
 import com.mygdx.game.Graphics.ButtonCaller;
@@ -54,6 +56,7 @@ public class PlayStage extends MyStage {
     private MyLabel kmh, policedistance, score; //pocoknak
 
     private ExplosionActor explosionActor;
+    private float elapseTime = 0; //robbanás után időt számolja
 
     public PlayStage(Viewport viewport, Batch batch, MyGdxGame game) {
         super(viewport, batch, game);
@@ -220,6 +223,17 @@ public class PlayStage extends MyStage {
         linePhysic();
         crashPhysic();
         strings();
+        if (currentHeart == 5) {
+            explosion(delta);
+        }
+    }
+
+    private void explosion(float delta) {
+        elapseTime += delta;
+        if (elapseTime > 3f) {
+            explosionActor.remove();
+            //game.setScreen(new MenuScreen(game)); //itt akad ki
+        }
     }
 
     private void strings() {
