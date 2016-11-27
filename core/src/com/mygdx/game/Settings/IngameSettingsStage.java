@@ -1,6 +1,8 @@
 package com.mygdx.game.Settings;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -32,6 +34,8 @@ public class IngameSettingsStage extends MyStage {
     private Array<OneSpriteStaticActor> volumeArray;
     public static float actualVol = 1;
     private float width, height;
+    private boolean visible = false;
+    private InputProcessor prevInputProcessor = null;
 
     public IngameSettingsStage(Viewport viewport, Batch batch, MyGdxGame game) {
         super(viewport, batch, game);
@@ -65,6 +69,7 @@ public class IngameSettingsStage extends MyStage {
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
                 PlayStage.setSettingclick(false);
+                Hide();
             }
         });
         addActor(textButton2);
@@ -179,6 +184,29 @@ public class IngameSettingsStage extends MyStage {
 
     public static boolean isB() {
         return musicPlay;
+    }
+
+
+    public void Show(){
+        visible = true;
+        if (prevInputProcessor== null) prevInputProcessor = Gdx.input.getInputProcessor();
+        Gdx.input.setInputProcessor(this);
+    }
+
+    public void Hide(){
+        Gdx.input.setInputProcessor(prevInputProcessor);
+        visible = false;
+        prevInputProcessor = null;
+    }
+
+    @Override
+    public void act(float delta) {
+        if (visible) super.act(delta);
+    }
+
+    @Override
+    public void draw() {
+        if (visible) super.draw();
     }
 
 

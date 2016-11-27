@@ -16,7 +16,6 @@ import com.mygdx.game.Settings.SettingsStage;
  */
 public class PlayScreen extends MyScreen {
     protected PlayStage playStage;
-    protected IngameSettingsStage settingsStage;
     private MusicSetter musicSetter = new MusicSetter();
 
     public PlayScreen(MyGdxGame game) {
@@ -26,15 +25,13 @@ public class PlayScreen extends MyScreen {
     @Override
     public void render(float delta) {
         super.render(delta);
-        if(settingsStage.isB())new MusicSetter(new Random(1,5).getGenNumber());
+
         playStage.act(delta);
         playStage.draw();
-        if(playStage.settingclick){
-            config(delta);
-        }
-        else backtogame();
-    }
 
+ /*       else backtogame();*/
+    }
+/*
     public void backtogame(){
         Gdx.input.setInputProcessor(playStage);
     }
@@ -42,9 +39,9 @@ public class PlayScreen extends MyScreen {
     public void config(float delta){
         settingsStage.act(delta);
         settingsStage.draw();
-        Gdx.input.setInputProcessor(settingsStage);
+        //Gdx.input.setInputProcessor(settingsStage);
     }
-
+    */
     @Override
     public void init() {
         playStage.settingclick = false;
@@ -52,7 +49,6 @@ public class PlayScreen extends MyScreen {
         g = 0.5f;
         b = 0.3f;
         playStage = new PlayStage(new ExtendViewport(270,480,new OrthographicCamera(270,480)), spriteBatch, game);
-        settingsStage = new IngameSettingsStage(new ExtendViewport(270,480,new OrthographicCamera(270/2,480/2)), spriteBatch, game);
         Gdx.input.setInputProcessor(playStage);
 
         /*inputMultiplexer = new InputMultiplexer();
@@ -84,7 +80,7 @@ public class PlayScreen extends MyScreen {
     @Override
     public void dispose() {
         playStage.dispose();
-        settingsStage.dispose();
+
         super.dispose();
     }
 }

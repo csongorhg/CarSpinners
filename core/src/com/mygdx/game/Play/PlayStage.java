@@ -3,6 +3,7 @@ package com.mygdx.game.Play;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
@@ -18,6 +19,8 @@ import com.mygdx.game.DemoMenu.MenuScreen;
 import com.mygdx.game.GlobalClasses.Assets;
 import com.mygdx.game.Graphics.BreakActor;
 import com.mygdx.game.Graphics.ButtonCaller;
+import com.mygdx.game.Math.Random;
+import com.mygdx.game.Music.MusicSetter;
 import com.mygdx.game.MyBaseClasses.MyLabel;
 import com.mygdx.game.Physics.Car;
 import com.mygdx.game.MyBaseClasses.MyStage;
@@ -25,6 +28,7 @@ import com.mygdx.game.MyBaseClasses.OneSpriteStaticActor;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Physics.Line;
 import com.mygdx.game.Physics.Physics;
+import com.mygdx.game.Settings.IngameSettingsStage;
 
 import java.util.Vector;
 
@@ -75,9 +79,14 @@ public class PlayStage extends MyStage {
         settingclick = b;
         return settingclick;
     }
+    protected IngameSettingsStage settingsStage;
 
     public void init() {
         addBackEventStackListener();
+
+
+        settingsStage = new IngameSettingsStage(new ExtendViewport(270,480,new OrthographicCamera(270/2,480/2)), getBatch(), game);
+
 
         resized();
 
@@ -107,7 +116,8 @@ public class PlayStage extends MyStage {
                 super.clicked(event, x, y);
 
 
-                setSettingclick(true);
+                //setSettingclick(true);
+                settingsStage.Show();
             }
         });
 
@@ -226,13 +236,23 @@ public class PlayStage extends MyStage {
         if (currentHeart == 5) {
             explosion(delta);
         }
+        if(settingsStage.isB())new MusicSetter(new Random(1,5).getGenNumber());
+        settingsStage.act(delta);
+    }
+
+    @Override
+    public void draw() {
+        super.draw();
+
+        settingsStage.draw();
     }
 
     private void explosion(float delta) {
         elapseTime += delta;
         if (elapseTime > 3f) {
             explosionActor.remove();
-            game.setScreen(new MenuScreen(game)); //itt akad ki
+            //game.setScreen(new MenuScreen(game)); //itt akad ki
+            game.setScreenBackByStackPop();
         }
     }
 
@@ -349,5 +369,11 @@ public class PlayStage extends MyStage {
         width = (((ExtendViewport)getViewport()).getMinWorldWidth());
         heigth = (((ExtendViewport)getViewport()).getMinWorldHeight());
 
+    }
+
+    @Override
+    public void dispose() {
+        settingsStage.dispose();
+        super.dispose();
     }
 }
