@@ -31,14 +31,14 @@ public class Line {
 
     public Line(float w,float h){
         widthkoz = w/5;
-        size = widthkoz/*0.9f*/;
+        size = widthkoz*0.9f;
         heightpoz = h;
         int[] t = generate[(int)Math.floor(generate.length*Math.random())];
         for (int i = 0; i < blocks.length; i++){
             blocks[i] = new Block(allblocks[t[i]]);
             blocks[i].actor.setSize(size,size);
-            blocks[i].actor.setPosition(widthkoz*(i+1),heightpoz);
-            positions[i] = widthkoz*(i+1);
+            blocks[i].actor.setPosition(widthkoz*(i+1) + widthkoz*0.1f,heightpoz);
+            positions[i] = widthkoz*(i+1) + widthkoz*0.1f;
         }
     }
 
