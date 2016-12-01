@@ -154,8 +154,7 @@ public class PlayStage extends MyStage {
         });
 
         addActor(f);
-
-        car = new Car(width/2 - Car.carTexture.getPaint().getWidth()/2,heigth/10,Car.carTexture.getPaint().getWidth(),Car.carTexture.getPaint().getHeight());
+        car = new Car(width/2 - Car.carTexture.getPaint().getWidth()/2,heigth/10);
         addActor(car.carActor);
         car.carActor.act(Gdx.graphics.getDeltaTime());
 

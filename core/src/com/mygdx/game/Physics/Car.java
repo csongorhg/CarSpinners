@@ -10,12 +10,12 @@ import com.mygdx.game.MyBaseClasses.OneSpriteStaticActor;
 
 public class Car{
 
-    public static CarTexture carTexture = new CarTexture();
+    public static CarTexture carTexture = new CarTexture(4,3);
     public OneSpriteStaticActor carActor = new OneSpriteStaticActor(Car.carTexture.getPaint());
     public final static int maxheart = 5;
     private int heart = maxheart;
 
-    public Car(float x, float y, float w, float h) {
+    public Car(float x, float y) {
         carActor.setPosition(x,y);
     }
 

@@ -50,8 +50,14 @@ public class Assets {
 			= new AssetDescriptor<Texture>("images/textbox.png", Texture.class);
 	public static final AssetDescriptor<Texture> BACKGROUND_TEXTURE
 			= new AssetDescriptor<Texture>("background2.png", Texture.class);
-	public static final AssetDescriptor<Texture> CAR_TEXTURE
+	public static final AssetDescriptor<Texture> CAR_TEXTURE_1
 			= new AssetDescriptor<Texture>("car-1.png", Texture.class);
+	public static final AssetDescriptor<Texture> CAR_TEXTURE_2
+			= new AssetDescriptor<Texture>("car-2.png", Texture.class);
+	public static final AssetDescriptor<Texture> CAR_TEXTURE_3
+			= new AssetDescriptor<Texture>("car-3.png", Texture.class);
+	public static final AssetDescriptor<Texture> CAR_TEXTURE_4
+			= new AssetDescriptor<Texture>("car-4.png", Texture.class);
 	public static final AssetDescriptor<Texture> MONEY_TEXTURE
 			= new AssetDescriptor<Texture>("money.png", Texture.class);
 	public static final AssetDescriptor<Texture> MUTE_ICON
@@ -90,6 +96,30 @@ public class Assets {
 			= new AssetDescriptor<Texture>("nyil.png", Texture.class);
 	public static final AssetDescriptor<Texture> BREAK
 			= new AssetDescriptor<Texture>("break.png", Texture.class);
+	public static final AssetDescriptor<Texture> TEXT_1_1
+			= new AssetDescriptor<Texture>("text-1-1.png", Texture.class);
+	public static final AssetDescriptor<Texture> TEXT_1_2
+			= new AssetDescriptor<Texture>("text-1-2.png", Texture.class);
+	public static final AssetDescriptor<Texture> TEXT_1_3
+			= new AssetDescriptor<Texture>("text-1-3.png", Texture.class);
+	public static final AssetDescriptor<Texture> TEXT_2_1
+			= new AssetDescriptor<Texture>("text-2-1.png", Texture.class);
+	public static final AssetDescriptor<Texture> TEXT_2_2
+			= new AssetDescriptor<Texture>("text-2-2.png", Texture.class);
+	public static final AssetDescriptor<Texture> TEXT_2_3
+			= new AssetDescriptor<Texture>("text-2-3.png", Texture.class);
+	public static final AssetDescriptor<Texture> TEXT_3_1
+			= new AssetDescriptor<Texture>("text-3-1.png", Texture.class);
+	public static final AssetDescriptor<Texture> TEXT_3_2
+			= new AssetDescriptor<Texture>("text-3-2.png", Texture.class);
+	public static final AssetDescriptor<Texture> TEXT_3_3
+			= new AssetDescriptor<Texture>("text-3-3.png", Texture.class);
+	public static final AssetDescriptor<Texture> TEXT_4_1
+			= new AssetDescriptor<Texture>("text-4-1.png", Texture.class);
+	public static final AssetDescriptor<Texture> TEXT_4_2
+			= new AssetDescriptor<Texture>("text-4-2.png", Texture.class);
+	public static final AssetDescriptor<Texture> TEXT_4_3
+			= new AssetDescriptor<Texture>("text-4-3.png", Texture.class);
 
 	//zenék
 	public static final AssetDescriptor<Music> EXTREMEACTION
@@ -126,7 +156,6 @@ public class Assets {
 		manager.load(BADASS);
 		manager.load(DANCE);
 		manager.load(BACKGROUND_TEXTURE);
-		manager.load(CAR_TEXTURE);
 		manager.load(MONEY_TEXTURE);
 		manager.load(MUTE_ICON);
 		manager.load(SOUND_ICON);
@@ -147,6 +176,22 @@ public class Assets {
 		manager.load(ARROW);
 		manager.load(EXPLOSION_TEXTUREATLAS);
 		manager.load(BREAK);
+		manager.load(CAR_TEXTURE_1);
+		manager.load(CAR_TEXTURE_2);
+		manager.load(CAR_TEXTURE_3);
+		manager.load(CAR_TEXTURE_4);
+		manager.load(TEXT_1_1);
+		manager.load(TEXT_1_2);
+		manager.load(TEXT_1_3);
+		manager.load(TEXT_2_1);
+		manager.load(TEXT_2_2);
+		manager.load(TEXT_2_3);
+		manager.load(TEXT_3_1);
+		manager.load(TEXT_3_2);
+		manager.load(TEXT_3_3);
+		manager.load(TEXT_4_1);
+		manager.load(TEXT_4_2);
+		manager.load(TEXT_4_3);
 	}
 
     public static void afterLoaded() {
