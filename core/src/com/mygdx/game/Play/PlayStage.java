@@ -46,8 +46,7 @@ public class PlayStage extends MyStage {
     public static boolean settingclick = false;
 
     private ButtonCaller p, f, textButton5; //gáz, fékpedál
-
-    private OneSpriteStaticActor oneSpriteStaticActor; //út
+    OneSpriteStaticActor felulet;
 
     private OneSpriteStaticActor heart[]; //szivek eltárolása
     private int currentHeart; //jelenlegi szív
@@ -100,8 +99,8 @@ public class PlayStage extends MyStage {
             OneSpriteStaticActor road = new OneSpriteStaticActor(Assets.manager.get(Assets.ROAD_BLOCK));
             float arany = (((ExtendViewport)getViewport()).getMinWorldWidth())/road.getWidth();
             road.setSize(road.getWidth()*arany,road.getHeight()*arany);
-            nowHeight += road.getHeight();
             road.setPosition(0,nowHeight);
+            nowHeight += road.getHeight();
             backgrounds.add(road);
             addActor(road);
         }
@@ -123,7 +122,7 @@ public class PlayStage extends MyStage {
         addActor(textButton5);
         textButton5.setZIndex(Integer.MAX_VALUE);
 
-        OneSpriteStaticActor felulet = new OneSpriteStaticActor(Assets.manager.get(Assets.ROAD_MENU));
+        felulet = new OneSpriteStaticActor(Assets.manager.get(Assets.ROAD_MENU));
         float arany = width/felulet.getWidth();
         felulet.setSize(felulet.getWidth()*arany,felulet.getHeight()*arany);
         addActor(felulet);
@@ -227,6 +226,27 @@ public class PlayStage extends MyStage {
         backgroundPhysic();
         crashPhysic();
         strings();
+        layers();
+    }
+
+    private void layers() {
+        for (int i = 0; i < lines.size(); i++){
+            for (int j = 0; j < 3; j++){
+                lines.get(i).blocks[j].actor.setZIndex(Integer.MAX_VALUE);
+            }
+        }
+        felulet.setZIndex(Integer.MAX_VALUE);
+        f.setZIndex(Integer.MAX_VALUE);
+        p.setZIndex(Integer.MAX_VALUE);
+        textButton5.setZIndex(Integer.MAX_VALUE);
+        for (int i = 0; i < heart.length; i++){
+            heart[i].setZIndex(Integer.MAX_VALUE);
+        }
+        car.carActor.setZIndex(Integer.MAX_VALUE);
+        kmh.setZIndex(Integer.MAX_VALUE);
+        policedistance.setZIndex(Integer.MAX_VALUE);
+        score.setZIndex(Integer.MAX_VALUE);
+
     }
 
     @Override
@@ -259,11 +279,7 @@ public class PlayStage extends MyStage {
                             if (l.blocks[i].getWeight() == 1) {
                                 if (currentHeart < Car.maxheart) {
                                     car.damage();
-                                    OneSpriteStaticActor emptyHeart = new OneSpriteStaticActor(Assets.manager.get(Assets.NOHEART));
-                                    emptyHeart.setPosition(heart[currentHeart].getX(), heart[currentHeart].getY());
-                                    emptyHeart.setSize(heart[currentHeart].getWidth(), heart[currentHeart].getHeight());
                                     heart[currentHeart].remove();
-                                    addActor(emptyHeart);
                                     currentHeart++;
                                     if (currentHeart == 5) {
                                         car.carActor.remove();
@@ -281,9 +297,19 @@ public class PlayStage extends MyStage {
                 }
     
     private void backgroundPhysic() {
-        //if(backgrounds.get(0))
         for (int i = 0; i < backgrounds.size(); i++){
             backgrounds.get(i).setPosition(backgrounds.get(i).getX(),backgrounds.get(i).getY()-Physic.carspeed);
+        }
+        if(backgrounds.get(backgrounds.size()-1).getY() < heigth-backgrounds.get(0).getHeight()){
+            OneSpriteStaticActor road = new OneSpriteStaticActor(Assets.manager.get(Assets.ROAD_BLOCK));
+            float arany = (((ExtendViewport)getViewport()).getMinWorldWidth())/road.getWidth();
+            road.setSize(road.getWidth()*arany,road.getHeight()*arany);
+            road.setPosition(0,backgrounds.get(backgrounds.size()-1).getY()+backgrounds.get(0).getHeight());
+            backgrounds.add(road);
+            addActor(road);
+        }
+        if(backgrounds.get(0).getY() < -backgrounds.get(0).getHeight()){
+            backgrounds.get(0).remove();
         }
     }
 
