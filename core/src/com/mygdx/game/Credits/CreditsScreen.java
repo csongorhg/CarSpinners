@@ -31,6 +31,7 @@ public class CreditsScreen extends MyScreen{
         bgStage.draw();
         creditsStage.act(delta);
         creditsStage.draw();
+
     }
 
     @Override
@@ -59,7 +60,8 @@ public class CreditsScreen extends MyScreen{
 
     @Override
     public void resize(int width, int height) {
-        super.resize(width, height);
-        bgStage.resize(width, height);
-    }
+             super.resize(width, height);
+             bgStage.resize(width, height);
+        }
+
 }

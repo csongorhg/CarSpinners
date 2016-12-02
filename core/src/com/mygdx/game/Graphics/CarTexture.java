@@ -32,17 +32,17 @@ public class CarTexture {
             Texture t;
             if(i == 1){
                 t = Assets.manager.get(Assets.CAR_TEXTURE_1);
-            }else if(i == 2){
+                }else if(i == 2){
                 t = Assets.manager.get(Assets.CAR_TEXTURE_2);
-            }else if(i == 3){
+                }else if(i == 3){
                 t = Assets.manager.get(Assets.CAR_TEXTURE_3);
-            }else{
+                }else{
                 t = Assets.manager.get(Assets.CAR_TEXTURE_4);
-            }
+                }
             t.getTextureData().prepare();
             p = t.getTextureData().consumePixmap();
             cartype = i;
-        }
+            }
     }
 
     public void setCarTextureTypeType(int i) {
@@ -50,44 +50,44 @@ public class CarTexture {
             Texture t;
             if(i == 0){
                 t = Assets.manager.get(Assets.BLOCAKDE_0);
-            }else
-            if(cartype == 1){
+                }else
+                if(cartype == 1){
                 if(i == 1){
                     t = Assets.manager.get(Assets.TEXT_1_1);
-                }else if(i == 2){
+                    }else if(i == 2){
                     t = Assets.manager.get(Assets.TEXT_1_2);
-                }else{
+                    }else{
                     t = Assets.manager.get(Assets.TEXT_1_3);
-                }
-            }else if(cartype == 2){
+                    }
+                }else if(cartype == 2){
                 if(i == 1){
                     t = Assets.manager.get(Assets.TEXT_2_1);
-                }else if(i == 2){
+                    }else if(i == 2){
                     t = Assets.manager.get(Assets.TEXT_2_2);
-                }else{
+                    }else{
                     t = Assets.manager.get(Assets.TEXT_2_3);
-                }
-            }else if(cartype == 3){
+                    }
+                }else if(cartype == 3){
                 if(i == 1){
                     t = Assets.manager.get(Assets.TEXT_3_1);
-                }else if(i == 2){
+                    }else if(i == 2){
                     t = Assets.manager.get(Assets.TEXT_3_2);
-                }else{
+                    }else{
                     t = Assets.manager.get(Assets.TEXT_3_3);
-                }
-            }else{
+                    }
+                }else{
                 if(i == 1){
                     t = Assets.manager.get(Assets.TEXT_4_1);
-                }else if(i == 2){
+                    }else if(i == 2){
                     t = Assets.manager.get(Assets.TEXT_4_2);
-                }else{
+                    }else{
                     t = Assets.manager.get(Assets.TEXT_4_3);
+                    }
                 }
-            }
             t.getTextureData().prepare();
             text = t.getTextureData().consumePixmap();
             carTextureType = i;
-        }
+            }
     }
 
     public Texture getPaint() {
@@ -102,15 +102,7 @@ public class CarTexture {
     }
 
     public void setColorTo(){
-        setColorText(r2,g2,b2);
-        setColor(r,g,b);
-    }
-
-    public void setColor(int i, int i1, int i2) {
-        c = Graphics.fullColor(i,i1,i2,1);
-        r = i;
-        g = i1;
-        b = i2;
+        setColorText(r2,g2,b2);setColor(r,g,b);
     }
 
     public void setColorText(int i, int i1, int i2) {
@@ -118,6 +110,13 @@ public class CarTexture {
         r2 = i;
         g2 = i1;
         b2 = i2;
+        }
+
+    public void setColor(int i, int i1, int i2) {
+        c = Graphics.fullColor(i,i1,i2,1);
+        r = i;
+        g = i1;
+        b = i2;
     }
 
 

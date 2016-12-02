@@ -38,14 +38,12 @@ public class CreditsStage extends MyStage{
     public void init() {
         addBackEventStackListener();
 
-
-
         Label.LabelStyle style;
         style = new com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle();
         style.fontColor = Color.WHITE;
 
-        //átméretezés
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("c64.ttf"));
+                //átméretezés
+                        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("c64.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter meret = new FreeTypeFontGenerator.FreeTypeFontParameter();
         meret.size = 15;
         meret.characters = Assets.CHARS;
@@ -53,15 +51,13 @@ public class CreditsStage extends MyStage{
         generator.dispose();
         style.font = font;
 
-        //átméretezés vége
+                //átméretezés vége
 
         creditText = new MyLabel("Developers:\nHegedüs Csongor\nHorváth Patrik\nEgyed Vince\nKiss Norbert\nTeacher preparation:\nTüske Balázs", style);
         creditText.setAlignment(Align.center);
         creditText.setPosition((((ExtendViewport)getViewport()).getMinWorldWidth())/2 - creditText.getWidth()/2,
                 (((ExtendViewport)getViewport()).getMinWorldHeight())/2 - creditText.getHeight()/2);
         addActor(creditText);
-
-
 
         textButton = new MyButton("Back", game.getTextButtonStyle());
         textButton.addListener(new ClickListener(){
