@@ -1,11 +1,18 @@
 package com.mygdx.game.Credits;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.game.GlobalClasses.Assets;
 import com.mygdx.game.Music.MusicSetter;
 import com.mygdx.game.MyBaseClasses.MyButton;
 import com.mygdx.game.MyBaseClasses.MyLabel;
@@ -31,8 +38,30 @@ public class CreditsStage extends MyStage{
     public void init() {
         addBackEventStackListener();
 
-        /*creditText = new MyLabel("Készítők:\nHegedűs Csongor\nHorváth Patrik\nEgyed Vince\nKiss Norbert\nFelkészítő tanár:\nTüske Balázs", game.getLabelStyle());
-        addActor(creditText);*/
+
+
+        Label.LabelStyle style;
+        style = new com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle();
+        style.fontColor = Color.WHITE;
+
+        //átméretezés
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("c64.ttf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter meret = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        meret.size = 15;
+        meret.characters = Assets.CHARS;
+        BitmapFont font = generator.generateFont(meret);
+        generator.dispose();
+        style.font = font;
+
+        //átméretezés vége
+
+        creditText = new MyLabel("Developers:\nHegedüs Csongor\nHorváth Patrik\nEgyed Vince\nKiss Norbert\nTeacher preparation:\nTüske Balázs", style);
+        creditText.setAlignment(Align.center);
+        creditText.setPosition((((ExtendViewport)getViewport()).getMinWorldWidth())/2 - creditText.getWidth()/2,
+                (((ExtendViewport)getViewport()).getMinWorldHeight())/2 - creditText.getHeight()/2);
+        addActor(creditText);
+
+
 
         textButton = new MyButton("Back", game.getTextButtonStyle());
         textButton.addListener(new ClickListener(){
