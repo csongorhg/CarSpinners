@@ -2,18 +2,33 @@ package com.mygdx.game.Play;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.game.DemoLoading.LoadingScreen;
+import com.mygdx.game.DemoMenu.ExplosionActor;
+import com.mygdx.game.DemoMenu.MenuScreen;
 import com.mygdx.game.GlobalClasses.Assets;
+import com.mygdx.game.Graphics.BreakActor;
 import com.mygdx.game.Graphics.ButtonCaller;
+import com.mygdx.game.Math.Random;
+import com.mygdx.game.Music.MusicSetter;
+import com.mygdx.game.MyBaseClasses.MyLabel;
 import com.mygdx.game.Physics.Car;
 import com.mygdx.game.MyBaseClasses.MyStage;
 import com.mygdx.game.MyBaseClasses.OneSpriteStaticActor;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Physics.Line;
+import com.mygdx.game.Physics.Physics;
+import com.mygdx.game.Settings.IngameSettingsStage;
 import com.mygdx.game.Physics.Physic;
 
 import java.util.Vector;
@@ -42,6 +57,9 @@ public class PlayStage extends MyStage {
 
     private Car car;
     private Vector<Line> lines = new Vector();
+    private MyLabel kmh, policedistance, score; //pocoknak
+    private ExplosionActor explosionActor;
+    private float elapseTime = 0; //robbanás után időt számolja
     private static Vector<OneSpriteStaticActor> backgrounds  = new Vector<OneSpriteStaticActor>();
 
     public PlayStage(Viewport viewport, Batch batch, MyGdxGame game) {
@@ -62,10 +80,14 @@ public class PlayStage extends MyStage {
         return settingclick;
     }
 
+    protected IngameSettingsStage settingsStage;
+
     public void init() {
         addBackEventStackListener();
 
         resized();
+
+        settingsStage = new IngameSettingsStage(new ExtendViewport(270,480,new OrthographicCamera(270/2,480/2)), getBatch(), game);
 
         heart = new OneSpriteStaticActor[Car.maxheart]; //szivek
 
@@ -93,28 +115,19 @@ public class PlayStage extends MyStage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-
-                //TESZT szívcsökkentés
-                if (currentHeart < Car.maxheart) {
-                    OneSpriteStaticActor emptyHeart = new OneSpriteStaticActor(Assets.manager.get(Assets.NOHEART));
-                    emptyHeart.setPosition(heart[currentHeart].getX(), heart[currentHeart].getY());
-                    emptyHeart.setSize(heart[currentHeart].getWidth(), heart[currentHeart].getHeight());
-                    heart[currentHeart].remove();
-                    addActor(emptyHeart);
-                    currentHeart++;
-                }
-                //TESZT szívcsökkentés
-
+                settingsStage.Show();
                 setSettingclick(true);
             }
         });
 
         addActor(textButton5);
+        textButton5.setZIndex(Integer.MAX_VALUE);
 
         OneSpriteStaticActor felulet = new OneSpriteStaticActor(Assets.manager.get(Assets.ROAD_MENU));
         float arany = width/felulet.getWidth();
         felulet.setSize(felulet.getWidth()*arany,felulet.getHeight()*arany);
         addActor(felulet);
+        felulet.setZIndex(Integer.MAX_VALUE);
 
        //gázpedál
         p = new ButtonCaller("", Assets.GAZ_ICON);
@@ -135,6 +148,7 @@ public class PlayStage extends MyStage {
         });
 
         addActor(p);
+        p.setZIndex(Integer.MAX_VALUE);
 
         //fékpedál
         f = new ButtonCaller("", Assets.FEK_ICON);
@@ -154,9 +168,11 @@ public class PlayStage extends MyStage {
         });
 
         addActor(f);
+        f.setZIndex(Integer.MAX_VALUE);
         car = new Car(width/2 - Car.carTexture.getPaint().getWidth()/2,heigth/10);
         addActor(car.carActor);
         car.carActor.act(Gdx.graphics.getDeltaTime());
+        car.carActor.setZIndex(Integer.MAX_VALUE);
 
         //szivek
         int x = 30 * Car.maxheart; //szivek szélessége
@@ -168,8 +184,39 @@ public class PlayStage extends MyStage {
             heart[i].setX(width-x);
             heart[i].setY(heigth-30);
             addActor(heart[i]);
+            heart[i].setZIndex(Integer.MAX_VALUE);
             x-=30;
         }
+        Label.LabelStyle style;
+                style = new com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle();
+                style.fontColor = Color.WHITE;
+        
+                        //átméretezés
+                                FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("c64.ttf"));
+                FreeTypeFontGenerator.FreeTypeFontParameter meret = new FreeTypeFontGenerator.FreeTypeFontParameter();
+                meret.size = 10;
+                meret.characters = Assets.CHARS;
+                BitmapFont font = generator.generateFont(meret);
+                generator.dispose();
+                style.font = font;
+                //átméretezés vége
+                
+                        
+                                        //kilóméter/óra
+                                                kmh = new MyLabel("asd1", style);
+                //myLabel.setPosition(getViewport().getWorldWidth()/(590/100),getViewport().getWorldHeight()/24);
+                        kmh.setPosition(75,19);
+                addActor(kmh);
+        
+                        //rendőr távolság
+                                policedistance = new MyLabel("asd2",style);
+                policedistance.setPosition(75,4);
+                addActor(policedistance);
+        
+                        //score
+                                score = new MyLabel("score",game.getLabelStyle());
+                score.setPosition(116,7);
+                addActor(score);
     }
 
     @Override
@@ -178,8 +225,61 @@ public class PlayStage extends MyStage {
         carPysic();
         linePhysic();
         backgroundPhysic();
+        crashPhysic();
+        strings();
     }
 
+    @Override
+        public void draw() {
+                super.draw();
+        
+                        settingsStage.draw();
+            }
+    
+                private void explosion(float delta) {
+                elapseTime += delta;
+                if (elapseTime > 3f) {
+                        explosionActor.remove();
+                        //game.setScreen(new MenuScreen(game)); //itt akad ki
+                                game.setScreenBackByStackPop();
+                    }
+        backgroundPhysic();
+    }
+
+    private void strings() {
+                kmh.setText(Physics.round(Physics.carspeed*10)+" km/h");
+                policedistance.setText(Physics.round(Physics.policedis)+" m");
+                score.setText("00000");
+            }
+    
+                private void crashPhysic() {
+                    Line l = lines.get(0);
+                    for (int i = 0; i < l.blocks.length; i++) {
+                        if (Physics.hit(l.blocks[i].actor, car.carActor)) {
+                            if (l.blocks[i].getWeight() == 1) {
+                                if (currentHeart < Car.maxheart) {
+                                    car.damage();
+                                    OneSpriteStaticActor emptyHeart = new OneSpriteStaticActor(Assets.manager.get(Assets.NOHEART));
+                                    emptyHeart.setPosition(heart[currentHeart].getX(), heart[currentHeart].getY());
+                                    emptyHeart.setSize(heart[currentHeart].getWidth(), heart[currentHeart].getHeight());
+                                    heart[currentHeart].remove();
+                                    addActor(emptyHeart);
+                                    currentHeart++;
+                                    if (currentHeart == 5) {
+                                        car.carActor.remove();
+                                        explosionActor = new ExplosionActor();
+                                        explosionActor.setPosition(car.carActor.getX() + car.carActor.getWidth() / 2 - explosionActor.getWidth() / 2,
+                                                car.carActor.getY() - car.carActor.getHeight() / 2);
+                                        addActor(explosionActor);
+                                    }
+                                }
+                                l.blocks[i].setWeight(0);
+                                l.blocks[i].actor.remove();
+                            }
+                        }
+                    }
+                }
+    
     private void backgroundPhysic() {
         //if(backgrounds.get(0))
         for (int i = 0; i < backgrounds.size(); i++){
@@ -208,6 +308,11 @@ public class PlayStage extends MyStage {
             for (int i = 0; i < lines.size(); i++){
                 lines.get(i).addHeight(speed);
             }
+            for (Actor a:getActors()) {
+                if (a instanceof BreakActor){
+                    a.setY(a.getY()-speed);
+                }
+            }
             if(lines.get(0).heightpoz+lines.get(0).size < 0){
                 removeLine();
             }
@@ -232,6 +337,7 @@ public class PlayStage extends MyStage {
         Line l = new Line(width,heigth);
         for (int i = 0; i < 3; i++){
             addActor(l.blocks[i].actor);
+            l.blocks[i].actor.setZIndex(5);
         }
         lines.add(l);
     }
@@ -243,6 +349,12 @@ public class PlayStage extends MyStage {
 
 
     }
+    @Override
+    public void dispose() {
+        settingsStage.dispose();
+        super.dispose();
+    }
+
 
     @Override
     protected void resized() {
