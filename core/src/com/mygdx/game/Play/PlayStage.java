@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.End.EndScreen;
@@ -29,6 +30,8 @@ import com.mygdx.game.Physics.Physics;
 import com.mygdx.game.Settings.IngameSettingsStage;
 
 import java.util.Vector;
+
+import javax.swing.GroupLayout;
 
 /**
  * Created by tuskeb on 2016. 09. 30..
@@ -64,6 +67,8 @@ public class PlayStage extends MyStage {
 
     private MoneyActor moneyActor;
 
+    private int scoreNumber;
+
     public PlayStage(Viewport viewport, Batch batch, MyGdxGame game) {
         super(viewport, batch, game);
     }
@@ -86,9 +91,9 @@ public class PlayStage extends MyStage {
     public void init() {
         addBackEventStackListener();
 
+        setScoreNumber(0); //pontszám
 
         settingsStage = new IngameSettingsStage(new ExtendViewport(270,480,new OrthographicCamera(270/2,480/2)), getBatch(), game);
-
 
         resized();
 
@@ -176,7 +181,8 @@ public class PlayStage extends MyStage {
         addActor(f);
         f.setZIndex(Integer.MAX_VALUE);
 
-        car = new Car(width/2 - Car.carTexture.getPaint().getWidth()/2,heigth/10);        addActor(car.carActor);
+        car = new Car(width/2 - Car.carTexture.getPaint().getWidth()/2,heigth/10);
+        addActor(car.carActor);
         car.carActor.setZIndex(Integer.MAX_VALUE);
         car.carActor.act(Gdx.graphics.getDeltaTime());
 
@@ -222,8 +228,20 @@ public class PlayStage extends MyStage {
         addActor(policedistance);
 
         //score
-        score = new MyLabel("score",game.getLabelStyle());
-        score.setPosition(116,7);
+        setScoreNumber(1);
+        Label.LabelStyle labelStyle = game.getLabelStyle();
+        //átméretezés
+        generator = new FreeTypeFontGenerator(Gdx.files.internal("c64.ttf"));
+        meret = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        meret.size = 25;
+        meret.characters = Assets.CHARS;
+        font = generator.generateFont(meret);
+        generator.dispose();
+        labelStyle.font = font;
+        //átméretezés vége
+        score = new MyLabel("score",labelStyle);
+        score.setPosition(120,5);
+        score.setAlignment(Align.right);
         addActor(score);
 
         //pénz
@@ -304,9 +322,10 @@ public class PlayStage extends MyStage {
     }
 
     private void strings() {
+        String nulls="0000";
         kmh.setText(Physics.round(Physics.carspeed*10)+" km/h");
         policedistance.setText(Physics.round(Physics.policedis)+" m");
-        score.setText("00000");
+        score.setText(nulls.substring(0,nulls.length()-(scoreNumber+"").length())+scoreNumber);
     }
 
     private void crashPhysic() {
@@ -417,5 +436,9 @@ public class PlayStage extends MyStage {
     public void dispose() {
         settingsStage.dispose();
         super.dispose();
+    }
+
+    public void setScoreNumber(int scoreNumber) {
+        this.scoreNumber = scoreNumber;
     }
 }
