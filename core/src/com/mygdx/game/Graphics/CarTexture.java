@@ -13,12 +13,12 @@ public class CarTexture {
     public Pixmap p;
     public Pixmap text;
     public int r=20, g=20, b=255;
-    public int r2=0, g2=0, b2=0;
+    public int r2=255, g2=255, b2=255;
 
     Color c;
     Color c2;
-    int cartype = 1;
-    int carTextureType = 0;
+    public int cartype = 1;
+    public int carTextureType = 0;
 
     public CarTexture(int ct,int ctt){
         setCarType(ct);

@@ -28,7 +28,7 @@ public class ExtrasStage extends MyStage {
     private OneSpriteStaticActor car;
     private Slider slider1, slider2, slider3, slider4;
     private static float slider1value = Car.carTexture.r, slider2value = Car.carTexture.g, slider3value = Car.carTexture.b;
-    private static int carTypeNumber = 4, carStyleNumber = 1;
+    private static int carTypeNumber = Car.carTexture.cartype, carStyleNumber = Car.carTexture.carTextureType;
     private OneSpriteStaticActor arrow, arrow2;
 
     //itt kell megadni, a pozicionálást!!!
@@ -87,7 +87,7 @@ public class ExtrasStage extends MyStage {
     void sliders(){
 
         //stílus
-        slider4 = new Slider(1, 3, 1, false, game.getSliderStyle());
+        slider4 = new Slider(0, 3, 1, false, game.getSliderStyle());
         addActor(slider4);
         slider4.setValue(carStyleNumber);
         slider4.addListener(new ChangeListener() {
