@@ -45,9 +45,9 @@ public class PlayScreen extends MyScreen {
     @Override
     public void init() {
         playStage.settingclick = false;
-        r = 1;
-        g = 0.5f;
-        b = 0.3f;
+        r = 0.3925f;
+        g = 0.3925f;
+        b = 0.3925f;
         playStage = new PlayStage(new ExtendViewport(270,480,new OrthographicCamera(270,480)), spriteBatch, game);
         Gdx.input.setInputProcessor(playStage);
 

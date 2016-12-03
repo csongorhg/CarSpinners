@@ -50,6 +50,7 @@ public class PlayStage extends MyStage {
     private OneSpriteStaticActor felulet;
 
     private OneSpriteStaticActor heart[]; //szivek eltárolása
+    private OneSpriteStaticActor emptyheart[];
     private int currentHeart; //jelenlegi szív
 
     private boolean fekisdown = false;
@@ -98,6 +99,7 @@ public class PlayStage extends MyStage {
         resized();
 
         heart = new OneSpriteStaticActor[Car.maxheart]; //szivek
+        emptyheart = new OneSpriteStaticActor[Car.maxheart];
 
         //út
         float nowHeight = 0;
@@ -279,9 +281,14 @@ public class PlayStage extends MyStage {
         f.setZIndex(Integer.MAX_VALUE);
         p.setZIndex(Integer.MAX_VALUE);
         textButton5.setZIndex(Integer.MAX_VALUE);
+        try {
+            for (int f = 0; f < emptyheart.length; f++) {
+                emptyheart[f].setZIndex(Integer.MAX_VALUE);
+            }
+        }catch (Exception e){}
         for (int i = 0; i < heart.length; i++){
             heart[i].setZIndex(Integer.MAX_VALUE);
-            }
+        }
         car.carActor.setZIndex(Integer.MAX_VALUE);
         kmh.setZIndex(Integer.MAX_VALUE);
         policedistance.setZIndex(Integer.MAX_VALUE);
@@ -335,11 +342,11 @@ public class PlayStage extends MyStage {
                 if(l.blocks[i].getWeight() == 1) {
                     if (currentHeart < Car.maxheart) {
                         car.damage();
-                        OneSpriteStaticActor emptyHeart = new OneSpriteStaticActor(Assets.manager.get(Assets.NOHEART));
-                        emptyHeart.setPosition(heart[currentHeart].getX(), heart[currentHeart].getY());
-                        emptyHeart.setSize(heart[currentHeart].getWidth(), heart[currentHeart].getHeight());
+                        emptyheart[currentHeart] = new OneSpriteStaticActor(Assets.manager.get(Assets.NOHEART));
+                        emptyheart[currentHeart].setPosition(heart[currentHeart].getX(), heart[currentHeart].getY());
+                        emptyheart[currentHeart].setSize(heart[currentHeart].getWidth(), heart[currentHeart].getHeight());
                         heart[currentHeart].remove();
-                        addActor(emptyHeart);
+                        addActor(emptyheart[currentHeart]);
                         currentHeart++;
                         if (currentHeart == 5) {
                             car.carActor.remove();

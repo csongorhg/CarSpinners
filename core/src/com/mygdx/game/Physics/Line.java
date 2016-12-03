@@ -38,7 +38,7 @@ public class Line {
             blocks[i] = new Block(allblocks[t[i]]);
             blocks[i].actor.setSize(size,size);
             blocks[i].actor.setPosition(widthkoz*(i+1) + widthkoz*0.1f,heightpoz);
-            positions[i] = widthkoz*(i+1) + widthkoz*0.1f;
+            positions[i] = widthkoz*(i+1) + widthkoz*0.05f;
         }
     }
 
