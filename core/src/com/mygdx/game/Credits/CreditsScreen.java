@@ -42,7 +42,6 @@ public class CreditsScreen extends MyScreen{
         bgStage = new MyStage(new StretchViewport(72,128, new OrthographicCamera(72,128)), spriteBatch, game) {
 
             private OneSpriteStaticActor backGroudActor;
-            private OneSpriteStaticActor money;
 
             @Override
             public void init() {

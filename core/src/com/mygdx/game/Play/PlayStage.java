@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.game.End.EndScreen;
 import com.mygdx.game.GlobalClasses.Assets;
 import com.mygdx.game.Graphics.BreakActor;
 import com.mygdx.game.Graphics.ButtonCaller;
@@ -296,8 +297,7 @@ public class PlayStage extends MyStage {
         elapseTime += delta;
         if (elapseTime > 3f) {
             explosionActor.remove();
-            //game.setScreen(new MenuScreen(game)); //itt akad ki
-            game.setScreenBackByStackPop();
+            game.setScreen(new EndScreen(game));
         }
     }
 
