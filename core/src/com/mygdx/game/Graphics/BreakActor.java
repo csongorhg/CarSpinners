@@ -27,6 +27,6 @@ public class BreakActor extends OneSpriteStaticActor {
     @Override
     protected void setStage(Stage stage) {
         super.setStage(stage);
-        setZIndex(5);
+        setZIndex(Integer.MAX_VALUE);
     }
 }

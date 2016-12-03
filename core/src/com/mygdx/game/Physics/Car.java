@@ -46,15 +46,15 @@ public class Car{
             public void init() {
                 super.init();
                 setPosition(carActor.getX(), carActor.getY());
-            }
-        });
+                }
+            });
         carActor.getStage().addActor(new BreakActor(){
             @Override
             public void init() {
                 super.init();
                 setPosition(carActor.getX()+carActor.getWidth()-getWidth(), carActor.getY());
-            }
-        });
-    }
+                }
+            });
+        }
 
 }
