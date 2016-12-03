@@ -69,6 +69,7 @@ public class PlayStage extends MyStage {
     private MoneyActor moneyActor;
 
     private int scoreNumber;
+    private Vector<Float> boxCountNew;
 
     public PlayStage(Viewport viewport, Batch batch, MyGdxGame game) {
         super(viewport, batch, game);
@@ -92,6 +93,7 @@ public class PlayStage extends MyStage {
     public void init() {
         addBackEventStackListener();
 
+        boxCountNew = new Vector<Float>(); //ellenőrző összeg a pontozáshoz
         setScoreNumber(0); //pontszám
 
         settingsStage = new IngameSettingsStage(new ExtendViewport(270,480,new OrthographicCamera(270/2,480/2)), getBatch(), game);
@@ -230,7 +232,6 @@ public class PlayStage extends MyStage {
         addActor(policedistance);
 
         //score
-        setScoreNumber(1);
         Label.LabelStyle labelStyle = game.getLabelStyle();
         //átméretezés
         generator = new FreeTypeFontGenerator(Gdx.files.internal("c64.ttf"));
@@ -329,7 +330,7 @@ public class PlayStage extends MyStage {
     }
 
     private void strings() {
-        String nulls="0000";
+        String nulls="0000"; //kiírásnál, hogy mindig 4 helyérték legyen
         kmh.setText(Physics.round(Physics.carspeed*10)+" km/h");
         policedistance.setText(Physics.round(Physics.policedis)+" m");
         score.setText(nulls.substring(0,nulls.length()-(scoreNumber+"").length())+scoreNumber);
@@ -341,6 +342,7 @@ public class PlayStage extends MyStage {
             if(Physics.hit(l.blocks[i].actor,car.carActor)){
                 if(l.blocks[i].getWeight() == 1) {
                     if (currentHeart < Car.maxheart) {
+                        boxCountNew.set(0,0f);
                         car.damage();
                         emptyheart[currentHeart] = new OneSpriteStaticActor(Assets.manager.get(Assets.NOHEART));
                         emptyheart[currentHeart].setPosition(heart[currentHeart].getX(), heart[currentHeart].getY());
@@ -408,17 +410,26 @@ public class PlayStage extends MyStage {
     }
 
     private void removeLine() {
+        float sum=0;
         for (int i = 0; i < 3; i++){
             lines.get(0).blocks[i].actor.remove();
+            sum += lines.get(0).blocks[i].getWeight();
         }
+        if (sum == boxCountNew.get(0) && sum!=0) {
+            setScoreNumber(getScoreNumber()+10);
+        }
+        boxCountNew.remove(0);
         lines.remove(0);
     }
 
     private void addLine() {
         Line l = new Line(width,heigth);
+        float sum=0;
         for (int i = 0; i < 3; i++){
             addActor(l.blocks[i].actor);
+            sum += l.blocks[i].getWeight();
         }
+        boxCountNew.add(sum);
         lines.add(l);
 
     }
@@ -447,5 +458,9 @@ public class PlayStage extends MyStage {
 
     public void setScoreNumber(int scoreNumber) {
         this.scoreNumber = scoreNumber;
+    }
+
+    public int getScoreNumber() {
+        return scoreNumber;
     }
 }
