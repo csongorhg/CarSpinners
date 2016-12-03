@@ -13,7 +13,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.mygdx.game.DemoMenu.ExplosionActor;
 import com.mygdx.game.GlobalClasses.Assets;
 import com.mygdx.game.Graphics.BreakActor;
 import com.mygdx.game.Graphics.ButtonCaller;
@@ -61,6 +60,8 @@ public class PlayStage extends MyStage {
     private float elapseTime = 0; //robbanás után időt számolja
 
     private static Vector<OneSpriteStaticActor> backgrounds  = new Vector<OneSpriteStaticActor>();
+
+    private MoneyActor moneyActor;
 
     public PlayStage(Viewport viewport, Batch batch, MyGdxGame game) {
         super(viewport, batch, game);
@@ -222,7 +223,12 @@ public class PlayStage extends MyStage {
         score.setPosition(116,7);
         addActor(score);
 
-
+        //pénz
+        /*moneyActor = new MoneyActor();
+        moneyActor.setSize(32,54);
+        moneyActor.setZIndex(Integer.MAX_VALUE);
+        moneyActor.setY(100);
+        addActor(moneyActor);*/
 
     }
 

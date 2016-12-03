@@ -43,6 +43,8 @@ public class Assets {
 
 	public static final AssetDescriptor<TextureAtlas> EXPLOSION_TEXTUREATLAS
 			= new AssetDescriptor<TextureAtlas>("explosion.atlas", TextureAtlas.class);
+	public static final AssetDescriptor<TextureAtlas> MONEY_TEXTUREATLAS
+			= new AssetDescriptor<TextureAtlas>("mozgopenz.atlas", TextureAtlas.class);
 
 	public static final AssetDescriptor<Texture> CURSOR_TEXTURE
 			= new AssetDescriptor<Texture>("images/cursor.png", Texture.class);
@@ -175,6 +177,7 @@ public class Assets {
 		manager.load(BLOCAKDE_1);
 		manager.load(ARROW);
 		manager.load(EXPLOSION_TEXTUREATLAS);
+		manager.load(MONEY_TEXTUREATLAS);
 		manager.load(BREAK);
 		manager.load(CAR_TEXTURE_1);
 		manager.load(CAR_TEXTURE_2);

@@ -1,4 +1,4 @@
-package com.mygdx.game.DemoMenu;
+package com.mygdx.game.Play;
 
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
