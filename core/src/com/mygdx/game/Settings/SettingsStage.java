@@ -84,7 +84,6 @@ public class SettingsStage extends MyStage{
         volumeIconSpriteActor.setPosition(0, heigth - volumeIconSpriteActor.getHeight());
     }
 
-
     void musicVolume(){
         volumePlusSpriteActor = new OneSpriteStaticActor(Assets.manager.get(Assets.PLUS_VOL));
         volumeMinusSpriteActor = new OneSpriteStaticActor(Assets.manager.get(Assets.MINUS_VOL));
@@ -106,7 +105,7 @@ public class SettingsStage extends MyStage{
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
                 if(actualVol>=0){
-                    actualVol-=0.1;
+                    actualVol-=0.1f;
                     IngameSettingsStage.actualVol = actualVol;
                     musicSetter.musicVolume(actualVol<=0?0:actualVol);
                     volumeArraySettings();

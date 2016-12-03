@@ -137,6 +137,7 @@ public class PlayStage extends MyStage {
         p = new ButtonCaller("", Assets.GAZ_ICON);
         p.setSize(54,57); //18*3, 19*3
         p.setX((((ExtendViewport)getViewport()).getMinWorldWidth()) - p.getWidth()*0.90f);
+        p.setY(30);
         p.addListener(new ClickListener(){
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -157,6 +158,7 @@ public class PlayStage extends MyStage {
         //fékpedál
         f = new ButtonCaller("", Assets.FEK_ICON);
         f.setSize(54,57); //18*3, 19*3
+        f.setY(30);
         f.addListener(new ClickListener(){
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -225,11 +227,11 @@ public class PlayStage extends MyStage {
         addActor(score);
 
         //pénz
-        /*moneyActor = new MoneyActor();
-        moneyActor.setSize(32,54);
+        moneyActor = new MoneyActor();
+        moneyActor.setSize(96,8);
         moneyActor.setZIndex(Integer.MAX_VALUE);
         moneyActor.setY(100);
-        addActor(moneyActor);*/
+        addActor(moneyActor);
 
     }
 

@@ -41,7 +41,7 @@ public class MenuStage extends MyStage {
     private int moneySpeeds[]; //pénzek sebbesége
     private int moneySpeedsinterval[]; //pénzek sebességének intervalluma
 
-    private Preferences preferences = Gdx.app.getPreferences(MenuScreen.PREFS);
+    private Preferences preferences = Gdx.app.getPreferences(MenuScreen.PREFS); //ez a kilépés után mentés
     private MyLabel deadufocountLabel;
     public static final String DEAD_UFO_COUNT = "DEAD_UFO_COUNT";
 
