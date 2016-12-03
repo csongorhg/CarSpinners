@@ -96,7 +96,7 @@ public class CarTexture {
         pixmap = Graphics.reColor(pixmap,Graphics.fullColor(255,255,255,1),c);
         Pixmap pixmap2 = new Pixmap(text.getWidth(),text.getHeight(),text.getFormat());
         pixmap2.drawPixmap(text,0,0);
-        pixmap2 = Graphics.reColor(pixmap2,Graphics.fullColor(0,0,255,1),c2); // a szín nem kappol át kell raknom fehérre
+        pixmap2 = Graphics.reColor(pixmap2,Graphics.fullColor(255,255,255,1),c2); // a szín nem kappol át kell raknom fehérre
         pixmap.drawPixmap(pixmap2,0,0);
         return new Texture(pixmap);
     }
