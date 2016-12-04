@@ -21,13 +21,14 @@ import com.mygdx.game.MyGdxGame;
 public class SettingsStage extends MyStage{
 
     private TextButton textButton;
-    private OneSpriteStaticActor volumeIconSpriteActor, volumePlusSpriteActor,volumeMinusSpriteActor;
-    private Array<OneSpriteStaticActor> volumeArray;
+    public OneSpriteStaticActor volumeIconSpriteActor, volumePlusSpriteActor,volumeMinusSpriteActor;
+    public Array<OneSpriteStaticActor> volumeArray;
     public static float actualVol = 1;
+    private static boolean voltmar = false;
     public static boolean musicPlay = true;
-    MusicSetter musicSetter = new MusicSetter();
+    public MusicSetter musicSetter = new MusicSetter();
 
-    private float width, heigth;
+    public float width, heigth;
 
     public SettingsStage(Viewport viewport, Batch batch, MyGdxGame game) {
         super(viewport, batch, game);
@@ -48,7 +49,7 @@ public class SettingsStage extends MyStage{
         });
         addActor(textButton);
 
-        resized();
+        this.resized();
 
         musicOnOff();
         musicVolume();
@@ -66,7 +67,7 @@ public class SettingsStage extends MyStage{
 
     }
 
-    void musicOnOff(){
+    public void musicOnOff(){
         volumeIconSpriteActor = new OneSpriteStaticActor(Assets.manager.get(musicPlay?Assets.SOUND_ICON:Assets.MUTE_ICON));
         addActor(volumeIconSpriteActor);
         volumeIconSpriteActor.addListener(new ClickListener(){
@@ -75,16 +76,25 @@ public class SettingsStage extends MyStage{
                 super.clicked(event, x, y);
                 volumeIconSpriteActor.remove();
                 musicPlay = !musicPlay;
-                IngameSettingsStage.musicPlay = musicPlay;
+                if(musicPlay){
+                    actualVol = 1;
+                    volumeArraySettings();
+                }else{
+                    actualVol = 1-0.1f-0.1f-0.1f-0.1f-0.1f-0.1f-0.1f-0.1f-0.1f-0.1f;
+                    volumeArraySettings();
+                }
+                //IngameSettingsStage.musicPlay = musicPlay;
                 new MusicSetter(musicPlay);
                 musicOnOff();
             }
         });
+        IngameSettingsStage.musicPlay = musicPlay;
+        IngameSettingsStage.actualVol = actualVol;
         volumeIconSpriteActor.setSize(width / 3, width / 3);
         volumeIconSpriteActor.setPosition(0, heigth - volumeIconSpriteActor.getHeight());
     }
 
-    void musicVolume(){
+    public void musicVolume(){
         volumePlusSpriteActor = new OneSpriteStaticActor(Assets.manager.get(Assets.PLUS_VOL));
         volumeMinusSpriteActor = new OneSpriteStaticActor(Assets.manager.get(Assets.MINUS_VOL));
         addActor(volumePlusSpriteActor); addActor(volumeMinusSpriteActor);
@@ -93,7 +103,14 @@ public class SettingsStage extends MyStage{
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
                 if(actualVol<=0.9){
-                    actualVol+=0.1;
+                    actualVol+=0.1f;
+                    if(actualVol>0 && !voltmar){
+                        voltmar = true;
+                        volumeIconSpriteActor.remove();
+                        musicPlay = true;
+                        new MusicSetter(musicPlay);
+                        musicOnOff();
+                    }
                     IngameSettingsStage.actualVol = actualVol;
                     musicSetter.musicVolume(actualVol);
                     volumeArraySettings();
@@ -106,6 +123,12 @@ public class SettingsStage extends MyStage{
                 super.clicked(event, x, y);
                 if(actualVol>=0){
                     actualVol-=0.1f;
+                    if(actualVol<=0){
+                        voltmar = false;
+                        volumeIconSpriteActor.remove();
+                        musicPlay = false;
+                        musicOnOff();
+                    }
                     IngameSettingsStage.actualVol = actualVol;
                     musicSetter.musicVolume(actualVol<=0?0:actualVol);
                     volumeArraySettings();
@@ -115,7 +138,7 @@ public class SettingsStage extends MyStage{
         volumeArraySettings();
     }
 
-    void volumeArraySettings(){
+    public void volumeArraySettings(){
         volumeArray = new Array<OneSpriteStaticActor>();
         for(float i=0; i<1; i+=0.1){
             if(i<=actualVol){
@@ -129,7 +152,7 @@ public class SettingsStage extends MyStage{
         volumeSize(width, heigth/2);
     }
 
-    void volumeSize(float width, float heigth){
+    public void volumeSize(float width, float heigth){
         float meretGomb = heigth/6;
         volumeMinusSpriteActor.setSize(meretGomb, meretGomb);
         volumePlusSpriteActor.setSize(meretGomb, meretGomb);

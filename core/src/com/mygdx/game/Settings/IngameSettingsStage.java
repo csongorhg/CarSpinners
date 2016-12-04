@@ -32,6 +32,7 @@ public class IngameSettingsStage extends MyStage {
     public static boolean musicPlay = true;
     MusicSetter musicSetter = new MusicSetter();
     private Array<OneSpriteStaticActor> volumeArray;
+    private static boolean voltmar = false;
     public static float actualVol = 1;
     private float width, height;
     private boolean visible = false;
@@ -102,11 +103,20 @@ public class IngameSettingsStage extends MyStage {
                 super.clicked(event, x, y);
                 volumeIconSpriteActor.remove();
                 musicPlay = !musicPlay;
-                SettingsStage.musicPlay = musicPlay;
+                if(musicPlay){
+                    actualVol = 1;
+                    volumeArraySettings();
+                }else{
+                    actualVol = 1-0.1f-0.1f-0.1f-0.1f-0.1f-0.1f-0.1f-0.1f-0.1f-0.1f;
+                    volumeArraySettings();
+                }
+                //SettingsStage.musicPlay = musicPlay;
                 new MusicSetter(musicPlay);
                 musicOnOff();
             }
         });
+        SettingsStage.musicPlay = musicPlay;
+        SettingsStage.actualVol = actualVol;
         volumeIconSpriteActor.setSize(width / 3, width / 3);
         volumeIconSpriteActor.setPosition(0, height - volumeIconSpriteActor.getHeight()-((ExtendViewport)getViewport()).getMinWorldHeight()/4);
     }
@@ -134,6 +144,13 @@ public class IngameSettingsStage extends MyStage {
                 super.clicked(event, x, y);
                 if(actualVol<=0.9){
                     actualVol+=0.1;
+                    if(actualVol>0 && !voltmar){
+                        voltmar = true;
+                        volumeIconSpriteActor.remove();
+                        musicPlay = true;
+                        new MusicSetter(musicPlay);
+                        musicOnOff();
+                    }
                     SettingsStage.actualVol = actualVol;
                     musicSetter.musicVolume(actualVol);
                     volumeArraySettings();
@@ -146,6 +163,12 @@ public class IngameSettingsStage extends MyStage {
                 super.clicked(event, x, y);
                 if(actualVol>=0){
                     actualVol-=0.1;
+                    if(actualVol<=0){
+                        voltmar = false;
+                        volumeIconSpriteActor.remove();
+                        musicPlay = false;
+                        musicOnOff();
+                    }
                     SettingsStage.actualVol = actualVol;
                     musicSetter.musicVolume(actualVol<=0?0:actualVol);
                     volumeArraySettings();
