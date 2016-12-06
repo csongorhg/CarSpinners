@@ -36,9 +36,9 @@ public class MyGdxGame extends Game {
 	public Slider.SliderStyle getSliderStyle(){
 		Slider.SliderStyle style;
 		style = new Slider.SliderStyle();
-		style.background = new TextureRegionDrawable(new TextureRegion(Assets.manager.get(Assets.BACKGROUND_TEXTURE)));
+		style.background = new TextureRegionDrawable(new TextureRegion(Assets.manager.get(Assets.SBACKGROUND)));
 		style.background.setMinHeight(WORLD_HEIGHT/20);
-		style.knob = new TextureRegionDrawable(new TextureRegion(Assets.manager.get(Assets.FILLED_VOL)));
+		style.knob = new TextureRegionDrawable(new TextureRegion(Assets.manager.get(Assets.SKNOB)));
 		style.knob.setMinHeight(WORLD_HEIGHT/20+10);
 		return style;
 	}

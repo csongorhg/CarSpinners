@@ -12,9 +12,10 @@ public class Physics {
     public static float MINcarspeed = 0;
     public static float MAXcarspeed = 10;
     public static float breakpower = 0.98f;
+    public static float normalmoving = 0.998f;
     public static float acceleration = 1.01f;
-    public static float policespeed = 5;
-    public static float policedis = 100;
+    public static float policespeed = 4;
+    public static float policedis = 1000;
 
     public static boolean hit(Actor a1,Actor a2){
         return  a1.getX() < a2.getX()+a2.getWidth() &&

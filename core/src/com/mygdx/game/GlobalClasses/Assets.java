@@ -83,13 +83,13 @@ public class Assets {
 	public static final AssetDescriptor<Texture> NOHEART
 			= new AssetDescriptor<Texture>("noheart.png", Texture.class);
 	public static final AssetDescriptor<Texture> PLUS_VOL
-			= new AssetDescriptor<Texture>("vol/plusz.png", Texture.class);
+			= new AssetDescriptor<Texture>("vol/splusz.png", Texture.class);
 	public static final AssetDescriptor<Texture> MINUS_VOL
-			= new AssetDescriptor<Texture>("vol/minusz.png", Texture.class);
+			= new AssetDescriptor<Texture>("vol/sminusz.png", Texture.class);
 	public static final AssetDescriptor<Texture> FILLED_VOL
-			= new AssetDescriptor<Texture>("vol/teli.png", Texture.class);
+			= new AssetDescriptor<Texture>("vol/sfull.png", Texture.class);
 	public static final AssetDescriptor<Texture> EMPTY_VOL
-			= new AssetDescriptor<Texture>("vol/ures.png", Texture.class);
+			= new AssetDescriptor<Texture>("vol/sempty.png", Texture.class);
 	public static final AssetDescriptor<Texture> BLOCAKDE_0
 			= new AssetDescriptor<Texture>("blockade-0.png", Texture.class);
 	public static final AssetDescriptor<Texture> BLOCAKDE_1
@@ -122,6 +122,10 @@ public class Assets {
 			= new AssetDescriptor<Texture>("text-4-2.png", Texture.class);
 	public static final AssetDescriptor<Texture> TEXT_4_3
 			= new AssetDescriptor<Texture>("text-4-3.png", Texture.class);
+	public static final AssetDescriptor<Texture> SKNOB
+			= new AssetDescriptor<Texture>("knob.png", Texture.class);
+	public static final AssetDescriptor<Texture> SBACKGROUND
+			= new AssetDescriptor<Texture>("sliderbackground.png", Texture.class);
 
 	//zenék
 	public static final AssetDescriptor<Music> EXTREMEACTION
@@ -195,6 +199,8 @@ public class Assets {
 		manager.load(TEXT_4_1);
 		manager.load(TEXT_4_2);
 		manager.load(TEXT_4_3);
+		manager.load(SBACKGROUND);
+		manager.load(SKNOB);
 	}
 
     public static void afterLoaded() {

@@ -161,8 +161,8 @@ public class SettingsStage extends MyStage{
         for(int i=0; i<volumeArray.size; i++){
             //hangero.get(i).setSize((fel.getX()-le.getWidth())/10, meretGomb);
             //hangero.get(i).setPosition(le.getWidth()+i*hangero.get(i).getWidth(),heigth);
-            volumeArray.get(i).setSize((volumePlusSpriteActor.getX()-volumeMinusSpriteActor.getWidth())/10,(volumePlusSpriteActor.getX()-volumeMinusSpriteActor.getWidth())/10);
-            volumeArray.get(i).setPosition(volumeMinusSpriteActor.getWidth()+i*volumeArray.get(i).getWidth(), heigth+volumeArray.get(i).getHeight()/2);
+            volumeArray.get(i).setSize((volumePlusSpriteActor.getX()-volumeMinusSpriteActor.getWidth())/10,meretGomb);
+            volumeArray.get(i).setPosition(volumeMinusSpriteActor.getWidth()+i*volumeArray.get(i).getWidth(), heigth);
         }
     }
 

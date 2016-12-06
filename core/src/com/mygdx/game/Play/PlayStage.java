@@ -44,6 +44,7 @@ public class PlayStage extends MyStage {
     private float width, heigthBetween, heigth;
 
     public static boolean settingclick = false;
+    public static boolean menuben = false;
 
     private ButtonCaller p, f, textButton5; //gáz, fékpedál
 
@@ -128,7 +129,7 @@ public class PlayStage extends MyStage {
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
 
-
+                menuben = true;
                 //setSettingclick(true);
                 settingsStage.Show();
             }
@@ -258,18 +259,20 @@ public class PlayStage extends MyStage {
 
     @Override
     public void act(float delta) {
-        super.act(delta);
-        carPhysic();
-        backgroundPhysic();
-        linePhysic();
-        crashPhysic();
-        strings();
-        layers();
-        if (currentHeart == 5) {
-            explosion(delta);
+        if(!menuben) {
+            super.act(delta);
+            carPhysic();
+            backgroundPhysic();
+            linePhysic();
+            crashPhysic();
+            strings();
+            layers();
+            if (currentHeart == 5) {
+                explosion(delta);
+            }
+            if (settingsStage.isB()) new MusicSetter(new Random(1, 5).getGenNumber());
+            settingsStage.act(delta);
         }
-        if(settingsStage.isB())new MusicSetter(new Random(1,5).getGenNumber());
-        settingsStage.act(delta);
     }
 
     private void layers() {
@@ -368,7 +371,7 @@ public class PlayStage extends MyStage {
     private void linePhysic(){
         float speed = Physics.carspeed;
         try{
-            if(!fekisdown && !gazisdown) speed *= 0.99;
+            if(!fekisdown && !gazisdown) speed *= Physics.normalmoving;
             else if(fekisdown) {
                 speed -= 0.01f;
                 speed *= Physics.breakpower;

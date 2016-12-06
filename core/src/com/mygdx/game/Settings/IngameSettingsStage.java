@@ -69,6 +69,7 @@ public class IngameSettingsStage extends MyStage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
+                PlayStage.menuben = false;
                 PlayStage.setSettingclick(false);
                 Hide();
             }
@@ -80,6 +81,7 @@ public class IngameSettingsStage extends MyStage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
+                PlayStage.menuben = false;
                 musicSetter.stopMusics();
                 if(musicPlay)musicSetter.MenuMusic();
                 SettingsStage.musicPlay=musicPlay;
@@ -199,8 +201,8 @@ public class IngameSettingsStage extends MyStage {
         volumeMinusSpriteActor.setPosition(0,heigth);
         volumePlusSpriteActor.setPosition(width*2-volumePlusSpriteActor.getWidth(), heigth);
         for(int i=0; i<volumeArray.size; i++){
-            volumeArray.get(i).setSize((volumePlusSpriteActor.getX()-volumeMinusSpriteActor.getWidth())/10,(volumePlusSpriteActor.getX()-volumeMinusSpriteActor.getWidth())/10);
-            volumeArray.get(i).setPosition(volumeMinusSpriteActor.getWidth()+i*volumeArray.get(i).getWidth(), heigth+volumeArray.get(i).getHeight()/2);
+            volumeArray.get(i).setSize((volumePlusSpriteActor.getX()-volumeMinusSpriteActor.getWidth())/10,meretGomb);
+            volumeArray.get(i).setPosition(volumeMinusSpriteActor.getWidth()+i*volumeArray.get(i).getWidth(), heigth);
         }
     }
 

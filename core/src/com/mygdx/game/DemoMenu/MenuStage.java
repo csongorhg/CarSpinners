@@ -20,6 +20,7 @@ import com.mygdx.game.MyBaseClasses.MyLabel;
 import com.mygdx.game.MyBaseClasses.MyStage;
 import com.mygdx.game.MyBaseClasses.OneSpriteStaticActor;
 import com.mygdx.game.Graphics.ButtonCaller;
+import com.mygdx.game.Physics.Physics;
 import com.mygdx.game.Play.PlayScreen;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Settings.SettingsScreen;
@@ -103,6 +104,8 @@ public class MenuStage extends MyStage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
+                Physics.carspeed = 0;
+                Physics.policedis = 1000;
                 game.setScreen(new PlayScreen(game));
 
             }
