@@ -222,6 +222,7 @@ public class Assets {
 		manager.load(TEXT_4_2);
 		manager.load(TEXT_4_3);
 		manager.load(SBACKGROUND);
+		manager.load(SKNOB);
 		manager.load(HOUSE);
 		manager.load(ENV_0);
 		manager.load(ENV_1);
