@@ -126,6 +126,28 @@ public class Assets {
 			= new AssetDescriptor<Texture>("knob.png", Texture.class);
 	public static final AssetDescriptor<Texture> SBACKGROUND
 			= new AssetDescriptor<Texture>("sliderbackground.png", Texture.class);
+	public static final AssetDescriptor<Texture> HOUSE
+			= new AssetDescriptor<Texture>("kornyezet/haz.png", Texture.class);
+	public static final AssetDescriptor<Texture> ENV_0
+			= new AssetDescriptor<Texture>("kornyezet/korny-0.png", Texture.class);
+	public static final AssetDescriptor<Texture> ENV_1
+			= new AssetDescriptor<Texture>("kornyezet/korny-1.png", Texture.class);
+	public static final AssetDescriptor<Texture> ENV_2
+			= new AssetDescriptor<Texture>("kornyezet/korny-2.png", Texture.class);
+	public static final AssetDescriptor<Texture> ENV_3
+			= new AssetDescriptor<Texture>("kornyezet/korny-3.png", Texture.class);
+	public static final AssetDescriptor<Texture> ENV_4
+			= new AssetDescriptor<Texture>("kornyezet/korny-4.png", Texture.class);
+	public static final AssetDescriptor<Texture> ENV_5
+			= new AssetDescriptor<Texture>("kornyezet/korny-5.png", Texture.class);
+	public static final AssetDescriptor<Texture> ENV_6
+			= new AssetDescriptor<Texture>("kornyezet/korny-6.png", Texture.class);
+	public static final AssetDescriptor<Texture> ENV_7
+			= new AssetDescriptor<Texture>("kornyezet/korny-7.png", Texture.class);
+	public static final AssetDescriptor<Texture> ENV_8
+			= new AssetDescriptor<Texture>("kornyezet/korny-8.png", Texture.class);
+	public static final AssetDescriptor<Texture> ENV_9
+			= new AssetDescriptor<Texture>("kornyezet/korny-9.png", Texture.class);
 
 	//zenék
 	public static final AssetDescriptor<Music> EXTREMEACTION
@@ -200,7 +222,17 @@ public class Assets {
 		manager.load(TEXT_4_2);
 		manager.load(TEXT_4_3);
 		manager.load(SBACKGROUND);
-		manager.load(SKNOB);
+		manager.load(HOUSE);
+		manager.load(ENV_0);
+		manager.load(ENV_1);
+		manager.load(ENV_2);
+		manager.load(ENV_3);
+		manager.load(ENV_4);
+		manager.load(ENV_5);
+		manager.load(ENV_6);
+		manager.load(ENV_7);
+		manager.load(ENV_8);
+		manager.load(ENV_9);
 	}
 
     public static void afterLoaded() {

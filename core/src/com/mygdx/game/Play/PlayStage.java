@@ -18,6 +18,7 @@ import com.mygdx.game.End.EndScreen;
 import com.mygdx.game.GlobalClasses.Assets;
 import com.mygdx.game.Graphics.BreakActor;
 import com.mygdx.game.Graphics.ButtonCaller;
+import com.mygdx.game.Graphics.Road;
 import com.mygdx.game.Math.Random;
 import com.mygdx.game.Music.MusicSetter;
 import com.mygdx.game.MyBaseClasses.MyLabel;
@@ -114,10 +115,10 @@ public class PlayStage extends MyStage {
                 backgrounds = new Vector<OneSpriteStaticActor>();
 
         for(int i = 0; i<5 ;i++){
-            OneSpriteStaticActor road = new OneSpriteStaticActor(Assets.manager.get(Assets.ROAD_BLOCK));
-            float arany = (((ExtendViewport)getViewport()).getMinWorldWidth())/road.getWidth();
+            OneSpriteStaticActor road = new OneSpriteStaticActor(Road.getRoad());
+            float arany = (((ExtendViewport)getViewport()).getMinWorldWidth())/Assets.manager.get(Assets.ROAD_BLOCK).getWidth();
             road.setSize(road.getWidth()*arany,road.getHeight()*arany);
-            road.setPosition(0,nowHeight);
+            road.setPosition(-94*arany,nowHeight);
             nowHeight += road.getHeight();
             backgrounds.add(road);
             addActor(road);
@@ -319,10 +320,10 @@ public class PlayStage extends MyStage {
             backgrounds.get(i).setPosition(backgrounds.get(i).getX(),backgrounds.get(i).getY()- Physics.carspeed);
         }
         if(backgrounds.get(backgrounds.size()-1).getY() < heigth-backgrounds.get(0).getHeight()){
-            OneSpriteStaticActor road = new OneSpriteStaticActor(Assets.manager.get(Assets.ROAD_BLOCK));
-            float arany = (((ExtendViewport)getViewport()).getMinWorldWidth())/road.getWidth();
+            OneSpriteStaticActor road = new OneSpriteStaticActor(Road.getRoad());
+            float arany = (((ExtendViewport)getViewport()).getMinWorldWidth())/Assets.manager.get(Assets.ROAD_BLOCK).getWidth();
             road.setSize(road.getWidth()*arany,road.getHeight()*arany);
-            road.setPosition(0,backgrounds.get(backgrounds.size()-1).getY()+backgrounds.get(0).getHeight());
+            road.setPosition(-94*arany,backgrounds.get(backgrounds.size()-1).getY()+backgrounds.get(0).getHeight());
             backgrounds.add(road);
             addActor(road);
             }
