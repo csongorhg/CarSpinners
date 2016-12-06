@@ -1,6 +1,7 @@
 package com.mygdx.game.End;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -14,6 +15,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.DemoMenu.MenuScreen;
+import com.mygdx.game.DemoMenu.MenuStage;
 import com.mygdx.game.GlobalClasses.Assets;
 import com.mygdx.game.Music.MusicSetter;
 import com.mygdx.game.MyBaseClasses.MyButton;
@@ -31,6 +33,8 @@ public class EndStage extends MyStage {
 
     private float width, heigthBetween, heigth;
 
+    private MyLabel myLabel, myLabel2, myLabel3, myLabel4, myLabel5, myLabel6;
+
     public EndStage(Viewport viewport, Batch batch, MyGdxGame game) {
         super(viewport, batch, game);
     }
@@ -39,21 +43,24 @@ public class EndStage extends MyStage {
     public void init() {
         addBackEventStackListener();
 
+        resized();
+
         Label.LabelStyle style;
         style = new com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle();
-        style.fontColor = Color.WHITE;
+        style.fontColor = Color.YELLOW;
 
         //átméretezés
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("c64.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter meret = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        meret.size = 15;
+        meret.size = 20;
         meret.characters = Assets.CHARS;
         BitmapFont font = generator.generateFont(meret);
         generator.dispose();
         style.font = font;
         //átméretezés vége
 
-        textButton = new MyButton(PlayStage.scoreNumber+"", game.getTextButtonStyle());
+        textButton = new MyButton("Menu", game.getTextButtonStyle());
+        textButton.setPosition(width - textButton.getWidth()/2,heigth);
         textButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -65,8 +72,40 @@ public class EndStage extends MyStage {
         });
 
         addActor(textButton);
+        float arany = (((ExtendViewport)getViewport()).getMinWorldWidth())/Assets.manager.get(Assets.ROAD_BLOCK).getWidth();
 
-        resized();
+        myLabel = new MyLabel(PlayStage.scoreNumber+"", style);
+        myLabel.setPosition(((ExtendViewport)getViewport()).getMinWorldWidth()-myLabel.getWidth()-10,
+                (((ExtendViewport)getViewport()).getMinWorldHeight()) * (3/4f) - myLabel.getHeight()/2);
+        addActor(myLabel);
+
+        myLabel2 = new MyLabel("Score: ", style);
+        myLabel2.setPosition(10,
+                (((ExtendViewport)getViewport()).getMinWorldHeight()) * (3/4f) - myLabel2.getHeight()/2);
+        addActor(myLabel2);
+
+        myLabel3 = new MyLabel("...", style);
+        myLabel3.setPosition(((ExtendViewport)getViewport()).getMinWorldWidth()-myLabel3.getWidth()-10,
+                myLabel.getY() - myLabel.getHeight()*2);
+        addActor(myLabel3);
+
+        myLabel4 = new MyLabel("Best score: ", style);
+        myLabel4.setPosition(10,
+                myLabel2.getY() - myLabel2.getHeight()*2);
+        addActor(myLabel4);
+
+        myLabel5 = new MyLabel("7168", style);
+        myLabel5.setPosition(((ExtendViewport)getViewport()).getMinWorldWidth()-myLabel5.getWidth()-10,
+                myLabel3.getY() - myLabel3.getHeight()*2);
+        addActor(myLabel5);
+
+        myLabel6 = new MyLabel("Valami...: ", style);
+        myLabel6.setPosition(10,
+                myLabel4.getY() - myLabel4.getHeight()*2);
+        addActor(myLabel6);
+
+
+
     }
 
     @Override
@@ -76,7 +115,6 @@ public class EndStage extends MyStage {
         //heigthBetween = (((ExtendViewport)getViewport()).getMinWorldHeight())/4; //egyenletesen elosztva 3 menüponthoz
         heigth = 0; //magasság
         //heigth -= heigthBetween;
-        textButton.setPosition(width - ((textButton.getWidth())/2),heigth);
 
 
         //creditText.setPosition(width - ((creditText.getWidth())/2), textButton.getHeight() + creditText.getHeight());

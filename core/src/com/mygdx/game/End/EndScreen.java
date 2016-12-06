@@ -1,6 +1,7 @@
 package com.mygdx.game.End;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
@@ -18,6 +19,9 @@ public class EndScreen extends MyScreen {
 
     protected EndStage endStage;
     protected MyStage bgStage;
+
+    public static final String PREFS = "Score";
+    private Preferences preferences = Gdx.app.getPreferences(PREFS);
 
     public EndScreen(MyGdxGame game) {
         super(game);
@@ -62,4 +66,15 @@ public class EndScreen extends MyScreen {
         bgStage.resize(width, height);
     }
 
+    @Override
+    public void dispose() {
+        preferences.flush();
+        super.dispose();
+    }
+
+    @Override
+    public void hide() {
+        preferences.flush();
+        super.hide();
+    }
 }

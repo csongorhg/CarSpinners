@@ -24,7 +24,6 @@ import com.mygdx.game.Physics.Physics;
 import com.mygdx.game.Play.PlayScreen;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Settings.SettingsScreen;
-import com.mygdx.game.Settings.SettingsStage;
 
 /**
  * Created by tuskeb on 2016. 09. 30..
@@ -44,7 +43,7 @@ public class MenuStage extends MyStage {
 
     private Preferences preferences = Gdx.app.getPreferences(MenuScreen.PREFS); //ez a kilépés után mentés
     private MyLabel deadufocountLabel;
-    public static final String DEAD_UFO_COUNT = "DEAD_UFO_COUNT";
+    public static final String STORED_SCORE = "STORED_SCORE";
 
     //private OneSpriteStaticActor cityStream, cityStream2; //úszó város
     //private int cityStreamSpeed;
@@ -90,7 +89,7 @@ public class MenuStage extends MyStage {
         public void clicked(InputEvent event, float x, float y) {
             super.clicked(event, x, y);
             game.setScreen(new SettingsScreen(game));
-            preferences.putInteger(MenuStage.DEAD_UFO_COUNT, preferences.getInteger(MenuStage.DEAD_UFO_COUNT,0)+1);
+            preferences.putInteger(MenuStage.STORED_SCORE, preferences.getInteger(MenuStage.STORED_SCORE,0)+1);
 
         }
     });
@@ -201,7 +200,7 @@ public class MenuStage extends MyStage {
     public void act(float delta) {
         super.act(delta);
 
-        deadufocountLabel.setText(preferences.getInteger(MenuStage.DEAD_UFO_COUNT, 0) + "");
+        deadufocountLabel.setText(preferences.getInteger(MenuStage.STORED_SCORE, 0) + "");
 
         music.MenuMusic();
 
@@ -232,6 +231,7 @@ public class MenuStage extends MyStage {
 
     @Override
     public void dispose() {
+        preferences.flush();
         super.dispose();
     }
 
