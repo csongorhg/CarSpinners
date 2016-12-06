@@ -69,8 +69,10 @@ public class PlayStage extends MyStage {
 
     private MoneyActor moneyActor;
 
-    private int scoreNumber;
+    public static int scoreNumber; //pontok
     private Vector<Float> boxCountNew;
+
+    private boolean dead; //halott-e az illető
 
     public PlayStage(Viewport viewport, Batch batch, MyGdxGame game) {
         super(viewport, batch, game);
@@ -94,8 +96,10 @@ public class PlayStage extends MyStage {
     public void init() {
         addBackEventStackListener();
 
+        dead = false; //él a játékos
+
         boxCountNew = new Vector<Float>(); //ellenőrző összeg a pontozáshoz
-        setScoreNumber(0); //pontszám
+        scoreNumber = 0; //pontszám
 
         settingsStage = new IngameSettingsStage(new ExtendViewport(270,480,new OrthographicCamera(270/2,480/2)), getBatch(), game);
 
@@ -261,12 +265,15 @@ public class PlayStage extends MyStage {
     public void act(float delta) {
         if(!menuben) {
             super.act(delta);
-            carPhysic();
-            backgroundPhysic();
-            linePhysic();
+            if (!dead) {
+                carPhysic();
+                backgroundPhysic();
+                linePhysic();
+                strings();
+                layers();
+            }
             crashPhysic();
-            strings();
-            layers();
+
             if (currentHeart == 5) {
                 explosion(delta);
             }
@@ -326,7 +333,7 @@ public class PlayStage extends MyStage {
 
     private void explosion(float delta) {
         elapseTime += delta;
-        if (elapseTime > 3f) {
+        if (elapseTime > 1f) {
             explosionActor.remove();
             game.setScreen(new EndScreen(game));
         }
@@ -354,10 +361,11 @@ public class PlayStage extends MyStage {
                         addActor(emptyheart[currentHeart]);
                         currentHeart++;
                         if (currentHeart == 5) {
+                            dead = true;
                             car.carActor.remove();
                             explosionActor = new ExplosionActor();
                             explosionActor.setPosition(car.carActor.getX() + car.carActor.getWidth()/2 - explosionActor.getWidth()/2,
-                                    car.carActor.getY() - car.carActor.getHeight()/2);
+                                    car.carActor.getY());
                             addActor(explosionActor);
                         }
                     }
@@ -419,7 +427,7 @@ public class PlayStage extends MyStage {
             sum += lines.get(0).blocks[i].getWeight();
         }
         if (sum == boxCountNew.get(0) && sum!=0) {
-            setScoreNumber(getScoreNumber()+10);
+            scoreNumber += 10;
         }
         boxCountNew.remove(0);
         lines.remove(0);
@@ -457,13 +465,5 @@ public class PlayStage extends MyStage {
     public void dispose() {
         settingsStage.dispose();
         super.dispose();
-    }
-
-    public void setScoreNumber(int scoreNumber) {
-        this.scoreNumber = scoreNumber;
-    }
-
-    public int getScoreNumber() {
-        return scoreNumber;
     }
 }

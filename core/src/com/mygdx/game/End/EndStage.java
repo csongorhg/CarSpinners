@@ -20,6 +20,7 @@ import com.mygdx.game.MyBaseClasses.MyButton;
 import com.mygdx.game.MyBaseClasses.MyLabel;
 import com.mygdx.game.MyBaseClasses.MyStage;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.Play.PlayStage;
 
 /**
  * Created by mordes on 2016.12.03..
@@ -50,10 +51,9 @@ public class EndStage extends MyStage {
         BitmapFont font = generator.generateFont(meret);
         generator.dispose();
         style.font = font;
-
         //átméretezés vége
 
-        textButton = new MyButton("Back", game.getTextButtonStyle());
+        textButton = new MyButton(PlayStage.scoreNumber+"", game.getTextButtonStyle());
         textButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {

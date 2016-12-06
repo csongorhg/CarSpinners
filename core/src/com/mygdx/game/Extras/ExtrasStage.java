@@ -11,7 +11,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.mygdx.game.CarClasses.CarTunningScreen;
 import com.mygdx.game.GlobalClasses.Assets;
 import com.mygdx.game.Physics.Car;
 import com.mygdx.game.MyBaseClasses.MyButton;
@@ -45,21 +44,6 @@ public class ExtrasStage extends MyStage {
 
         resized();
 
-        textButton3 = new MyButton("Car tunning", game.getTextButtonStyle());
-        textButton3.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                super.clicked(event, x, y);
-                game.setScreen(new CarTunningScreen(game));
-            }
-        });
-        textButton3.setPosition(width - ((textButton3.getWidth())/2), heigth);
-        addActor(textButton3);
-
-        car(); //autó létrehozása
-
-        sliders(); //színbeállító létrehozása
-
         textButton = new MyButton("Back", game.getTextButtonStyle());
         textButton.addListener(new ClickListener(){
             @Override
@@ -68,8 +52,12 @@ public class ExtrasStage extends MyStage {
                 game.setScreenBackByStackPop();
             }
         });
-        textButton.setPosition(width - ((textButton.getWidth())/2),0);
+        textButton.setPosition(width - textButton.getWidth()/2 ,0);
         addActor(textButton);
+
+        car(); //autó létrehozása
+
+        sliders(); //színbeállító létrehozása
 
         arrows(); //autó váltó nyilak lértehozása
 
@@ -80,7 +68,7 @@ public class ExtrasStage extends MyStage {
         Car.carTexture.setCarTextureTypeType(carStyleNumber);
         car = new OneSpriteStaticActor(Car.carTexture.getPaint());
         car.setSize(car.getWidth()*3,car.getHeight()*3);
-        car.setPosition(width-(car.getWidth()/2), textButton3.getY()-car.getHeight()-10);
+        car.setPosition(width-(car.getWidth()/2), heigth-car.getHeight()-10);
         addActor(car);
     }
 
@@ -98,8 +86,8 @@ public class ExtrasStage extends MyStage {
                 car();
             }
         });
-        slider4.setWidth(car.getWidth());
-        slider4.setPosition(car.getX(), car.getY()-slider4.getHeight()-10);
+        slider4.setWidth(width + width/2);
+        slider4.setPosition(width-slider4.getWidth()/2, car.getY()-slider4.getHeight()-10);
 
         //red
         slider1 = new Slider(0, 255, 1, false, game.getSliderStyle());
@@ -115,7 +103,7 @@ public class ExtrasStage extends MyStage {
                 slider1value = slider1.getValue();
             }
         });
-        slider1.setWidth(textButton3.getWidth()-20);
+        slider1.setWidth(width + width/2);
         slider1.setPosition(width-slider1.getWidth()/2, slider4.getY()-slider1.getHeight()-10);
 
         //green
@@ -132,7 +120,7 @@ public class ExtrasStage extends MyStage {
                 slider2value = slider2.getValue();
             }
         });
-        slider2.setWidth(textButton3.getWidth()-20);
+        slider2.setWidth(width + width/2);
         slider2.setPosition(width-slider2.getWidth()/2, slider1.getY()-slider2.getHeight()-10);
 
         //blue
@@ -149,7 +137,7 @@ public class ExtrasStage extends MyStage {
                 slider3value = slider3.getValue();
             }
         });
-        slider3.setWidth(textButton3.getWidth()-20);
+        slider3.setWidth(width + width/2);
         slider3.setPosition(width-slider3.getWidth()/2, slider2.getY()-slider3.getHeight()-10);
 
     }
