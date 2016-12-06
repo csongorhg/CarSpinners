@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.GlobalClasses.Assets;
+import com.mygdx.game.Math.Random;
 import com.mygdx.game.Music.MusicSetter;
 import com.mygdx.game.MyBaseClasses.MyButton;
 import com.mygdx.game.MyBaseClasses.MyStage;
@@ -23,8 +24,8 @@ public class SettingsStage extends MyStage{
     private TextButton textButton;
     public OneSpriteStaticActor volumeIconSpriteActor, volumePlusSpriteActor,volumeMinusSpriteActor;
     public Array<OneSpriteStaticActor> volumeArray;
-    public static float actualVol = 1;
-    private static boolean voltmar = false;
+    public static float actualVol;
+    private boolean clicked = false;
     public static boolean musicPlay = true;
     public MusicSetter musicSetter = new MusicSetter();
 
@@ -55,19 +56,16 @@ public class SettingsStage extends MyStage{
         musicVolume();
     }
 
-    @Override
+   @Override
     protected void resized() {
         super.resized();
         width = (((ExtendViewport)getViewport()).getMinWorldWidth())/2; //vízszintesen középre
-        //heigthBetween = (((ExtendViewport)getViewport()).getMinWorldHeight())/5; //egyenletesen elosztva 3 menüponthoz
         heigth = (((ExtendViewport)getViewport()).getMinWorldHeight()); //magasság
-        //heigth -= heigthBetween;
-
         textButton.setPosition(width - ((textButton.getWidth()) / 2), 0);
 
     }
 
-    public void musicOnOff(){
+    void musicOnOff(){
         volumeIconSpriteActor = new OneSpriteStaticActor(Assets.manager.get(musicPlay?Assets.SOUND_ICON:Assets.MUTE_ICON));
         addActor(volumeIconSpriteActor);
         volumeIconSpriteActor.addListener(new ClickListener(){
@@ -78,23 +76,24 @@ public class SettingsStage extends MyStage{
                 musicPlay = !musicPlay;
                 if(musicPlay){
                     actualVol = 1;
+                    new MusicSetter(musicPlay);
                     volumeArraySettings();
                 }else{
-                    actualVol = 1-0.1f-0.1f-0.1f-0.1f-0.1f-0.1f-0.1f-0.1f-0.1f-0.1f;
+                    clicked = false;
+                    new MusicSetter().stopMusics();
+                    actualVol = -0.1f;
                     volumeArraySettings();
                 }
-                //IngameSettingsStage.musicPlay = musicPlay;
-                new MusicSetter(musicPlay);
                 musicOnOff();
             }
         });
         IngameSettingsStage.musicPlay = musicPlay;
         IngameSettingsStage.actualVol = actualVol;
         volumeIconSpriteActor.setSize(width / 3, width / 3);
-        volumeIconSpriteActor.setPosition(0, heigth - volumeIconSpriteActor.getHeight());
+        volumeIconSpriteActor.setPosition(0, heigth - volumeIconSpriteActor.getHeight()-((ExtendViewport)getViewport()).getMinWorldHeight()/4);
     }
 
-    public void musicVolume(){
+    void musicVolume(){
         volumePlusSpriteActor = new OneSpriteStaticActor(Assets.manager.get(Assets.PLUS_VOL));
         volumeMinusSpriteActor = new OneSpriteStaticActor(Assets.manager.get(Assets.MINUS_VOL));
         addActor(volumePlusSpriteActor); addActor(volumeMinusSpriteActor);
@@ -102,19 +101,33 @@ public class SettingsStage extends MyStage{
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                if(actualVol<=0.9){
-                    actualVol+=0.1f;
-                    if(actualVol>0 && !voltmar){
+                if(!musicPlay && !clicked){
+                    volumeIconSpriteActor.remove();
+                    musicPlay = true;
+                    new MusicSetter(musicPlay);
+                    actualVol=1;
+                    musicOnOff();
+                }
+                else if(actualVol <= 0){
+                    volumeIconSpriteActor.remove();
+                    musicPlay = true;
+                    actualVol+=0.1;
+                    musicOnOff();
+                }
+                else if(actualVol<=0.9){
+                    actualVol+=0.1;
+                    /*if(actualVol>0 && !voltmar){
                         voltmar = true;
                         volumeIconSpriteActor.remove();
                         musicPlay = true;
                         new MusicSetter(musicPlay);
                         musicOnOff();
-                    }
-                    IngameSettingsStage.actualVol = actualVol;
-                    musicSetter.musicVolume(actualVol);
-                    volumeArraySettings();
+                    }*/
                 }
+                IngameSettingsStage.actualVol = actualVol;
+                IngameSettingsStage.musicPlay = musicPlay;
+                musicSetter.musicVolume(actualVol);
+                volumeArraySettings();
             }
         });
         volumeMinusSpriteActor.addListener(new ClickListener(){
@@ -122,17 +135,19 @@ public class SettingsStage extends MyStage{
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
                 if(actualVol>=0){
-                    actualVol-=0.1f;
-                    if(actualVol<=0){
-                        voltmar = false;
-                        volumeIconSpriteActor.remove();
-                        musicPlay = false;
-                        musicOnOff();
-                    }
-                    IngameSettingsStage.actualVol = actualVol;
-                    musicSetter.musicVolume(actualVol<=0?0:actualVol);
-                    volumeArraySettings();
+                    actualVol-=0.1;
                 }
+                if(actualVol<=0){
+                    //voltmar = false;
+                    volumeIconSpriteActor.remove();
+                    musicPlay = false;
+                    clicked = true;
+                    musicOnOff();
+                }
+                IngameSettingsStage.actualVol = actualVol;
+                IngameSettingsStage.musicPlay = musicPlay;
+                musicSetter.musicVolume(actualVol);
+                volumeArraySettings();
             }
         });
         volumeArraySettings();
