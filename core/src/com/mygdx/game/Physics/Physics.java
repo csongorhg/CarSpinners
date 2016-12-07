@@ -16,6 +16,8 @@ public class Physics {
     public static float acceleration = 1.01f;
     public static float policespeed = 4;
     public static float policedis = 1000;
+    public static int MAXenergy = 15;
+    public static int energy = 15;
 
     public static boolean hit(Actor a1,Actor a2){
         return  a1.getX() < a2.getX()+a2.getWidth() &&
@@ -30,4 +32,7 @@ public class Physics {
     }
 
 
+    public static void maxEnergy() {
+        energy = MAXenergy;
+    }
 }

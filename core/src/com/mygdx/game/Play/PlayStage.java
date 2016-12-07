@@ -112,7 +112,7 @@ public class PlayStage extends MyStage {
         //út
         float nowHeight = 0;
 
-                backgrounds = new Vector<OneSpriteStaticActor>();
+        backgrounds = new Vector<OneSpriteStaticActor>();
 
         for(int i = 0; i<5 ;i++){
             OneSpriteStaticActor road = new OneSpriteStaticActor(Road.getRoad());
@@ -351,7 +351,12 @@ public class PlayStage extends MyStage {
         Line l = lines.get(0);
         for (int i=0; i<l.blocks.length;i++){
             if(Physics.hit(l.blocks[i].actor,car.carActor)){
-                if(l.blocks[i].getWeight() == 1) {
+                if(l.blocks[i].getId() == 2){
+                    l.blocks[i].setId(0);
+                    l.blocks[i].actor.remove();
+                    Physics.maxEnergy();
+                }
+                else if(l.blocks[i].getWeight() == 1) {
                     if (currentHeart < Car.maxheart) {
                         boxCountNew.set(0,0f);
                         car.damage();
@@ -410,6 +415,7 @@ public class PlayStage extends MyStage {
             }
             if(lines.get(0).heightpoz+lines.get(0).size < 0){
                 removeLine();
+                Physics.energy--;
             }
             if(width - lines.get(lines.size()-1).heightpoz > lines.get(lines.size()-1).size){
                 addLine();

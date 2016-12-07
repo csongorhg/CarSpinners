@@ -94,6 +94,12 @@ public class Assets {
 			= new AssetDescriptor<Texture>("blockade-0.png", Texture.class);
 	public static final AssetDescriptor<Texture> BLOCAKDE_1
 			= new AssetDescriptor<Texture>("blockade-1.png", Texture.class);
+	public static final AssetDescriptor<Texture> BLOCAKDE_2
+			= new AssetDescriptor<Texture>("blockade-2.png", Texture.class);
+	public static final AssetDescriptor<Texture> BLOCAKDE_3
+			= new AssetDescriptor<Texture>("blockade-3.png", Texture.class);
+	public static final AssetDescriptor<Texture> BATTERY
+			= new AssetDescriptor<Texture>("battery.png", Texture.class);
 	public static final AssetDescriptor<Texture> ARROW
 			= new AssetDescriptor<Texture>("nyil.png", Texture.class);
 	public static final AssetDescriptor<Texture> BREAK
@@ -201,6 +207,9 @@ public class Assets {
 		manager.load(NOHEART);
 		manager.load(BLOCAKDE_0);
 		manager.load(BLOCAKDE_1);
+		manager.load(BLOCAKDE_2);
+		manager.load(BLOCAKDE_3);
+		manager.load(BATTERY);
 		manager.load(ARROW);
 		manager.load(EXPLOSION_TEXTUREATLAS);
 		manager.load(MONEY_TEXTUREATLAS);

@@ -48,11 +48,16 @@ public class Block {
     public float getWeight() {
         return weight;
     }
+    public int getId(){return id;}
 
     public float getWidth() {
         return actor.getWidth();
     }
     public float getHeight() {
         return actor.getHeight();
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
