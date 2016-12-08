@@ -294,7 +294,8 @@ public class PlayStage extends MyStage {
         szirenaActor = new SzirenaActor();
         szirenaActor.setSize(((ExtendViewport) getViewport()).getMinWorldWidth(),15);
         szirenaActor.setY(33);
-
+        szirenaActor.setVisible(false);
+        addActor(szirenaActor);
 
 
         //visszaszámláló
@@ -314,7 +315,6 @@ public class PlayStage extends MyStage {
             if (walkActor.getX() >= car.carActor.getX()) {
                 walkHasEnded = true;
                 walkActor.remove();
-                addActor(szirenaActor);
                 counter.setText("GO!");
             }
             if (walkHasEnded) {
@@ -325,8 +325,9 @@ public class PlayStage extends MyStage {
                     linePhysic();
                     strings();
                     float f = 1000/Physics.policedis > 30 ? 30 : 1000/Physics.policedis;
-                    szirenaActor.setFps(f);
+                    szirenaActor.setVisible(true);
                     szirenaActor.setZIndex(Integer.MAX_VALUE);
+                    szirenaActor.setFps(f);
                     layers();
 
                     if (Math.random() < 0.02 * Physics.carspeed) {
@@ -476,6 +477,7 @@ public class PlayStage extends MyStage {
                         currentHeart++;
                         if (currentHeart == 5) {
                             dead = true;
+                            szirenaActor.remove();
                             car.carActor.remove();
                             explosionActor = new ExplosionActor();
                             explosionActor.setPosition(car.carActor.getX() + car.carActor.getWidth()/2 - explosionActor.getWidth()/2,
