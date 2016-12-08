@@ -105,6 +105,7 @@ public class MenuStage extends MyStage {
                 super.clicked(event, x, y);
                 Physics.carspeed = 0;
                 Physics.policedis = 1000;
+                Physics.maxEnergy();
                 game.setScreen(new PlayScreen(game));
 
             }

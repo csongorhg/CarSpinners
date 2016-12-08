@@ -73,8 +73,8 @@ public class Line {
 
     private void reloadBlocks() {
         allblocks[0] = new Block(1,0,Assets.manager.get(Assets.BLOCAKDE_0));
-        allblocks[0] = new Block(1,1,randomBlockade());
-        allblocks[0] = new Block(2,0,Assets.manager.get(Assets.BATTERY));
+        allblocks[1] = new Block(1,1,randomBlockade());
+        allblocks[2] = new Block(2,0,Assets.manager.get(Assets.BATTERY));
     }
 
     public void addHeight(float f) {
