@@ -309,6 +309,7 @@ public class PlayStage extends MyStage {
             }
             if (settingsStage.isB()) new MusicSetter(new Random(1, 5).getGenNumber());
             settingsStage.act(delta);
+            isdead();
         }
     }
 
@@ -318,8 +319,15 @@ public class PlayStage extends MyStage {
                 preferences.putInteger(SCORE, scoreNumber);
             }
             preferences.flush();
+            timeOutput();
             game.setScreen(new EndScreen(game));
         }
+    }
+
+    private void timeOutput() {
+        int t = (int)(timer/60*100);
+        timerOut[0] = t/60;
+        timerOut[1] = t%60;
     }
 
     private void layers() {
@@ -381,9 +389,7 @@ public class PlayStage extends MyStage {
         elapseTime += delta;
         if (elapseTime > 1f) {
             explosionActor.remove();
-            int t = (int)(timer/60*100);
-            timerOut[0] = t/60;
-            timerOut[1] = t%60;
+            timeOutput();
             game.setScreen(new EndScreen(game));
         }
     }
