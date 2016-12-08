@@ -1,10 +1,15 @@
 package com.mygdx.game.Extras;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.ButtonGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -12,6 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.GlobalClasses.Assets;
+import com.mygdx.game.MyBaseClasses.MyLabel;
 import com.mygdx.game.Physics.Car;
 import com.mygdx.game.MyBaseClasses.MyButton;
 import com.mygdx.game.MyBaseClasses.MyStage;
@@ -30,6 +36,8 @@ public class ExtrasStage extends MyStage {
     private static float slider1value = Car.carTexture.r, slider2value = Car.carTexture.g, slider3value = Car.carTexture.b;
     private static int carTypeNumber = Car.carTexture.cartype, carStyleNumber = Car.carTexture.carTextureType;
     private OneSpriteStaticActor arrow, arrow2;
+    private MyLabel myLabel, myLabel2, myLabel3, myLabel4, myLabel5;
+    private Label.LabelStyle style;
 
     //itt kell megadni, a pozicionálást!!!
     private float width, heigthBetween, heigth;
@@ -44,6 +52,24 @@ public class ExtrasStage extends MyStage {
         addBackEventStackListener();
 
         resized();
+
+
+
+        style = new com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle();
+        style.fontColor = Color.YELLOW;
+
+        //átméretezés
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("c64.ttf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter meret = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        meret.size = 20;
+        meret.characters = Assets.CHARS;
+        BitmapFont font = generator.generateFont(meret);
+        generator.dispose();
+        style.font = font;
+        //átméretezés vége
+
+
+
 
         textButton = new MyButton("Back", game.getTextButtonStyle());
         textButton.addListener(new ClickListener(){
@@ -93,6 +119,13 @@ public class ExtrasStage extends MyStage {
         slider1.setWidth(width + width/2);
         slider1.setPosition(width-slider1.getWidth()/2, car.getY()-slider1.getHeight()-10);
 
+        myLabel = new MyLabel("R", style);
+        myLabel.setPosition(slider1.getX() - myLabel.getWidth()*2, slider1.getY()+myLabel.getHeight()/2);
+        addActor(myLabel);
+
+
+
+
         //green
         slider2 = new Slider(0, 255, 1, false, game.getSliderStyle());
         addActor(slider2);
@@ -110,6 +143,12 @@ public class ExtrasStage extends MyStage {
         });
         slider2.setWidth(width + width/2);
         slider2.setPosition(width-slider2.getWidth()/2, slider1.getY()-slider2.getHeight()-10);
+
+        myLabel2 = new MyLabel("G", style);
+        myLabel2.setPosition(slider2.getX() - myLabel2.getWidth()*2, slider2.getY()+myLabel2.getHeight()/2);
+        addActor(myLabel2);
+
+
 
         //blue
         slider3 = new Slider(0, 255, 1, false, game.getSliderStyle());
@@ -129,6 +168,12 @@ public class ExtrasStage extends MyStage {
         slider3.setWidth(width + width/2);
         slider3.setPosition(width-slider3.getWidth()/2, slider2.getY()-slider3.getHeight()-10);
 
+        myLabel3 = new MyLabel("B", style);
+        myLabel3.setPosition(slider3.getX() - myLabel3.getWidth()*2, slider3.getY()+myLabel3.getHeight()/2);
+        addActor(myLabel3);
+
+
+
         //stílus
         slider4 = new Slider(0, 3, 1, false, game.getSliderStyle());
         addActor(slider4);
@@ -143,6 +188,12 @@ public class ExtrasStage extends MyStage {
         });
         slider4.setWidth(width);
         slider4.setPosition(width-slider3.getWidth()/2, slider3.getY()-slider4.getHeight()-10);
+
+        myLabel4 = new MyLabel("S", style);
+        myLabel4.setPosition(slider4.getX() - myLabel4.getWidth()*2, slider4.getY()+myLabel4.getHeight()/2);
+        addActor(myLabel4);
+
+
 
         //autó vagy textúra színezése
         slider5 = new Slider(0, 1, 1, false, game.getSliderStyle());

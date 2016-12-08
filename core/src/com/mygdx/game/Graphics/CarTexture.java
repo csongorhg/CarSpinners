@@ -12,7 +12,7 @@ public class CarTexture {
 
     public Pixmap p;
     public Pixmap text;
-    public int r=20, g=20, b=255;
+    public int r=255, g=0, b=0;
     public int r2=255, g2=255, b2=255;
 
     Color c;

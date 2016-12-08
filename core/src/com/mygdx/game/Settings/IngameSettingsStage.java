@@ -66,7 +66,7 @@ public class IngameSettingsStage extends MyStage {
         backgroundSpriteActor.setY(((ExtendViewport) getViewport()).getMinWorldHeight()/4);
         addActor(backgroundSpriteActor);
 
-        textButton2 = new MyButton("Back to Game", game.getTextButtonStyle());
+        textButton2 = new MyButton("Continue", game.getTextButtonStyle());
         textButton2.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -78,7 +78,7 @@ public class IngameSettingsStage extends MyStage {
         });
         addActor(textButton2);
 
-        textButton = new MyButton("Back to Menu", game.getTextButtonStyle());
+        textButton = new MyButton("Menu", game.getTextButtonStyle());
         textButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
