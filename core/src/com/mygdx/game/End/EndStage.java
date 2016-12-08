@@ -35,12 +35,17 @@ public class EndStage extends MyStage {
 
     private MyLabel myLabel, myLabel2, myLabel3, myLabel4, myLabel5, myLabel6;
 
+    private Preferences preferences;
+
+    public static final String SCORE = "Score";
+
     public EndStage(Viewport viewport, Batch batch, MyGdxGame game) {
         super(viewport, batch, game);
     }
 
 
     public void init() {
+        preferences = Gdx.app.getPreferences(MenuScreen.PREFS); //ez a kilépés után mentés
         addBackEventStackListener();
 
         resized();
@@ -84,7 +89,7 @@ public class EndStage extends MyStage {
                 (((ExtendViewport)getViewport()).getMinWorldHeight()) * (3/4f) - myLabel2.getHeight()/2);
         addActor(myLabel2);
 
-        myLabel3 = new MyLabel("...", style);
+        myLabel3 = new MyLabel(preferences.getInteger(SCORE, 0) + "", style);
         myLabel3.setPosition(((ExtendViewport)getViewport()).getMinWorldWidth()-myLabel3.getWidth()-10,
                 myLabel.getY() - myLabel.getHeight()*2);
         addActor(myLabel3);

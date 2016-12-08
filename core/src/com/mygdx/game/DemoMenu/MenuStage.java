@@ -41,7 +41,7 @@ public class MenuStage extends MyStage {
     private int moneySpeeds[]; //pénzek sebbesége
     private int moneySpeedsinterval[]; //pénzek sebességének intervalluma
 
-    private Preferences preferences = Gdx.app.getPreferences(MenuScreen.PREFS); //ez a kilépés után mentés
+
     private MyLabel deadufocountLabel;
     public static final String STORED_SCORE = "STORED_SCORE";
 
@@ -89,7 +89,7 @@ public class MenuStage extends MyStage {
         public void clicked(InputEvent event, float x, float y) {
             super.clicked(event, x, y);
             game.setScreen(new SettingsScreen(game));
-            preferences.putInteger(MenuStage.STORED_SCORE, preferences.getInteger(MenuStage.STORED_SCORE,0)+1);
+            //preferences.putInteger(MenuStage.STORED_SCORE, preferences.getInteger(MenuStage.STORED_SCORE,0)+1);
 
         }
     });
@@ -200,7 +200,7 @@ public class MenuStage extends MyStage {
     public void act(float delta) {
         super.act(delta);
 
-        deadufocountLabel.setText(preferences.getInteger(MenuStage.STORED_SCORE, 0) + "");
+
 
         music.MenuMusic();
 
@@ -231,7 +231,7 @@ public class MenuStage extends MyStage {
 
     @Override
     public void dispose() {
-        preferences.flush();
+        //preferences.flush();
         super.dispose();
     }
 

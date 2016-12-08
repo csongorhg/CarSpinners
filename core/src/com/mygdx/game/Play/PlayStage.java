@@ -2,6 +2,7 @@ package com.mygdx.game.Play;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -14,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.game.DemoMenu.MenuScreen;
 import com.mygdx.game.End.EndScreen;
 import com.mygdx.game.GlobalClasses.Assets;
 import com.mygdx.game.Graphics.BreakActor;
@@ -34,10 +36,14 @@ import java.util.Vector;
 
 import javax.swing.GroupLayout;
 
+import static com.mygdx.game.End.EndStage.SCORE;
+
 /**
  * Created by tuskeb on 2016. 09. 30..
  */
 public class PlayStage extends MyStage {
+
+    private Preferences preferences = Gdx.app.getPreferences(MenuScreen.PREFS); //ez a kilépés után mentés
 
     //private TextButton textButton;
 
@@ -336,6 +342,10 @@ public class PlayStage extends MyStage {
         elapseTime += delta;
         if (elapseTime > 1f) {
             explosionActor.remove();
+            if (scoreNumber>preferences.getInteger(SCORE, 0)){
+                preferences.putInteger(SCORE, scoreNumber);
+            }
+            preferences.flush();
             game.setScreen(new EndScreen(game));
         }
     }
