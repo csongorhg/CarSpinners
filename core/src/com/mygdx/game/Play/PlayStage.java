@@ -285,6 +285,7 @@ public class PlayStage extends MyStage {
                 linePhysic();
                 strings();
                 layers();
+                isdead();
             }
             crashPhysic();
 
@@ -293,6 +294,16 @@ public class PlayStage extends MyStage {
             }
             if (settingsStage.isB()) new MusicSetter(new Random(1, 5).getGenNumber());
             settingsStage.act(delta);
+        }
+    }
+
+    private void isdead() {
+        if(Physics.energy <= 0 || Physics.policedis <= 0){
+            if (scoreNumber>preferences.getInteger(SCORE, 0)){
+                preferences.putInteger(SCORE, scoreNumber);
+            }
+            preferences.flush();
+            game.setScreen(new EndScreen(game));
         }
     }
 
