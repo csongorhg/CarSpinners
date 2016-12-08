@@ -35,6 +35,12 @@ public class LoadingScreen extends MyScreen {
 				super.init();
 				setFps(12);
 			}
+
+			@Override
+			public void act(float delta) {
+				super.act(delta);
+				setRotation(360-elapsedTime*100);
+			}
 		};
 		stage.addActor(pic);
 

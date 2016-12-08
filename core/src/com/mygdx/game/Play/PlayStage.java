@@ -88,6 +88,7 @@ public class PlayStage extends MyStage {
     public static int timerOut[]; //időt átadja
 
     private WalkActor walkActor;
+    private boolean walkHasEnded;
 
     public PlayStage(Viewport viewport, Batch batch, MyGdxGame game) {
         super(viewport, batch, game);
@@ -244,13 +245,13 @@ public class PlayStage extends MyStage {
 
 
         //kilóméter/óra
-        kmh = new MyLabel("kmh", style);
+        kmh = new MyLabel("---", style);
         //myLabel.setPosition(getViewport().getWorldWidth()/(590/100),getViewport().getWorldHeight()/24);
         kmh.setPosition(75,19);
         addActor(kmh);
 
         //rendőr távolság
-        policedistance = new MyLabel("dis",style);
+        policedistance = new MyLabel("---",style);
         policedistance.setPosition(75,4);
         addActor(policedistance);
 
@@ -265,8 +266,8 @@ public class PlayStage extends MyStage {
         generator.dispose();
         labelStyle.font = font;
         //átméretezés vége
-        score = new MyLabel("score",labelStyle);
-        score.setPosition(120,5);
+        score = new MyLabel("----",labelStyle);
+        score.setPosition(140,5);
         score.setAlignment(Align.right);
         addActor(score);
 
@@ -280,8 +281,10 @@ public class PlayStage extends MyStage {
         //séta
         walkActor = new WalkActor();
         walkActor.setZIndex(Integer.MAX_VALUE);
-        walkActor.setPosition(100,100);
+        walkActor.setPosition(0 - walkActor.getWidth(),car.carActor.getY() + car.carActor.getHeight()/2);
         addActor(walkActor);
+        walkHasEnded = false;
+
 
     }
 
@@ -289,32 +292,39 @@ public class PlayStage extends MyStage {
     public void act(float delta) {
         if(!menuben) {
             super.act(delta);
-            if (!dead) {
-                timer += delta;
-                carPhysic();
-                backgroundPhysic();
-                linePhysic();
-                strings();
-                layers();
-                if (Math.random() < 0.02 * Physics.carspeed) {
-                    addActor(new MoneyActor() {
-                        @Override
-                        public void init() {
-                            super.init();
-                            setPosition(car.carActor.getX() + car.carActor.getWidth()/2, car.carActor.getY() + car.carActor.getHeight()/2);
-                        }
-                    });
+            walkActor.setX(walkActor.getX()+1);
+            if (walkActor.getX() >= car.carActor.getX()) {
+                walkHasEnded = true;
+                walkActor.remove();
+            }
+            if (walkHasEnded) {
+                if (!dead) {
+                    timer += delta;
+                    carPhysic();
+                    backgroundPhysic();
+                    linePhysic();
+                    strings();
+                    layers();
+                    if (Math.random() < 0.02 * Physics.carspeed) {
+                        addActor(new MoneyActor() {
+                            @Override
+                            public void init() {
+                                super.init();
+                                setPosition(car.carActor.getX() + car.carActor.getWidth()/2, car.carActor.getY() + car.carActor.getHeight()/2);
+                            }
+                        });
+                    }
                 }
-            }
-            crashPhysic();
+                crashPhysic();
 
-            if (currentHeart == 5) {
-                explosion(delta);
+                if (currentHeart == 5) {
+                    explosion(delta);
+                }
+                if (settingsStage.isB()) new MusicSetter(new Random(1, 5).getGenNumber());
+                settingsStage.act(delta);
+                isdead();
             }
-            if (settingsStage.isB()) new MusicSetter(new Random(1, 5).getGenNumber());
-            settingsStage.act(delta);
-            isdead();
-            System.out.println(getActors().size);
+
         }
     }
 
