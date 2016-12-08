@@ -20,6 +20,7 @@ import com.mygdx.game.End.EndScreen;
 import com.mygdx.game.GlobalClasses.Assets;
 import com.mygdx.game.Graphics.BreakActor;
 import com.mygdx.game.Graphics.ButtonCaller;
+import com.mygdx.game.Graphics.EnergyTexture;
 import com.mygdx.game.Graphics.Road;
 import com.mygdx.game.Math.Random;
 import com.mygdx.game.Music.MusicSetter;
@@ -57,6 +58,7 @@ public class PlayStage extends MyStage {
 
     private OneSpriteStaticActor felulet;
 
+    private OneSpriteStaticActor energyActor;
     private OneSpriteStaticActor heart[]; //szivek eltárolása
     private OneSpriteStaticActor emptyheart[];
     private int currentHeart; //jelenlegi szív
@@ -259,6 +261,11 @@ public class PlayStage extends MyStage {
         score.setAlignment(Align.right);
         addActor(score);
 
+        energyActor = new OneSpriteStaticActor(EnergyTexture.getTexture());
+        energyActor.setSize(8,24);
+        energyActor.setPosition(57,4);
+        addActor(energyActor);
+
         //pénz
         moneyActor = new MoneyActor();
         moneyActor.setSize(96,8);
@@ -311,6 +318,12 @@ public class PlayStage extends MyStage {
         kmh.setZIndex(Integer.MAX_VALUE);
         policedistance.setZIndex(Integer.MAX_VALUE);
         score.setZIndex(Integer.MAX_VALUE);
+        energyActor.remove();
+        energyActor = new OneSpriteStaticActor(EnergyTexture.getTexture());
+        energyActor.setSize(8,24);
+        energyActor.setPosition(57,4);
+        addActor(energyActor);
+
     }
 
     @Override
