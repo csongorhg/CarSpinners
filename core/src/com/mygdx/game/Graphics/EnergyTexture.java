@@ -18,10 +18,16 @@ public class EnergyTexture {
         Color c = e>10 ? Color.GREEN : e>5 ? Color.ORANGE : Color.RED;
         for (int i = 0; i < p.getWidth(); i++){
             for (int j = 0; j< p.getHeight(); j++){
-                if(i == 0 || i == 4 || j == 0 || j == 16) p.drawPixel(i,j,Color.argb8888(Color.BLACK));
+                if(i == 0 || i == 4 || j == 0 || j == 16){
+                    p.drawPixel(i,j,Color.rgba8888(Color.BLACK));
+                }
                 else{
-                    if(j >= 16-e) p.drawPixel(i,j,Color.argb8888(c));
-                    else p.drawPixel(i,j,Color.argb8888(Color.BLACK));
+                    if(j >= 16-e){
+                        p.drawPixel(i,j,Color.rgba8888(c));
+                    }
+                    else{
+                        p.drawPixel(i,j,Color.rgba8888(Color.BLACK));
+                    }
                 }
             }
         }
