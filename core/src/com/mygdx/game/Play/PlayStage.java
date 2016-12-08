@@ -260,11 +260,11 @@ public class PlayStage extends MyStage {
         addActor(score);
 
         //pénz
-        moneyActor = new MoneyActor();
-        moneyActor.setSize(96,8);
-        moneyActor.setZIndex(Integer.MAX_VALUE);
-        moneyActor.setY(100);
-        addActor(moneyActor);
+        //moneyActor = new MoneyActor();
+        //moneyActor.setSize(96,8);
+        //moneyActor.setZIndex(Integer.MAX_VALUE);
+        //moneyActor.setY(100);
+        //addActor(moneyActor);
 
     }
 
@@ -278,6 +278,15 @@ public class PlayStage extends MyStage {
                 linePhysic();
                 strings();
                 layers();
+                if (Math.random() < 0.02 * Physics.carspeed) {
+                    addActor(new MoneyActor() {
+                        @Override
+                        public void init() {
+                            super.init();
+                            setPosition(car.carActor.getX() + car.carActor.getWidth()/2, car.carActor.getY() + car.carActor.getHeight()/2);
+                        }
+                    });
+                }
             }
             crashPhysic();
 
@@ -420,6 +429,9 @@ public class PlayStage extends MyStage {
             }
             for (Actor a:getActors()) {
                 if (a instanceof BreakActor){
+                    a.setY(a.getY()-speed);
+                }
+                if (a instanceof MoneyActor){
                     a.setY(a.getY()-speed);
                 }
             }
