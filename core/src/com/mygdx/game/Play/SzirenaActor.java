@@ -12,7 +12,7 @@ public class SzirenaActor extends OneSpriteAnimatedActor {
     public SzirenaActor() {
         //super("explosion.atlas");
         super(Assets.manager.get(Assets.SZIRENA_TEXTUREATLAS));
-        setFps(30);
+        setFps(10);
 
         addListener(new ClickListener()
         {

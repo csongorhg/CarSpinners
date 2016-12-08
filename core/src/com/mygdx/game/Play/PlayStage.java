@@ -70,7 +70,7 @@ public class PlayStage extends MyStage {
     private Car car;
     private Vector<Line> lines = new Vector();
 
-    private MyLabel kmh, policedistance, score; //pocoknak
+    private MyLabel kmh, policedistance, score, counter; //pocoknak
 
     private ExplosionActor explosionActor;
     private float elapseTime = 0; //robbanás után időt számolja
@@ -89,6 +89,9 @@ public class PlayStage extends MyStage {
 
     private WalkActor walkActor;
     private boolean walkHasEnded;
+
+    private SzirenaActor szirenaActor;
+    private float szirenatime;
 
     public PlayStage(Viewport viewport, Batch batch, MyGdxGame game) {
         super(viewport, batch, game);
@@ -286,6 +289,21 @@ public class PlayStage extends MyStage {
         walkHasEnded = false;
 
 
+
+        //sziréna
+        szirenaActor = new SzirenaActor();
+        szirenaActor.setSize(((ExtendViewport) getViewport()).getMinWorldWidth(),15);
+        szirenaActor.setY(33);
+
+
+
+        //visszaszámláló
+        counter = new MyLabel("3",labelStyle);
+        counter.setZIndex(Integer.MAX_VALUE);
+        counter.setPosition((((ExtendViewport) getViewport()).getMinWorldWidth())/2 - counter.getWidth()/2,
+                (((ExtendViewport) getViewport()).getMinWorldHeight())/2 - counter.getHeight()/2);
+        counter.setAlignment(Align.center);
+        addActor(counter);
     }
 
     @Override
@@ -296,6 +314,8 @@ public class PlayStage extends MyStage {
             if (walkActor.getX() >= car.carActor.getX()) {
                 walkHasEnded = true;
                 walkActor.remove();
+                addActor(szirenaActor);
+                counter.setText("GO!");
             }
             if (walkHasEnded) {
                 if (!dead) {
@@ -304,7 +324,11 @@ public class PlayStage extends MyStage {
                     backgroundPhysic();
                     linePhysic();
                     strings();
+                    float f = 1000/Physics.policedis > 30 ? 30 : 1000/Physics.policedis;
+                    szirenaActor.setFps(f);
+                    szirenaActor.setZIndex(Integer.MAX_VALUE);
                     layers();
+
                     if (Math.random() < 0.02 * Physics.carspeed) {
                         addActor(new MoneyActor() {
                             @Override
@@ -314,6 +338,8 @@ public class PlayStage extends MyStage {
                             }
                         });
                     }
+
+                    if (timer > 2f) counter.remove();
                 }
                 crashPhysic();
 
@@ -324,7 +350,19 @@ public class PlayStage extends MyStage {
                 settingsStage.act(delta);
                 isdead();
             }
-
+            else {
+                if (walkActor.getX()<car.carActor.getX()*(1/3f)) {
+                    counter.setText("3");
+                }
+                else if (walkActor.getX()<car.carActor.getX()*(2/3f)
+                        && walkActor.getX()>=car.carActor.getX()*(1/3f)) {
+                    counter.setText("2");
+                }
+                else if (walkActor.getX()<car.carActor.getX()
+                        && walkActor.getX()>=car.carActor.getX()*(2/3f)){
+                    counter.setText("1");
+                }
+            }
         }
     }
 
