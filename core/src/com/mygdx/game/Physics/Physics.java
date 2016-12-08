@@ -14,7 +14,7 @@ public class Physics {
     public static float breakpower = 0.98f;
     public static float normalmoving = 0.998f;
     public static float acceleration = 1.01f;
-    public static float policespeed = 3;
+    public static float policespeed = 4;
     public static float policedis = 1000;
     public static int MAXenergy = 15;
     public static int energy = 15;

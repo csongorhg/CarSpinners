@@ -241,13 +241,13 @@ public class PlayStage extends MyStage {
 
 
         //kilóméter/óra
-        kmh = new MyLabel("asd1", style);
+        kmh = new MyLabel("kmh", style);
         //myLabel.setPosition(getViewport().getWorldWidth()/(590/100),getViewport().getWorldHeight()/24);
         kmh.setPosition(75,19);
         addActor(kmh);
 
         //rendőr távolság
-        policedistance = new MyLabel("asd2",style);
+        policedistance = new MyLabel("dis",style);
         policedistance.setPosition(75,4);
         addActor(policedistance);
 
@@ -397,7 +397,7 @@ public class PlayStage extends MyStage {
     private void strings() {
         String nulls="0000"; //kiírásnál, hogy mindig 4 helyérték legyen
         kmh.setText(Physics.round(Physics.carspeed*10)+" km/h");
-        policedistance.setText(Physics.round(Physics.policedis)+" m");
+        policedistance.setText(Physics.policedis > 1000 ? Physics.round(Physics.policedis/100)/10.0+" km" : Physics.round(Physics.policedis)+" m");
         score.setText(nulls.substring(0,nulls.length()-(scoreNumber+"").length())+scoreNumber);
     }
 
