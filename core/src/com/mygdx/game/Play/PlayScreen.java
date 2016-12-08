@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.mygdx.game.DemoMenu.MenuStage;
 import com.mygdx.game.Math.Random;
 import com.mygdx.game.Music.MusicSetter;
 import com.mygdx.game.MyBaseClasses.MyScreen;
@@ -16,7 +17,7 @@ import com.mygdx.game.Settings.SettingsStage;
  */
 public class PlayScreen extends MyScreen {
     protected PlayStage playStage;
-    private MusicSetter musicSetter = new MusicSetter();
+    public static MusicSetter gameMusic;
 
     public PlayScreen(MyGdxGame game) {
         super(game);
@@ -29,6 +30,7 @@ public class PlayScreen extends MyScreen {
         playStage.act(delta);
         playStage.draw();
 
+        gameMusic = new MusicSetter(new Random(1,5).getGenNumber());
  /*       else backtogame();*/
     }
 /*
@@ -44,6 +46,15 @@ public class PlayScreen extends MyScreen {
     */
     @Override
     public void init() {
+        if(MenuStage.music.getGameVolume() == 0){
+            MenuStage.music.musicVolume(1f);
+            gameMusic = new MusicSetter(new Random(1,5).getGenNumber());
+            gameMusic.musicVolume(0f);
+        }
+        else {
+            gameMusic = new MusicSetter(new Random(1, 5).getGenNumber());
+            gameMusic.musicVolume(MenuStage.music.getMenuVolume());
+        }
         playStage.settingclick = false;
         r = 0.3925f;
         g = 0.3925f;
@@ -68,7 +79,6 @@ public class PlayScreen extends MyScreen {
     @Override
     public void show() {
         super.show();
-        musicSetter.stopMusics();
     }
 
     @Override

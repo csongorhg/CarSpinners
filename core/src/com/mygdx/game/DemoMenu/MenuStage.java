@@ -103,6 +103,7 @@ public class MenuStage extends MyStage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
+                music.stopMusics();
                 Physics.carspeed = 0;
                 Physics.policedis = 1000;
                 Physics.maxEnergy();

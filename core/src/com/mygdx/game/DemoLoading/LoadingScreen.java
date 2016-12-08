@@ -66,8 +66,8 @@ public class LoadingScreen extends MyScreen {
 		if (elapsedTime > 4.0 && Assets.manager.update()) {
 			Assets.afterLoaded();
 
-			//SettingsStage.actualVol = 1;
-			IngameSettingsStage.actualVol = 1;
+			SettingsStage.musicPlay = true;
+			IngameSettingsStage.musicPlay = true;
 
 			new MusicSetter(true); //menüzene hívás
 

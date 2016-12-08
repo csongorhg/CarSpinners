@@ -22,6 +22,7 @@ import com.mygdx.game.MyBaseClasses.MyButton;
 import com.mygdx.game.MyBaseClasses.MyLabel;
 import com.mygdx.game.MyBaseClasses.MyStage;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.Play.PlayScreen;
 import com.mygdx.game.Play.PlayStage;
 import com.mygdx.game.Settings.IngameSettingsStage;
 import com.mygdx.game.Settings.SettingsStage;
@@ -72,8 +73,12 @@ public class EndStage extends MyStage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
+                SettingsStage.musicPlay = IngameSettingsStage.musicPlay;
+                System.out.println(IngameSettingsStage.musicPlay?"true":"false");
                 SettingsStage.clicked = IngameSettingsStage.clicked;
+                PlayScreen.gameMusic.stopMusics();
                 MenuStage.music = new MusicSetter(IngameSettingsStage.musicPlay);
+                MenuStage.music.musicVolume(PlayScreen.gameMusic.getGameVolume());
                 game.setBackButtonStack();
                 game.setScreen(new MenuScreen(game));
             }
