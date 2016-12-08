@@ -324,7 +324,7 @@ public class PlayStage extends MyStage {
                     backgroundPhysic();
                     linePhysic();
                     strings();
-                    float f = 1000/Physics.policedis > 30 ? 30 : 1000/Physics.policedis;
+                    float f = 4000/Physics.policedis > 30 ? 30 : 1000/Physics.policedis;
                     szirenaActor.setVisible(true);
                     szirenaActor.setZIndex(Integer.MAX_VALUE);
                     szirenaActor.setFps(f);
