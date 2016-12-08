@@ -25,7 +25,8 @@ public class ExtrasStage extends MyStage {
 
     private TextButton textButton, textButton3;
     private OneSpriteStaticActor car;
-    private Slider slider1, slider2, slider3, slider4;
+    private boolean carColor;
+    private Slider slider1, slider2, slider3, slider4, slider5;
     private static float slider1value = Car.carTexture.r, slider2value = Car.carTexture.g, slider3value = Car.carTexture.b;
     private static int carTypeNumber = Car.carTexture.cartype, carStyleNumber = Car.carTexture.carTextureType;
     private OneSpriteStaticActor arrow, arrow2;
@@ -74,21 +75,6 @@ public class ExtrasStage extends MyStage {
 
     void sliders(){
 
-        //stílus
-        slider4 = new Slider(0, 3, 1, false, game.getSliderStyle());
-        addActor(slider4);
-        slider4.setValue(carStyleNumber);
-        slider4.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                carStyleNumber = (int)slider4.getValue();
-                car.remove();
-                car();
-            }
-        });
-        slider4.setWidth(width + width/2);
-        slider4.setPosition(width-slider4.getWidth()/2, car.getY()-slider4.getHeight()-10);
-
         //red
         slider1 = new Slider(0, 255, 1, false, game.getSliderStyle());
         addActor(slider1);
@@ -96,7 +82,8 @@ public class ExtrasStage extends MyStage {
         slider1.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                Car.carTexture.r = (int)slider1.getValue();
+                if(carColor){Car.carTexture.r = (int)slider1.getValue();}
+                else{Car.carTexture.r2 = (int)slider1.getValue();}
                 Car.carTexture.setColorTo();
                 car.remove();
                 car();
@@ -104,7 +91,7 @@ public class ExtrasStage extends MyStage {
             }
         });
         slider1.setWidth(width + width/2);
-        slider1.setPosition(width-slider1.getWidth()/2, slider4.getY()-slider1.getHeight()-10);
+        slider1.setPosition(width-slider1.getWidth()/2, car.getY()-slider1.getHeight()-10);
 
         //green
         slider2 = new Slider(0, 255, 1, false, game.getSliderStyle());
@@ -113,7 +100,8 @@ public class ExtrasStage extends MyStage {
         slider2.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                Car.carTexture.g = (int)slider2.getValue();
+                if(carColor){Car.carTexture.g = (int)slider2.getValue();}
+                else{Car.carTexture.g2 = (int)slider2.getValue();}
                 Car.carTexture.setColorTo();
                 car.remove();
                 car();
@@ -130,7 +118,8 @@ public class ExtrasStage extends MyStage {
         slider3.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                Car.carTexture.b = (int)slider3.getValue();
+                if(carColor){Car.carTexture.b = (int)slider3.getValue();}
+                else{Car.carTexture.b2 = (int)slider3.getValue();}
                 Car.carTexture.setColorTo();
                 car.remove();
                 car();
@@ -140,6 +129,53 @@ public class ExtrasStage extends MyStage {
         slider3.setWidth(width + width/2);
         slider3.setPosition(width-slider3.getWidth()/2, slider2.getY()-slider3.getHeight()-10);
 
+        //stílus
+        slider4 = new Slider(0, 3, 1, false, game.getSliderStyle());
+        addActor(slider4);
+        slider4.setValue(carStyleNumber);
+        slider4.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                carStyleNumber = (int)slider4.getValue();
+                car.remove();
+                car();
+            }
+        });
+        slider4.setWidth(width);
+        slider4.setPosition(width-slider3.getWidth()/2, slider3.getY()-slider4.getHeight()-10);
+
+        //autó vagy textúra színezése
+        slider5 = new Slider(0, 1, 1, false, game.getSliderStyle());
+        addActor(slider5);
+        slider5.setValue(0);
+        slider5.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                colorChanger();
+            }
+        });
+        slider5.setWidth(slider3.getWidth()-slider4.getWidth()-10);
+        slider5.setPosition(slider4.getX()+slider4.getWidth()+10, slider4.getY());
+
+    }
+
+    void colorChanger(){
+        carColor=slider5.getValue()==0?true:false;
+        if(carColor){
+            slider1value = Car.carTexture.r;
+            slider2value = Car.carTexture.g;
+            slider3value = Car.carTexture.b;
+            slider1.setValue(slider1value);
+            slider2.setValue(slider2value);
+            slider3.setValue(slider3value);
+        }else{
+            slider1value = Car.carTexture.r2;
+            slider2value = Car.carTexture.g2;
+            slider3value = Car.carTexture.b2;
+            slider1.setValue(slider1value);
+            slider2.setValue(slider2value);
+            slider3.setValue(slider3value);
+        }
     }
 
     void arrows(){
