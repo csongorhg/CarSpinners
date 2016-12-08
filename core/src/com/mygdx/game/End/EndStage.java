@@ -99,12 +99,12 @@ public class EndStage extends MyStage {
                 myLabel2.getY() - myLabel2.getHeight()*2);
         addActor(myLabel4);
 
-        myLabel5 = new MyLabel("7168", style);
+        myLabel5 = new MyLabel(PlayStage.timerOut[0]+":"+PlayStage.timerOut[1], style);
         myLabel5.setPosition(((ExtendViewport)getViewport()).getMinWorldWidth()-myLabel5.getWidth()-10,
                 myLabel3.getY() - myLabel3.getHeight()*2);
         addActor(myLabel5);
 
-        myLabel6 = new MyLabel("Valami...: ", style);
+        myLabel6 = new MyLabel("Time: ", style);
         myLabel6.setPosition(10,
                 myLabel4.getY() - myLabel4.getHeight()*2);
         addActor(myLabel6);

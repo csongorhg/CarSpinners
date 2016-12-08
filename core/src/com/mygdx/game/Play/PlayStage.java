@@ -83,6 +83,9 @@ public class PlayStage extends MyStage {
 
     private boolean dead; //halott-e az illető
 
+    private float timer; // méri az időt
+    public static int timerOut[];
+
     public PlayStage(Viewport viewport, Batch batch, MyGdxGame game) {
         super(viewport, batch, game);
     }
@@ -104,6 +107,9 @@ public class PlayStage extends MyStage {
 
     public void init() {
         addBackEventStackListener();
+
+        timer = 0;
+        timerOut = new int[2];
 
         dead = false; //él a játékos
 
@@ -280,6 +286,7 @@ public class PlayStage extends MyStage {
         if(!menuben) {
             super.act(delta);
             if (!dead) {
+                timer += delta;
                 carPhysic();
                 backgroundPhysic();
                 linePhysic();
@@ -374,10 +381,9 @@ public class PlayStage extends MyStage {
         elapseTime += delta;
         if (elapseTime > 1f) {
             explosionActor.remove();
-            if (scoreNumber>preferences.getInteger(SCORE, 0)){
-                preferences.putInteger(SCORE, scoreNumber);
-            }
-            preferences.flush();
+            int t = (int)(timer/60*100);
+            timerOut[0] = t/60;
+            timerOut[1] = t%60;
             game.setScreen(new EndScreen(game));
         }
     }
@@ -399,7 +405,7 @@ public class PlayStage extends MyStage {
                     Physics.maxEnergy();
                 }
                 else if(l.blocks[i].getWeight() == 1) {
-                    if (currentHeart < Car.maxheart) {
+                    if (currentHeart <5) {
                         boxCountNew.set(0,0f);
                         car.damage();
                         emptyheart[currentHeart] = new OneSpriteStaticActor(Assets.manager.get(Assets.NOHEART));
@@ -479,7 +485,11 @@ public class PlayStage extends MyStage {
             sum += lines.get(0).blocks[i].getWeight();
         }
         if (sum == boxCountNew.get(0) && sum!=0) {
-            scoreNumber += 10;
+            scoreNumber += 1;
+            if (scoreNumber>preferences.getInteger(SCORE, 0)){
+                preferences.putInteger(SCORE, scoreNumber);
+            }
+            preferences.flush();
         }
         boxCountNew.remove(0);
         lines.remove(0);
