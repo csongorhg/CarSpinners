@@ -23,6 +23,8 @@ import com.mygdx.game.MyBaseClasses.MyLabel;
 import com.mygdx.game.MyBaseClasses.MyStage;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Play.PlayStage;
+import com.mygdx.game.Settings.IngameSettingsStage;
+import com.mygdx.game.Settings.SettingsStage;
 
 /**
  * Created by mordes on 2016.12.03..
@@ -70,7 +72,8 @@ public class EndStage extends MyStage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                new MusicSetter(true);
+                SettingsStage.clicked = IngameSettingsStage.clicked;
+                MenuStage.music = new MusicSetter(IngameSettingsStage.musicPlay);
                 game.setBackButtonStack();
                 game.setScreen(new MenuScreen(game));
             }

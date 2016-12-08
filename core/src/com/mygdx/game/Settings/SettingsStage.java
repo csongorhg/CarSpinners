@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.game.DemoMenu.MenuStage;
 import com.mygdx.game.GlobalClasses.Assets;
 import com.mygdx.game.Math.Random;
 import com.mygdx.game.Music.MusicSetter;
@@ -14,6 +15,7 @@ import com.mygdx.game.MyBaseClasses.MyButton;
 import com.mygdx.game.MyBaseClasses.MyStage;
 import com.mygdx.game.MyBaseClasses.OneSpriteStaticActor;
 import com.mygdx.game.MyGdxGame;
+import com.sun.glass.ui.Menu;
 
 /**
  * Created by Kicsi on 2016. 11. 12..
@@ -24,10 +26,10 @@ public class SettingsStage extends MyStage{
     private TextButton textButton;
     public OneSpriteStaticActor volumeIconSpriteActor, volumePlusSpriteActor,volumeMinusSpriteActor;
     public Array<OneSpriteStaticActor> volumeArray;
-    public static float actualVol;
-    private boolean clicked = false;
+    //public static float actualVol;
+    public static boolean clicked;
     public static boolean musicPlay = true;
-    public MusicSetter musicSetter = new MusicSetter();
+    //public MusicSetter musicSetter = new MusicSetter();
 
     public float width, heigth;
 
@@ -38,12 +40,15 @@ public class SettingsStage extends MyStage{
 
     public void init() {
         addBackEventStackListener();
+        System.out.println(MenuStage.music.getMenuVolume());
 
         textButton = new MyButton("Back", game.getTextButtonStyle());
         textButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
+                IngameSettingsStage.musicPlay = musicPlay;
+                IngameSettingsStage.clicked = clicked;
                 game.setScreenBackByStackPop();
 
             }
@@ -67,6 +72,7 @@ public class SettingsStage extends MyStage{
 
     void musicOnOff(){
         volumeIconSpriteActor = new OneSpriteStaticActor(Assets.manager.get(musicPlay?Assets.SOUND_ICON:Assets.MUTE_ICON));
+        //volumeIconSpriteActor = new OneSpriteStaticActor(Assets.manager.get(MenuStage.music.playing()?Assets.SOUND_ICON:Assets.MUTE_ICON));
         addActor(volumeIconSpriteActor);
         volumeIconSpriteActor.addListener(new ClickListener(){
             @Override
@@ -75,20 +81,23 @@ public class SettingsStage extends MyStage{
                 volumeIconSpriteActor.remove();
                 musicPlay = !musicPlay;
                 if(musicPlay){
-                    actualVol = 1;
-                    new MusicSetter(musicPlay);
+                    MenuStage.music.MenuMusic2();
+                    MenuStage.music = new MusicSetter(true);
+                    MenuStage.music.musicVolume(1f);
+                    MenuStage.music.MenuMusic();
                     volumeArraySettings();
+                    //musicOnOff();
                 }else{
                     clicked = false;
-                    new MusicSetter().stopMusics();
-                    actualVol = -0.1f;
+                    MenuStage.music.stopMusics();
+                    //actualVol = -0.1f;
+                    MenuStage.music.musicVolume(-0.1f);
                     volumeArraySettings();
+                    //musicOnOff();
                 }
                 musicOnOff();
             }
         });
-        IngameSettingsStage.musicPlay = musicPlay;
-        IngameSettingsStage.actualVol = actualVol;
         volumeIconSpriteActor.setSize(width / 3, width / 3);
         volumeIconSpriteActor.setPosition(0, heigth - volumeIconSpriteActor.getHeight()-((ExtendViewport)getViewport()).getMinWorldHeight()/4);
     }
@@ -104,29 +113,21 @@ public class SettingsStage extends MyStage{
                 if(!musicPlay && !clicked){
                     volumeIconSpriteActor.remove();
                     musicPlay = true;
-                    new MusicSetter(musicPlay);
-                    actualVol=1;
+                    MenuStage.music.musicVolume(1f);
+                    MenuStage.music.MenuMusic();
                     musicOnOff();
                 }
-                else if(actualVol <= 0){
+                else if(MenuStage.music.getMenuVolume() == 0){
                     volumeIconSpriteActor.remove();
                     musicPlay = true;
-                    actualVol+=0.1;
+                    MenuStage.music.musicVolume(0.09999993f);
+                    MenuStage.music.MenuMusic2();
+                    MenuStage.music = new MusicSetter(true);
                     musicOnOff();
                 }
-                else if(actualVol<=0.9){
-                    actualVol+=0.1;
-                    /*if(actualVol>0 && !voltmar){
-                        voltmar = true;
-                        volumeIconSpriteActor.remove();
-                        musicPlay = true;
-                        new MusicSetter(musicPlay);
-                        musicOnOff();
-                    }*/
+                else if(MenuStage.music.getMenuVolume()<=0.9){
+                    MenuStage.music.musicVolume(MenuStage.music.getMenuVolume()+0.1f);
                 }
-                IngameSettingsStage.actualVol = actualVol;
-                IngameSettingsStage.musicPlay = musicPlay;
-                musicSetter.musicVolume(actualVol);
                 volumeArraySettings();
             }
         });
@@ -134,20 +135,17 @@ public class SettingsStage extends MyStage{
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                if(actualVol>=0){
-                    actualVol-=0.1;
+                if(MenuStage.music.getMenuVolume()>=0){
+                    MenuStage.music.musicVolume(MenuStage.music.getMenuVolume()-0.1f);
+                    volumeArraySettings();
                 }
-                if(actualVol<=0){
-                    //voltmar = false;
+                if(MenuStage.music.getMenuVolume()<0){
                     volumeIconSpriteActor.remove();
                     musicPlay = false;
+                    MenuStage.music.musicVolume(0);
                     clicked = true;
                     musicOnOff();
                 }
-                IngameSettingsStage.actualVol = actualVol;
-                IngameSettingsStage.musicPlay = musicPlay;
-                musicSetter.musicVolume(actualVol);
-                volumeArraySettings();
             }
         });
         volumeArraySettings();
@@ -156,7 +154,7 @@ public class SettingsStage extends MyStage{
     public void volumeArraySettings(){
         volumeArray = new Array<OneSpriteStaticActor>();
         for(float i=0; i<1; i+=0.1){
-            if(i<=actualVol){
+            if(i<=MenuStage.music.getMenuVolume()){
                 volumeArray.add(new OneSpriteStaticActor(Assets.manager.get(Assets.FILLED_VOL)));
                 addActor(volumeArray.get((int)(i*10)));
             }else{

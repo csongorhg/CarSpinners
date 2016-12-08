@@ -32,7 +32,7 @@ public class MenuStage extends MyStage {
 
     private TextButton textButton, textButton2, textButton3, textButton4, textButton5;
 
-    private MusicSetter music = new MusicSetter();
+    public static MusicSetter music = new MusicSetter();
 
     private float width, heigthBetween, heigth; //menüpontok pozicionálása
 

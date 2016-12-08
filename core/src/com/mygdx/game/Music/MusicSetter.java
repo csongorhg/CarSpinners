@@ -51,6 +51,53 @@ public class MusicSetter {
         }
     }
 
+    public boolean playing(){
+        return menumusic.isPlaying();
+    }
+
+    public void MenuMusic2(){
+        menumusic.stop();
+        menumusic.play();
+    }
+
+    public float getMenuVolume(){return menumusic.getVolume();}
+    public float getGameVolume(){return gamemusic1.getVolume();}
+
+    public void gameMusic(int whichMusic) {
+
+        if(!(gamemusic1.isPlaying() || gamemusic2.isPlaying() || gamemusic3.isPlaying() || gamemusic4.isPlaying() || gamemusic5.isPlaying())) {
+            while (isSameMusic == whichMusic) { //amíg nem lesz más mint az előbb játszott zene
+                //kiraktam egy osztályba a random fv.-t, mivel több helyen is használjuk
+                whichMusic = new Random(1, 5).getGenNumber();
+            }
+
+            stopMusics();
+
+            switch (whichMusic) {
+                case 1:
+                    gamemusic1.play();
+                    isSameMusic = 1;
+                    break;
+                case 2:
+                    gamemusic2.play();
+                    isSameMusic = 2;
+                    break;
+                case 3:
+                    gamemusic3.play();
+                    isSameMusic = 3;
+                    break;
+                case 4:
+                    gamemusic4.play();
+                    isSameMusic = 4;
+                    break;
+                case 5:
+                    gamemusic5.play();
+                    isSameMusic = 5;
+                    break;
+            }
+        }
+    }
+
     public MusicSetter(int whichMusic) {
 
         if(!(gamemusic1.isPlaying() || gamemusic2.isPlaying() || gamemusic3.isPlaying() || gamemusic4.isPlaying() || gamemusic5.isPlaying())) {

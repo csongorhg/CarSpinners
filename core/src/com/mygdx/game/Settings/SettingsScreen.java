@@ -65,9 +65,6 @@ public class SettingsScreen extends MyScreen{
 
             }
         };
-
-        settingsStage.actualVol = IngameSettingsStage.actualVol;
-        settingsStage.musicPlay = IngameSettingsStage.musicPlay;
         settingsStage  = new SettingsStage(new ExtendViewport(270,480,new OrthographicCamera(270,480)), spriteBatch, game);
         Gdx.input.setInputProcessor(settingsStage);
     }

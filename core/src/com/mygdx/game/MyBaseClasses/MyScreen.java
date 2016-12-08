@@ -81,7 +81,7 @@ abstract public class MyScreen implements Screen, InitableInterface {
 
     @Override
     public void show() {
-        SettingsStage.actualVol = 1;
+        //SettingsStage.actualVol = 1;
     }
 
     public Game getGame() {

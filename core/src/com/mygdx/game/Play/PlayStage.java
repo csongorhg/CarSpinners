@@ -16,6 +16,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.DemoMenu.MenuScreen;
+import com.mygdx.game.DemoMenu.MenuStage;
 import com.mygdx.game.End.EndScreen;
 import com.mygdx.game.GlobalClasses.Assets;
 import com.mygdx.game.Graphics.BreakActor;
