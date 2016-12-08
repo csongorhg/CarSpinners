@@ -63,12 +63,18 @@ public class Line {
         heightpoz = h;
         int[] t = getLineStyle();
         for (int i = 0; i < blocks.length; i++){
-            allblocks[1] = new Block(1,1,randomBlockade());
+            reloadBlocks();
             blocks[i] = new Block(allblocks[t[i]]);
             blocks[i].actor.setSize(size,size);
             blocks[i].actor.setPosition(widthkoz*(i+1) + widthkoz*0.1f,heightpoz);
             positions[i] = widthkoz*(i+1) + widthkoz*0.05f;
         }
+    }
+
+    private void reloadBlocks() {
+        allblocks[0] = new Block(1,0,Assets.manager.get(Assets.BLOCAKDE_0));
+        allblocks[0] = new Block(1,1,randomBlockade());
+        allblocks[0] = new Block(2,0,Assets.manager.get(Assets.BATTERY));
     }
 
     public void addHeight(float f) {
