@@ -64,7 +64,7 @@ public class OneSpriteAnimatedActor extends OneSpriteActor {
             }
             setFrame(((int) (elapsedTime * fps)));
         }
-        setRotation(360-elapsedTime*100);
+        //setRotation(360-elapsedTime*100);
     }
 
     public void setFrame(int frame)

@@ -45,6 +45,10 @@ public class Assets {
 			= new AssetDescriptor<TextureAtlas>("explosion.atlas", TextureAtlas.class);
 	public static final AssetDescriptor<TextureAtlas> MONEY_TEXTUREATLAS
 			= new AssetDescriptor<TextureAtlas>("mozgopenz.atlas", TextureAtlas.class);
+	public static final AssetDescriptor<TextureAtlas> WALK_TEXTUREATLAS
+			= new AssetDescriptor<TextureAtlas>("seta.atlas", TextureAtlas.class);
+	public static final AssetDescriptor<TextureAtlas> SZIRENA_TEXTUREATLAS
+			= new AssetDescriptor<TextureAtlas>("szirena.atlas", TextureAtlas.class);
 
 	public static final AssetDescriptor<Texture> CURSOR_TEXTURE
 			= new AssetDescriptor<Texture>("images/cursor.png", Texture.class);
@@ -243,6 +247,8 @@ public class Assets {
 		manager.load(ENV_7);
 		manager.load(ENV_8);
 		manager.load(ENV_9);
+		manager.load(WALK_TEXTUREATLAS);
+		manager.load(SZIRENA_TEXTUREATLAS);
 	}
 
     public static void afterLoaded() {

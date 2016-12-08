@@ -84,7 +84,9 @@ public class PlayStage extends MyStage {
     private boolean dead; //halott-e az illető
 
     private float timer; // méri az időt
-    public static int timerOut[];
+    public static int timerOut[]; //időt átadja
+
+    private WalkActor walkActor;
 
     public PlayStage(Viewport viewport, Batch batch, MyGdxGame game) {
         super(viewport, batch, game);
@@ -272,12 +274,13 @@ public class PlayStage extends MyStage {
         energyActor.setPosition(57,4);
         addActor(energyActor);
 
-        //pénz
-        //moneyActor = new MoneyActor();
-        //moneyActor.setSize(96,8);
-        //moneyActor.setZIndex(Integer.MAX_VALUE);
-        //moneyActor.setY(100);
-        //addActor(moneyActor);
+
+
+        //séta
+        walkActor = new WalkActor();
+        walkActor.setZIndex(Integer.MAX_VALUE);
+        walkActor.setPosition(100,100);
+        addActor(walkActor);
 
     }
 
