@@ -310,6 +310,7 @@ public class PlayStage extends MyStage {
             if (settingsStage.isB()) new MusicSetter(new Random(1, 5).getGenNumber());
             settingsStage.act(delta);
             isdead();
+            System.out.println(getActors().size);
         }
     }
 
@@ -382,6 +383,7 @@ public class PlayStage extends MyStage {
             }
         if(backgrounds.get(0).getY() < -backgrounds.get(0).getHeight()){
             backgrounds.get(0).remove();
+            backgrounds.remove(0);
             }
     }
 
@@ -498,6 +500,7 @@ public class PlayStage extends MyStage {
             preferences.flush();
         }
         boxCountNew.remove(0);
+        lines.get(0).remove();
         lines.remove(0);
     }
 

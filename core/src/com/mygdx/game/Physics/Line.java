@@ -85,4 +85,10 @@ public class Line {
     }
 
     static public int vel(int a,int b){return (int)((Math.random()*b-a+1)+a);}
+
+    public void remove() {
+        for (int i = 0; i< 3 ; i++){
+            blocks[i].actor.remove();
+        }
+    }
 }
