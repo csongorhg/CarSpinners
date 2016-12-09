@@ -1,0 +1,19 @@
+policecar.png
+size: 56, 256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+car-10000
+  rotate: false
+  xy: 0, 0
+  size: 56, 128
+  orig: 56, 128
+  offset: 0, 0
+  index: -1
+car-10015
+  rotate: false
+  xy: 0, 128
+  size: 56, 128
+  orig: 56, 128
+  offset: 0, 0
+  index: -1
