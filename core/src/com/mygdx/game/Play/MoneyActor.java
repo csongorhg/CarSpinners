@@ -18,14 +18,6 @@ public class MoneyActor extends OneSpriteAnimatedActor {
         super(Assets.manager.get(Assets.MONEY_TEXTUREATLAS));
         setSize(16,16);
         setFps(10);
-        addListener(new ClickListener()
-        {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                super.clicked(event, x, y);
-                running = !running;
-            }
-        });
         dx = (float)Math.random()*400f-200f;
         dy = (float)Math.random()*100f-30f;
     }

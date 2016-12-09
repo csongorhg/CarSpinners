@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g3d.particles.influencers.DynamicsModifier;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -93,6 +94,8 @@ public class PlayStage extends MyStage {
 
     private SzirenaActor szirenaActor;
     private float szirenatime;
+
+    private PoliceActor policeActor;
 
     public PlayStage(Viewport viewport, Batch batch, MyGdxGame game) {
         super(viewport, batch, game);
@@ -378,14 +381,30 @@ public class PlayStage extends MyStage {
         }
     }
 
-    private void isdead() {
-        if(Physics.energy <= 0 || Physics.policedis <= 0){
-            if (scoreNumber>preferences.getInteger(SCORE, 0)){
+
+
+    private void isdead() {//Physics.energy
+        if(Physics.policedis <= 0){
+            if (!dead) {
+                policeActor = new PoliceActor();
+                policeActor.setPosition(100, 100);
+                addActor(policeActor);
+            }
+            dead = true;
+            /*if (scoreNumber>preferences.getInteger(SCORE, 0)){
                 preferences.putInteger(SCORE, scoreNumber);
             }
             preferences.flush();
             timeOutput();
-            game.setScreen(new EndScreen(game));
+            game.setScreen(new EndScreen(game));*/
+
+            /*addActor(new MoneyActor(){
+                @Override
+                public void init() {
+                    super.init();
+                    setPosition(100,100);
+                }
+            });*/
         }
     }
 
