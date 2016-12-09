@@ -33,7 +33,7 @@ public class ExtrasStage extends MyStage {
     private OneSpriteStaticActor car;
     private boolean carColor;
     private Slider slider1, slider2, slider3, slider4, slider5;
-    private static float slider1value = Car.carTexture.r, slider2value = Car.carTexture.g, slider3value = Car.carTexture.b;
+    private static float slider1value = Car.carTexture.r2, slider2value = Car.carTexture.g2, slider3value = Car.carTexture.b2;
     private static int carTypeNumber = Car.carTexture.cartype, carStyleNumber = Car.carTexture.carTextureType;
     private OneSpriteStaticActor arrow, arrow2;
     private MyLabel myLabel, myLabel2, myLabel3, myLabel4, myLabel5;
@@ -52,8 +52,6 @@ public class ExtrasStage extends MyStage {
         addBackEventStackListener();
 
         resized();
-
-
 
         style = new com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle();
         style.fontColor = Color.YELLOW;
@@ -198,7 +196,7 @@ public class ExtrasStage extends MyStage {
         //autó vagy textúra színezése
         slider5 = new Slider(0, 1, 1, false, game.getSliderStyle());
         addActor(slider5);
-        slider5.setValue(0);
+        slider5.setValue(1);
         slider5.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
