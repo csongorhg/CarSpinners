@@ -89,6 +89,7 @@ public class PlayStage extends MyStage {
 
     private WalkActor walkActor;
     private boolean walkHasEnded;
+    private boolean isSzirena;
 
     private SzirenaActor szirenaActor;
     private float szirenatime;
@@ -119,7 +120,7 @@ public class PlayStage extends MyStage {
         timerOut = new int[2];
 
         dead = false; //él a játékos
-
+        isSzirena = true;
         boxCountNew = new Vector<Float>(); //ellenőrző összeg a pontozáshoz
         scoreNumber = 0; //pontszám
 
@@ -324,11 +325,11 @@ public class PlayStage extends MyStage {
                     backgroundPhysic();
                     linePhysic();
                     strings();
-                    float f = 4000/Physics.policedis > 30 ? 30 : 1000/Physics.policedis;
-                    szirenaActor.setVisible(true);
-                    szirenaActor.setZIndex(Integer.MAX_VALUE);
-                    szirenaActor.setFps(f);
                     layers();
+                    if(isSzirena) {
+                        szirenaActor.setVisible(true);
+                        isSzirena = false;
+                    }
 
                     if (Math.random() < 0.02 * Physics.carspeed) {
                         addActor(new MoneyActor() {
@@ -390,6 +391,7 @@ public class PlayStage extends MyStage {
                 lines.get(i).blocks[j].actor.setZIndex(Integer.MAX_VALUE);
                 }
             }
+        szirenaActor.setZIndex(Integer.MAX_VALUE);
         felulet.setZIndex(Integer.MAX_VALUE);
         f.setZIndex(Integer.MAX_VALUE);
         p.setZIndex(Integer.MAX_VALUE);
