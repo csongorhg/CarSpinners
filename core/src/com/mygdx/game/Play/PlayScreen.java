@@ -18,7 +18,6 @@ import com.mygdx.game.Settings.SettingsStage;
 public class PlayScreen extends MyScreen {
     protected PlayStage playStage;
     public static MusicSetter gameMusic;
-    public static float setmusicvolume;
 
     public PlayScreen(MyGdxGame game) {
         super(game);
@@ -31,7 +30,8 @@ public class PlayScreen extends MyScreen {
         playStage.act(delta);
         playStage.draw();
 
-        gameMusic = new MusicSetter(new Random(1,5).getGenNumber());
+
+        //gameMusic = new MusicSetter(new Random(1,5).getGenNumber());
  /*       else backtogame();*/
     }
 /*
@@ -47,8 +47,9 @@ public class PlayScreen extends MyScreen {
     */
     @Override
     public void init() {
-        gameMusic.musicVolume(MenuStage.music.getMenuVolume());
-        gameMusic = new MusicSetter(new Random(1, 5).getGenNumber());
+        gameMusic.stopMusics();
+        //gameMusic = new MusicSetter(new Random(1, 5).getGenNumber());
+        //gameMusic.musicVolume(MenuStage.music.getMenuVolume());
         playStage.settingclick = false;
         r = 0.3925f;
         g = 0.3925f;

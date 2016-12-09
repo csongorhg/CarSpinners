@@ -324,6 +324,7 @@ public class PlayStage extends MyStage {
 
     @Override
     public void act(float delta) {
+        PlayScreen.gameMusic = new MusicSetter(new Random(1,5).getGenNumber());
         if(!menuben) {
             super.act(delta);
             walkActor.setX(walkActor.getX()+1);

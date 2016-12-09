@@ -43,8 +43,6 @@ abstract public class MyScreen implements Screen, InitableInterface {
 
     @Override
     public void dispose() {
-        MenuStage.music.stopMusics();
-        PlayScreen.gameMusic.stopMusics();
         spriteBatch.dispose();
     }
 
@@ -81,7 +79,8 @@ abstract public class MyScreen implements Screen, InitableInterface {
     @Override
     public void show() {
         MenuStage.music = new MusicSetter(true);
-        PlayScreen.gameMusic = new MusicSetter(new Random(1,5).getGenNumber());
+        PlayScreen.gameMusic.stopMusics();
+        //if(game.getScreen().toString().equals("PlayScreen"))PlayScreen.gameMusic = new MusicSetter(new Random(1,5).getGenNumber());
     }
 
     public Game getGame() {

@@ -73,8 +73,10 @@ public class LoadingScreen extends MyScreen {
 			SettingsStage.musicPlay = true;
 			IngameSettingsStage.musicPlay = true;
 			MenuStage.music = new MusicSetter(true);
-			PlayScreen.gameMusic = new MusicSetter(new Random(1,5).getGenNumber());
-			PlayScreen.gameMusic.stopMusics();
+
+			PlayScreen.gameMusic = new MusicSetter(new Random(1, 5).getGenNumber());
+			PlayScreen.gameMusic.musicVolume(0f);
+			MenuStage.music.musicVolume(1f);
 
 			new MusicSetter(true); //menüzene hívás
 
