@@ -172,6 +172,10 @@ public class Assets {
 			= new AssetDescriptor<Music>("music/bensound-dance.mp3", Music.class);
 	public static final AssetDescriptor<Music> BADASS
 			= new AssetDescriptor<Music>("music/bensound-badass.mp3", Music.class);
+	public static final AssetDescriptor<Music> CARENGINE
+			= new AssetDescriptor<Music>("music/carEngine.mp3", Music.class);
+	public static final AssetDescriptor<Music> STARTCAR
+			= new AssetDescriptor<Music>("music/startcar.mp3", Music.class);
 
 	public static void prepare() {
 		manager = new AssetManager();
@@ -249,6 +253,8 @@ public class Assets {
 		manager.load(ENV_9);
 		manager.load(WALK_TEXTUREATLAS);
 		manager.load(SZIRENA_TEXTUREATLAS);
+		manager.load(STARTCAR);
+		manager.load(CARENGINE);
 	}
 
     public static void afterLoaded() {

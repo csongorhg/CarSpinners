@@ -3,16 +3,20 @@ package com.mygdx.game.DemoLoading;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g3d.particles.influencers.ColorInfluencer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.DemoMenu.MenuScreen;
+import com.mygdx.game.DemoMenu.MenuStage;
+import com.mygdx.game.Math.Random;
 import com.mygdx.game.Music.MusicSetter;
 import com.mygdx.game.MyBaseClasses.MyScreen;
 import com.mygdx.game.GlobalClasses.*;
 import com.mygdx.game.MyBaseClasses.OneSpriteAnimatedActor;
 import com.mygdx.game.MyBaseClasses.OneSpriteStaticActor;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.Play.PlayScreen;
 import com.mygdx.game.Settings.IngameSettingsStage;
 import com.mygdx.game.Settings.SettingsStage;
 
@@ -68,6 +72,9 @@ public class LoadingScreen extends MyScreen {
 
 			SettingsStage.musicPlay = true;
 			IngameSettingsStage.musicPlay = true;
+			MenuStage.music = new MusicSetter(true);
+			PlayScreen.gameMusic = new MusicSetter(new Random(1,5).getGenNumber());
+			PlayScreen.gameMusic.stopMusics();
 
 			new MusicSetter(true); //menüzene hívás
 

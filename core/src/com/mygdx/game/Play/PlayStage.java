@@ -3,6 +3,7 @@ package com.mygdx.game.Play;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Preferences;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -115,6 +116,8 @@ public class PlayStage extends MyStage {
 
     public void init() {
         addBackEventStackListener();
+
+        CarEngineStart.played = false;
 
         timer = 0;
         timerOut = new int[2];
@@ -319,6 +322,7 @@ public class PlayStage extends MyStage {
                 counter.setText("GO!");
             }
             if (walkHasEnded) {
+                new CarEngineStart();
                 if (!dead) {
                     timer += delta;
                     carPhysic();

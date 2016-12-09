@@ -51,10 +51,6 @@ public class MusicSetter {
         }
     }
 
-    public boolean playing(){
-        return menumusic.isPlaying();
-    }
-
     public void MenuMusic2(){
         menumusic.stop();
         menumusic.play();
