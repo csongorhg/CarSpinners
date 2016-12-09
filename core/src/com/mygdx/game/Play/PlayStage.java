@@ -381,17 +381,15 @@ public class PlayStage extends MyStage {
                     if (timer > 2f) counter.remove();
                 }else {
                     if (policeActor.getY()+48 >= car.carActor.getY()) {
+                        if (explosionActor != null) explosion(delta);
                         if (car.carActor.getX() >= width - car.carActor.getWidth()) {
                             if (!boomPolice) {
-                                policedistance.setText("0");
                                 boomPolice = true;
                                 explosionActor = new ExplosionActor();
                                 explosionActor.setPosition(car.carActor.getX() - car.carActor.getWidth() - 24,
                                         car.carActor.getY() - car.carActor.getHeight()/2);
                                 car.carActor.remove();
                                 addActor(explosionActor);
-                                endLimit = 2f;
-                                explosion(delta);
                             }
                         } else {
                             policeActor.setX(policeActor.getX() + 2);
@@ -406,7 +404,6 @@ public class PlayStage extends MyStage {
                 }
                 crashPhysic();
                 if (Car.heart <= 0) {
-                    endLimit = 2f;
                     explosion(delta);
                 }
                 if (settingsStage.isB()) new MusicSetter(new Random(1, 5).getGenNumber());
@@ -433,6 +430,7 @@ public class PlayStage extends MyStage {
 
     private void isdead() {//Physics.energy
         if(Physics.policedis <= 0){
+            policedistance.setText("0 m");
             if (!dead) {
             }
             dead = true;
