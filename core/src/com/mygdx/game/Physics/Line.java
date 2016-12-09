@@ -11,11 +11,13 @@ import com.mygdx.game.GlobalClasses.Assets;
 public class Line {
 
     static int lastEnergy = 0;
+    static int lastHeart = 0;
 
     public static Block[] allblocks = {
         new Block(1,0,Assets.manager.get(Assets.BLOCAKDE_0)),
         new Block(1,1,randomBlockade()),
-        new Block(2,0,Assets.manager.get(Assets.BATTERY))
+        new Block(2,0,Assets.manager.get(Assets.BATTERY)),
+        new Block(3,0,Assets.manager.get(Assets.HEARTONGOURND))
     };
 
     private static Texture randomBlockade() {
@@ -52,7 +54,17 @@ public class Line {
             lastEnergy = 0;
         }
 
+        if(lastHeart > 1){
+            int i = vel(0,3)-1;
+            while(t[i] == 2){
+                i = vel(0,3)-1;
+            }
+            t[i] = 3;
+            lastHeart = 0;
+        }
+
         lastEnergy++;
+        lastHeart++;
 
         return t;
     }

@@ -40,7 +40,6 @@ public class SettingsStage extends MyStage{
 
     public void init() {
         addBackEventStackListener();
-        System.out.println(MenuStage.music.getMenuVolume());
 
         textButton = new MyButton("Back", game.getTextButtonStyle());
         textButton.addListener(new ClickListener(){
@@ -138,7 +137,6 @@ public class SettingsStage extends MyStage{
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                System.out.println(MenuStage.music.getMenuVolume());
                 if(MenuStage.music.getMenuVolume()>=0){
                     MenuStage.music.musicVolume(MenuStage.music.getMenuVolume()-0.1f);
                     volumeArraySettings();

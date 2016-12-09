@@ -84,6 +84,8 @@ public class Assets {
 			= new AssetDescriptor<Texture>("felulet.png", Texture.class);
 	public static final AssetDescriptor<Texture> HEART
 			= new AssetDescriptor<Texture>("heart.png", Texture.class);
+	public static final AssetDescriptor<Texture> HEARTONGOURND
+			= new AssetDescriptor<Texture>("heartonground.png", Texture.class);
 	public static final AssetDescriptor<Texture> NOHEART
 			= new AssetDescriptor<Texture>("noheart.png", Texture.class);
 	public static final AssetDescriptor<Texture> PLUS_VOL
@@ -211,6 +213,7 @@ public class Assets {
 		manager.load(EMPTY_VOL);
 		manager.load(ROAD_BLOCK);
 		manager.load(ROAD_MENU);
+		manager.load(HEARTONGOURND);
 		manager.load(HEART);
 		manager.load(NOHEART);
 		manager.load(BLOCAKDE_0);

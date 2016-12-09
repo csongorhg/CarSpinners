@@ -177,7 +177,6 @@ public class WorldActorGroup extends Group implements WorldInterface, InitableIn
 
     @Override
     public void removeFromWorld() {
-        System.out.println(body.getWorld().isLocked());
         if (!body.getWorld().isLocked()) {
             beforeRemoveFromWorld();
             world.destroyBody(this.body);

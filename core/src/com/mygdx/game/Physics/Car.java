@@ -13,7 +13,7 @@ public class Car{
     public static CarTexture carTexture = new CarTexture(1,2);
     public OneSpriteStaticActor carActor = new OneSpriteStaticActor(Car.carTexture.getPaint());
     public final static int maxheart = 5;
-    private int heart = maxheart;
+    public static int heart = maxheart;
 
     public Car(float x, float y) {
         carActor.setPosition(x,y);

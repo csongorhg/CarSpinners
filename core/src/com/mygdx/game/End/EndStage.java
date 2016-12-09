@@ -74,7 +74,6 @@ public class EndStage extends MyStage {
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
                 SettingsStage.musicPlay = IngameSettingsStage.musicPlay;
-                System.out.println(IngameSettingsStage.musicPlay?"true":"false");
                 SettingsStage.clicked = IngameSettingsStage.clicked;
                 PlayScreen.gameMusic.stopMusics();
                 MenuStage.music = new MusicSetter(IngameSettingsStage.musicPlay);
