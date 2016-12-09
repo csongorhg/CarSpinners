@@ -49,6 +49,8 @@ public class Assets {
 			= new AssetDescriptor<TextureAtlas>("seta.atlas", TextureAtlas.class);
 	public static final AssetDescriptor<TextureAtlas> SZIRENA_TEXTUREATLAS
 			= new AssetDescriptor<TextureAtlas>("szirena.atlas", TextureAtlas.class);
+	public static final AssetDescriptor<TextureAtlas> POLICE_TEXTUREATLAS
+			= new AssetDescriptor<TextureAtlas>("policecar.atlas", TextureAtlas.class);
 
 	public static final AssetDescriptor<Texture> CURSOR_TEXTURE
 			= new AssetDescriptor<Texture>("images/cursor.png", Texture.class);
@@ -258,6 +260,7 @@ public class Assets {
 		manager.load(SZIRENA_TEXTUREATLAS);
 		manager.load(STARTCAR);
 		manager.load(CARENGINE);
+		manager.load(POLICE_TEXTUREATLAS);
 	}
 
     public static void afterLoaded() {
