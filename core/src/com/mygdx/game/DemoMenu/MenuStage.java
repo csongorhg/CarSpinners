@@ -104,7 +104,7 @@ public class MenuStage extends MyStage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                PlayScreen.setmusicvolume = music.getMenuVolume();
+                PlayScreen.gameMusic.musicVolume(MenuStage.music.getMenuVolume());
                 music.stopMusics();
                 Physics.carspeed = 0;
                 Physics.policedis = 1000;

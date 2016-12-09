@@ -335,6 +335,7 @@ public class PlayStage extends MyStage {
 
     @Override
     public void act(float delta) {
+        PlayScreen.gameMusic = new MusicSetter(new Random(1,5).getGenNumber());
         if(!menuben) {
             super.act(delta);
             walkActor.setX(walkActor.getX()+1);
@@ -450,8 +451,14 @@ public class PlayStage extends MyStage {
                 }
             });*/
         }
-        if (Physics.energy <= 0) {
+        if(Physics.energy <= 0){
             dead = true;
+            if (scoreNumber>preferences.getInteger(SCORE, 0)){
+                preferences.putInteger(SCORE, scoreNumber);
+            }
+            preferences.flush();
+            timeOutput();
+            game.setScreen(new EndScreen(game));
         }
     }
 

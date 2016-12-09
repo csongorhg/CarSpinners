@@ -129,7 +129,7 @@ public class SettingsStage extends MyStage{
                 else if(MenuStage.music.getMenuVolume()<=0.9){
                     MenuStage.music.musicVolume(MenuStage.music.getMenuVolume()+0.1f);
                 }
-                PlayScreen.gameMusic.musicVolume(MenuStage.music.getMenuVolume());
+                //PlayScreen.gameMusic.musicVolume(MenuStage.music.getMenuVolume());
                 volumeArraySettings();
             }
         });
@@ -149,7 +149,7 @@ public class SettingsStage extends MyStage{
                     clicked = true;
                     musicOnOff();
                 }
-                PlayScreen.gameMusic.musicVolume(MenuStage.music.getMenuVolume());
+                //PlayScreen.gameMusic.musicVolume(MenuStage.music.getMenuVolume());
             }
         });
         volumeArraySettings();
