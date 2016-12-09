@@ -18,7 +18,7 @@ import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Play.PlayScreen;
 
 /**
- * Created by Kicsi on 2016. 11. 12..
+ * Created by Kicsi on 2016. 11. 12...
  */
 
 public class SettingsStage extends MyStage{
