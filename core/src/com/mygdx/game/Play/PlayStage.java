@@ -417,6 +417,14 @@ public class PlayStage extends MyStage {
                 }
             });*/
         }
+        if(Physics.energy <= 0){
+            if (scoreNumber>preferences.getInteger(SCORE, 0)){
+                preferences.putInteger(SCORE, scoreNumber);
+            }
+            preferences.flush();
+            timeOutput();
+            game.setScreen(new EndScreen(game));
+        }
     }
 
     private void timeOutput() {
