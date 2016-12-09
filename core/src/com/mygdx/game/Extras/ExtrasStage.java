@@ -100,7 +100,7 @@ public class ExtrasStage extends MyStage {
     void sliders(){
 
         //red
-        slider1 = new Slider(0, 255, 1, false, game.getSliderStyle());
+        slider1 = new Slider(0, 255, 1, false, game.getSliderStyle(1));
         addActor(slider1);
         slider1.setValue(slider1value);
         slider1.addListener(new ChangeListener() {
@@ -125,7 +125,7 @@ public class ExtrasStage extends MyStage {
 
 
         //green
-        slider2 = new Slider(0, 255, 1, false, game.getSliderStyle());
+        slider2 = new Slider(0, 255, 1, false, game.getSliderStyle(2));
         addActor(slider2);
         slider2.setValue(slider2value);
         slider2.addListener(new ChangeListener() {
@@ -149,7 +149,7 @@ public class ExtrasStage extends MyStage {
 
 
         //blue
-        slider3 = new Slider(0, 255, 1, false, game.getSliderStyle());
+        slider3 = new Slider(0, 255, 1, false, game.getSliderStyle(3));
         addActor(slider3);
         slider3.setValue(slider3value);
         slider3.addListener(new ChangeListener() {
@@ -173,7 +173,7 @@ public class ExtrasStage extends MyStage {
 
 
         //stílus
-        slider4 = new Slider(0, 3, 1, false, game.getSliderStyle());
+        slider4 = new Slider(0, 3, 1, false, game.getSliderStyle(0));
         addActor(slider4);
         slider4.setValue(carStyleNumber);
         slider4.addListener(new ChangeListener() {
@@ -194,7 +194,7 @@ public class ExtrasStage extends MyStage {
 
 
         //autó vagy textúra színezése
-        slider5 = new Slider(0, 1, 1, false, game.getSliderStyle());
+        slider5 = new Slider(0, 1, 1, false, game.getSliderStyle(0));
         addActor(slider5);
         slider5.setValue(1);
         slider5.addListener(new ChangeListener() {

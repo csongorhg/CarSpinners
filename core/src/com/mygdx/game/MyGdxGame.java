@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.mygdx.game.GlobalClasses.Assets;
 import com.mygdx.game.DemoLoading.LoadingScreen;
+import com.mygdx.game.Graphics.Graphics;
 import com.mygdx.game.MyBaseClasses.MyScreen;
 
 import java.lang.reflect.InvocationTargetException;
@@ -33,10 +34,21 @@ public class MyGdxGame extends Game {
 		return style;
 	}
 
-	public Slider.SliderStyle getSliderStyle(){
+	public Slider.SliderStyle getSliderStyle(int a){
 		Slider.SliderStyle style;
 		style = new Slider.SliderStyle();
-		style.background = new TextureRegionDrawable(new TextureRegion(Assets.manager.get(Assets.SBACKGROUND)));
+		Texture t = Assets.manager.get(Assets.SBACKGROUND);
+		t.getTextureData().prepare();
+		Pixmap p = t.getTextureData().consumePixmap();
+		if(a == 1){
+			style.background = new TextureRegionDrawable(new TextureRegion(new Texture(Graphics.reColor(p, Color.WHITE, Color.RED))));
+		}else if(a == 2){
+			style.background = new TextureRegionDrawable(new TextureRegion(new Texture(Graphics.reColor(p, Color.WHITE, Color.GREEN))));
+		}else if(a == 3){
+			style.background = new TextureRegionDrawable(new TextureRegion(new Texture(Graphics.reColor(p, Color.WHITE, Color.BLUE))));
+		}else{
+			style.background = new TextureRegionDrawable(new TextureRegion(Assets.manager.get(Assets.SBACKGROUND)));
+		}
 		style.background.setMinHeight(WORLD_HEIGHT/20);
 		style.knob = new TextureRegionDrawable(new TextureRegion(Assets.manager.get(Assets.SKNOB)));
 		style.knob.setMinHeight(WORLD_HEIGHT/20+10);
