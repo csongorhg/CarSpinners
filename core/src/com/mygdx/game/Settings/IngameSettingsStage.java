@@ -41,9 +41,11 @@ public class IngameSettingsStage extends MyStage {
     private float width, height;
     private boolean visible = false;
     private InputProcessor prevInputProcessor = null;
+    private CarMusic c;
 
-    public IngameSettingsStage(Viewport viewport, Batch batch, MyGdxGame game) {
+    public IngameSettingsStage(Viewport viewport, Batch batch, MyGdxGame game, CarMusic c) {
         super(viewport, batch, game);
+        this.c = c;
     }
 
 
@@ -138,6 +140,9 @@ public class IngameSettingsStage extends MyStage {
                     volumeArraySettings();
                 }*/
                 CarMusic.setMusicPlay(!CarMusic.isMusicPlay());
+                if (!CarMusic.isMusicPlay()){
+                    c.dispose();
+                }
 /*                volumeIconSpriteActor = new OneSpriteStaticActor(Assets.manager.get(CarMusic.isMusicPlay()?Assets.SOUND_ICON:Assets.MUTE_ICON));
                 volumeIconSpriteActor.setSize(width / 3, width / 3);
                 volumeIconSpriteActor.setPosition(0, height - volumeIconSpriteActor.getHeight()-((ExtendViewport)getViewport()).getMinWorldHeight()/4);
@@ -241,6 +246,7 @@ public class IngameSettingsStage extends MyStage {
 
     @Override
     public void act(float delta) {
+        c.act();
         if (visible) super.act(delta);
     }
 

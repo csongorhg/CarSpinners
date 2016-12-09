@@ -24,8 +24,6 @@ public class CarMusic implements Disposable{
 
     public static void setMusicPlay(boolean musicPlay) {
         CarMusic.musicPlay = musicPlay;
-        if (!musicPlay){
-        }
     }
 
 
@@ -70,5 +68,6 @@ public class CarMusic implements Disposable{
         for (Music m : musics) {
             m.stop();
         }
+        nowPlayed = -1;
     }
 }

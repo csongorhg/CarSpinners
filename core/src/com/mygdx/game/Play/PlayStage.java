@@ -148,7 +148,7 @@ public class PlayStage extends MyStage {
         boxCountNew = new Vector<Float>(); //ellenőrző összeg a pontozáshoz
         scoreNumber = 0; //pontszám
 
-        settingsStage = new IngameSettingsStage(new ExtendViewport(270,480,new OrthographicCamera(270/2,480/2)), new SpriteBatch(), game);
+        settingsStage = new IngameSettingsStage(new ExtendViewport(270,480,new OrthographicCamera(270/2,480/2)), new SpriteBatch(), game, carMusic);
 
         resized();
 
