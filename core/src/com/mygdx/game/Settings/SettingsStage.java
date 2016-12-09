@@ -141,9 +141,10 @@ public class SettingsStage extends MyStage{
                     MenuStage.music.musicVolume(MenuStage.music.getMenuVolume()-0.1f);
                     volumeArraySettings();
                 }
-                if(MenuStage.music.getMenuVolume()<0.09999994){
+                if(MenuStage.music.getMenuVolume()<0){
                     volumeIconSpriteActor.remove();
                     musicPlay = false;
+                    IngameSettingsStage.musicPlay = musicPlay;
                     MenuStage.music.musicVolume(0);
                     clicked = true;
                     musicOnOff();
