@@ -116,7 +116,6 @@ public class MenuStage extends MyStage {
 
             }
         });
-        textButton.debug();
         addActor(textButton);
 
 
@@ -131,7 +130,6 @@ public class MenuStage extends MyStage {
                 game.setScreen(new ExtrasScreen(game));
             }
         });
-        textButton2.debug();
         addActor(textButton2);
 
 
@@ -145,7 +143,6 @@ public class MenuStage extends MyStage {
                 game.setScreen(new CreditsScreen(game));
             }
         });
-        textButton3.debug();
         addActor(textButton3);
 
 
@@ -159,7 +156,6 @@ public class MenuStage extends MyStage {
                 game.setScreenBackByStackPop();
             }
         });
-        textButton4.debug();
         addActor(textButton4);
 
 
