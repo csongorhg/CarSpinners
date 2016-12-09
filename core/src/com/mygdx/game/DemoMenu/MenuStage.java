@@ -223,22 +223,10 @@ public class MenuStage extends MyStage {
             }
         }
 
-        //városfolyam
-        /*
-        if (cityStream.getX() > ((ExtendViewport)getViewport()).getMinWorldWidth()) {
-            cityStream.setX(cityStream2.getX()-cityStream.getWidth());
-        }
-        cityStream.setX(cityStream.getX()+cityStreamSpeed);
-
-        if (cityStream2.getX() > ((ExtendViewport)getViewport()).getMinWorldWidth()) {
-            cityStream2.setX(cityStream.getX() - cityStream.getWidth());
-        }
-        cityStream2.setX(cityStream2.getX()+cityStreamSpeed);*/
     }
 
     @Override
     public void dispose() {
-        //preferences.flush();
         super.dispose();
     }
 

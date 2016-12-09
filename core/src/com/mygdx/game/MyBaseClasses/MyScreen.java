@@ -7,12 +7,17 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ObjectSet;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.mygdx.game.DemoMenu.MenuStage;
 import com.mygdx.game.GlobalClasses.Assets;
+import com.mygdx.game.Math.Random;
 import com.mygdx.game.Music.MusicSetter;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.Play.PlayScreen;
+import com.mygdx.game.Play.PlayStage;
 import com.mygdx.game.Settings.IngameSettingsStage;
 import com.mygdx.game.Settings.SettingsStage;
 
@@ -38,12 +43,15 @@ abstract public class MyScreen implements Screen, InitableInterface {
 
     @Override
     public void dispose() {
+        MenuStage.music.stopMusics();
+        PlayScreen.gameMusic.stopMusics();
         spriteBatch.dispose();
     }
 
     @Override
     public void hide() {
-
+        MenuStage.music.stopMusics();
+        PlayScreen.gameMusic.stopMusics();
     }
 
     @Override
@@ -59,16 +67,7 @@ abstract public class MyScreen implements Screen, InitableInterface {
 
         //spriteBatch.setProjectionMatrix(camera.combined);
     }
-/*
-    public void setCameraReset(ExtendViewport viewport, int width, int height)
-    {
-        viewport.update(width, height, true);
-        ((OrthographicCamera)viewport.getCamera()).setToOrtho(false, viewport.getWorldWidth(), viewport.getWorldHeight());
-        ((OrthographicCamera)viewport.getCamera()).translate((viewport.getWorldWidth() -  - viewport.getMinWorldWidth() / 2) < 0 ? 0 : -((viewport.getWorldWidth()  - viewport.getMinWorldWidth()) / 2),
-                ((viewport.getWorldHeight()  - viewport.getMinWorldHeight()) / 2) < 0 ? 0 : -((viewport.getWorldHeight() - viewport.getMinWorldHeight()) / 2));
-        ((OrthographicCamera)viewport.getCamera()).update();
-    }
-*/
+
     @Override
     public void resize(int width, int height) {
         //setCameraReset(viewport, width, height);
@@ -81,7 +80,8 @@ abstract public class MyScreen implements Screen, InitableInterface {
 
     @Override
     public void show() {
-        //SettingsStage.actualVol = 1;
+        MenuStage.music = new MusicSetter(true);
+        PlayScreen.gameMusic = new MusicSetter(new Random(1,5).getGenNumber());
     }
 
     public Game getGame() {
@@ -97,9 +97,5 @@ abstract public class MyScreen implements Screen, InitableInterface {
 
     @Override
     public void init() {
-        //camera.setToOrtho(false);
-        /*
-        camera.translate(WORLD_WIDTH/2, WORLD_HEIGHT/2);*/
-        //camera.update();
     }
 }
