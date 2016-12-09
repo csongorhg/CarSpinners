@@ -320,6 +320,8 @@ public class PlayStage extends MyStage {
         addActor(counter);
     }
 
+    EnergyTextActor energyTextActor = null;
+
     @Override
     public void act(float delta) {
         if(!menuben) {
@@ -339,6 +341,15 @@ public class PlayStage extends MyStage {
                     carPhysic();
                     backgroundPhysic();
                     linePhysic();
+                    if (Physics.energy<5 && energyTextActor==null){
+                        addActor(energyTextActor = new EnergyTextActor(game.getLabelStyle()));
+                    }
+                    if (Physics.energy>=5 && energyTextActor!=null) {
+                        energyTextActor.remove();
+                        energyTextActor = null;
+                    }
+
+
                     if(isSzirena) {
                         szirenaActor.setVisible(true);
                         isSzirena = false;
@@ -437,6 +448,7 @@ public class PlayStage extends MyStage {
         energyActor.setPosition(57,4);
         addActor(energyActor);
 
+        if (energyTextActor!= null) energyTextActor.setZIndex(Integer.MAX_VALUE);
     }
 
     @Override
