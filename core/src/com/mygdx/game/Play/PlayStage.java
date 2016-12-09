@@ -471,15 +471,7 @@ public class PlayStage extends MyStage {
                     l.blocks[i].actor.remove();
                     Physics.maxEnergy();
                 }else if(l.blocks[i].getId() == 3){
-                    if (currentHeart<5) {
-                        System.out.println(currentHeart);
-                        heart[currentHeart] = new OneSpriteStaticActor(Assets.manager.get(Assets.HEART));
-                        heart[currentHeart].setPosition(emptyheart[currentHeart].getX(), emptyheart[currentHeart].getY());
-                        heart[currentHeart].setSize(emptyheart[currentHeart].getWidth(), emptyheart[currentHeart].getHeight());
-                        emptyheart[currentHeart].remove();
-                        addActor(emptyheart[currentHeart]);
-                    }
-
+                    //heart novel
                 }
                 else if(l.blocks[i].getWeight() == 1) {
                     if (currentHeart <5) {
