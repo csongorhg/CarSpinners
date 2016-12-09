@@ -35,4 +35,6 @@ public class Physics {
     public static void maxEnergy() {
         energy = MAXenergy;
     }
+
+    public static void maxHeal() { Car.heart = Car.maxheart; }
 }

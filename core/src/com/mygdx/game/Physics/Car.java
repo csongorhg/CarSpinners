@@ -19,12 +19,13 @@ public class Car{
         carActor.setPosition(x,y);
     }
 
-    public int getHeart() {
+    public static int getHeart() {
         return heart;
     }
 
     public void heal(){
-        heart = maxheart;
+        heart++;
+        if(heart > maxheart) heart = maxheart;
     }
 
     public void heal(int i){

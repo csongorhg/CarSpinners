@@ -64,7 +64,6 @@ public class PlayStage extends MyStage {
     private OneSpriteStaticActor energyActor;
     private OneSpriteStaticActor heart[]; //szivek eltárolása
     private OneSpriteStaticActor emptyheart[];
-    private int currentHeart; //jelenlegi szív
 
     private boolean fekisdown = false;
     private boolean gazisdown = false;
@@ -226,15 +225,22 @@ public class PlayStage extends MyStage {
 
         //szivek
         int x = 30 * Car.maxheart; //szivek szélessége
-        currentHeart = 0; //jelenlegi szív
 
         for (int i = 0; i < Car.maxheart; i++){ //tömbként generálom
+            emptyheart[i] = new OneSpriteStaticActor(Assets.manager.get(Assets.NOHEART));
+            emptyheart[i].setSize(30,30);
+            emptyheart[i].setX(width-x);
+            emptyheart[i].setY(heigth-30);
+            addActor(emptyheart[i]);
+            emptyheart[i].setZIndex(Integer.MAX_VALUE);
+
             heart[i] = new OneSpriteStaticActor(Assets.manager.get(Assets.HEART));
             heart[i].setSize(30,30);
             heart[i].setX(width-x);
             heart[i].setY(heigth-30);
             addActor(heart[i]);
             heart[i].setZIndex(Integer.MAX_VALUE);
+
             x-=30;
         }
 
@@ -328,11 +334,11 @@ public class PlayStage extends MyStage {
                 new CarEngineStart();
                 if (!dead) {
                     timer += delta;
+                    strings();
+                    layers();
                     carPhysic();
                     backgroundPhysic();
                     linePhysic();
-                    strings();
-                    layers();
                     if(isSzirena) {
                         szirenaActor.setVisible(true);
                         isSzirena = false;
@@ -352,7 +358,7 @@ public class PlayStage extends MyStage {
                 }
                 crashPhysic();
 
-                if (currentHeart == 5) {
+                if (Car.heart <= 0) {
                     explosion(delta);
                 }
                 if (settingsStage.isB()) new MusicSetter(new Random(1, 5).getGenNumber());
@@ -419,18 +425,12 @@ public class PlayStage extends MyStage {
         f.setZIndex(Integer.MAX_VALUE);
         p.setZIndex(Integer.MAX_VALUE);
         textButton5.setZIndex(Integer.MAX_VALUE);
-        try {
-            for (int f = 0; f < emptyheart.length; f++) {
-                emptyheart[f].setZIndex(Integer.MAX_VALUE);
-            }
-        }catch (Exception e){}
-        for (int i = 0; i < heart.length; i++){
-            heart[i].setZIndex(Integer.MAX_VALUE);
-        }
         car.carActor.setZIndex(Integer.MAX_VALUE);
         kmh.setZIndex(Integer.MAX_VALUE);
         policedistance.setZIndex(Integer.MAX_VALUE);
         score.setZIndex(Integer.MAX_VALUE);
+        heartLayer();
+
         energyActor.remove();
         energyActor = new OneSpriteStaticActor(EnergyTexture.getTexture());
         energyActor.setSize(8,24);
@@ -490,19 +490,16 @@ public class PlayStage extends MyStage {
                     l.blocks[i].actor.remove();
                     Physics.maxEnergy();
                 }else if(l.blocks[i].getId() == 3){
-                    //heart novel
+                    l.blocks[i].setId(0);
+                    l.blocks[i].actor.remove();
+                    car.heal();
+                    heartLayer();
                 }
                 else if(l.blocks[i].getWeight() == 1) {
-                    if (currentHeart <5) {
+                    if (Car.heart >= 0) {
                         boxCountNew.set(0,0f);
                         car.damage();
-                        emptyheart[currentHeart] = new OneSpriteStaticActor(Assets.manager.get(Assets.NOHEART));
-                        emptyheart[currentHeart].setPosition(heart[currentHeart].getX(), heart[currentHeart].getY());
-                        emptyheart[currentHeart].setSize(heart[currentHeart].getWidth(), heart[currentHeart].getHeight());
-                        heart[currentHeart].remove();
-                        addActor(emptyheart[currentHeart]);
-                        currentHeart++;
-                        if (currentHeart == 5) {
+                        if (Car.heart <= 0) {
                             dead = true;
                             szirenaActor.remove();
                             car.carActor.remove();
@@ -516,6 +513,15 @@ public class PlayStage extends MyStage {
                     l.blocks[i].actor.remove();
                 }
             }
+        }
+    }
+
+    private void heartLayer() {
+        for (int f = 0; f < Car.heart; f++) {
+            heart[f].setZIndex(Integer.MAX_VALUE);
+        }
+        for (int i = Car.heart; i < heart.length; i++){
+            emptyheart[i].setZIndex(Integer.MAX_VALUE);
         }
     }
 
