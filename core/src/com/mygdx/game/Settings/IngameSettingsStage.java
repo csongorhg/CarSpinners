@@ -131,9 +131,9 @@ public class IngameSettingsStage extends MyStage {
                     volumeArraySettings();
                 }else{
                     clicked = false;
-                    PlayScreen.gameMusic.musicVolume(-0.1f);
-                    volumeArraySettings();
+                    //PlayScreen.gameMusic.musicVolume(-0.1f);
                     PlayScreen.gameMusic.musicVolume(0f);
+                    volumeArraySettings();
                 }
                 musicOnOff();
             }
@@ -194,7 +194,7 @@ public class IngameSettingsStage extends MyStage {
     public void volumeArraySettings(){
         volumeArray = new Array<OneSpriteStaticActor>();
         for(float i=0; i<1; i+=0.1){
-            if(i<=PlayScreen.gameMusic.getMenuVolume()){
+            if(i<PlayScreen.gameMusic.getMenuVolume()){
                 volumeArray.add(new OneSpriteStaticActor(Assets.manager.get(Assets.FILLED_VOL)));
                 addActor(volumeArray.get((int)(i*10)));
             }else{

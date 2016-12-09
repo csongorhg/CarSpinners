@@ -82,17 +82,17 @@ public class SettingsStage extends MyStage{
                 else musicPlay = true;
                 IngameSettingsStage.musicPlay = musicPlay;
                 if(musicPlay){
-                    MenuStage.music.MenuMusic2();
-                    MenuStage.music = new MusicSetter(true);
+                    //MenuStage.music.MenuMusic2();
+                    //MenuStage.music = new MusicSetter(true);
                     MenuStage.music.musicVolume(1f);
                     MenuStage.music.MenuMusic();
                     volumeArraySettings();
                     //musicOnOff();
                 }else{
                     clicked = false;
-                    MenuStage.music.musicVolume(-0.1f);
-                    volumeArraySettings();
+                    //MenuStage.music.musicVolume(-0.1f);
                     MenuStage.music.musicVolume(0f);
+                    volumeArraySettings();
                     //musicOnOff();
                 }
                 musicOnOff();
@@ -157,7 +157,7 @@ public class SettingsStage extends MyStage{
     public void volumeArraySettings(){
         volumeArray = new Array<OneSpriteStaticActor>();
         for(float i=0; i<1; i+=0.1){
-            if(i<=MenuStage.music.getMenuVolume()){
+            if(i<MenuStage.music.getMenuVolume()){
                 volumeArray.add(new OneSpriteStaticActor(Assets.manager.get(Assets.FILLED_VOL)));
                 addActor(volumeArray.get((int)(i*10)));
             }else{
