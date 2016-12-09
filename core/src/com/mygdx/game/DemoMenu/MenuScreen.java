@@ -56,6 +56,21 @@ public class MenuScreen extends MyScreen {
     }
 
     @Override
+    public void pause() {
+        super.pause();
+    }
+
+    @Override
+    public void resume() {
+        super.resume();
+    }
+
+    @Override
+    public void show() {
+        super.show();
+    }
+
+    @Override
     public void hide() {
         preferences.flush();
         super.hide();

@@ -48,8 +48,8 @@ abstract public class MyScreen implements Screen, InitableInterface {
 
     @Override
     public void hide() {
-        MenuStage.music.stopMusics();
-        PlayScreen.gameMusic.stopMusics();
+        //MenuStage.music.stopMusics();
+        //PlayScreen.gameMusic.stopMusics();
     }
 
     @Override
@@ -78,8 +78,8 @@ abstract public class MyScreen implements Screen, InitableInterface {
 
     @Override
     public void show() {
-        MenuStage.music = new MusicSetter(true);
-        PlayScreen.gameMusic.stopMusics();
+        //MenuStage.music = new MusicSetter(true);
+        //PlayScreen.gameMusic.stopMusics();
         //if(game.getScreen().toString().equals("PlayScreen"))PlayScreen.gameMusic = new MusicSetter(new Random(1,5).getGenNumber());
     }
 

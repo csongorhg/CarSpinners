@@ -26,7 +26,7 @@ public class MusicSetter {
     private final Music gamemusic5 = Assets.manager.get(Assets.BADASS);
 
     private static int isSameMusic; //ugyan az a zene, melyik zene
-
+/*
     public MusicSetter(boolean b) {
         stopMusics();
         if(b) menumusic.play();
@@ -45,6 +45,7 @@ public class MusicSetter {
     }
 
     public void MenuMusic(){
+        System.out.println(SettingsStage.isB());
         if(!menumusic.isPlaying() && SettingsStage.isB()){
             menumusic.stop();
             menumusic.play();
@@ -137,5 +138,5 @@ public class MusicSetter {
         gamemusic4.stop();
         gamemusic5.stop();
     }
-
+*/
 }

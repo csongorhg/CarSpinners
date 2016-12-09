@@ -14,6 +14,7 @@ import com.mygdx.game.Credits.CreditsScreen;
 import com.mygdx.game.Extras.ExtrasScreen;
 import com.mygdx.game.GlobalClasses.Assets;
 import com.mygdx.game.Math.Random;
+import com.mygdx.game.Music.CarMusic;
 import com.mygdx.game.Music.MusicSetter;
 import com.mygdx.game.MyBaseClasses.MyButton;
 import com.mygdx.game.MyBaseClasses.MyLabel;
@@ -46,6 +47,8 @@ public class MenuStage extends MyStage {
     private MyLabel deadufocountLabel;
     public static final String STORED_SCORE = "STORED_SCORE";
 
+    public CarMusic carMusic;
+
     //private OneSpriteStaticActor cityStream, cityStream2; //úszó város
     //private int cityStreamSpeed;
 
@@ -54,9 +57,14 @@ public class MenuStage extends MyStage {
     }
 
 
+    public void disposeCarMusic(){
+        carMusic.dispose();
+    }
+
     public void init()
     {
-
+        carMusic = new CarMusic();
+        carMusic.addMusic(Assets.manager.get(Assets.MOOSE));
         addBackEventStackListener();
 
         addActor(deadufocountLabel = new MyLabel("", game.getLabelStyle()){
@@ -104,8 +112,8 @@ public class MenuStage extends MyStage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                PlayScreen.gameMusic.musicVolume(MenuStage.music.getMenuVolume());
-                music.stopMusics();
+                /*PlayScreen.gameMusic.musicVolume(MenuStage.music.getMenuVolume());
+                music.stopMusics();*/
                 Physics.carspeed = 0;
                 Physics.policedis = 1000;
                 Physics.maxEnergy();
@@ -202,10 +210,10 @@ public class MenuStage extends MyStage {
     @Override
     public void act(float delta) {
         super.act(delta);
+        carMusic.act();
 
 
-
-        music.MenuMusic();
+        //music.MenuMusic();
 
         //pénzfolyam
         for (int i = 0; i < moneyStream.size; i++) {
@@ -223,6 +231,7 @@ public class MenuStage extends MyStage {
 
     @Override
     public void dispose() {
+        carMusic.dispose();
         super.dispose();
     }
 

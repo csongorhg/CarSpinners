@@ -73,11 +73,11 @@ public class EndStage extends MyStage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                SettingsStage.musicPlay = IngameSettingsStage.musicPlay;
+                //SettingsStage.musicPlay = IngameSettingsStage.musicPlay;
                 SettingsStage.clicked = IngameSettingsStage.clicked;
-                PlayScreen.gameMusic.stopMusics();
+                /*PlayScreen.gameMusic.stopMusics();
                 MenuStage.music = new MusicSetter(IngameSettingsStage.musicPlay);
-                MenuStage.music.musicVolume(PlayScreen.gameMusic.getGameVolume());
+                MenuStage.music.musicVolume(PlayScreen.gameMusic.getGameVolume());*/
                 game.setBackButtonStack();
                 game.setScreen(new MenuScreen(game));
             }

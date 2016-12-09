@@ -47,7 +47,7 @@ public class PlayScreen extends MyScreen {
     */
     @Override
     public void init() {
-        gameMusic.stopMusics();
+        //gameMusic.stopMusics();
         //gameMusic = new MusicSetter(new Random(1, 5).getGenNumber());
         //gameMusic.musicVolume(MenuStage.music.getMenuVolume());
         playStage.settingclick = false;
@@ -88,4 +88,16 @@ public class PlayScreen extends MyScreen {
 
         super.dispose();
     }
+
+    @Override
+    public void pause() {
+        super.pause();
+    }
+
+
+    @Override
+    public void resume() {
+        super.resume();
+    }
+
 }

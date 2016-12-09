@@ -10,6 +10,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.DemoMenu.MenuStage;
 import com.mygdx.game.GlobalClasses.Assets;
 import com.mygdx.game.Math.Random;
+import com.mygdx.game.Music.CarMusic;
 import com.mygdx.game.Music.MusicSetter;
 import com.mygdx.game.MyBaseClasses.MyButton;
 import com.mygdx.game.MyBaseClasses.MyStage;
@@ -30,6 +31,7 @@ public class SettingsStage extends MyStage{
     public static boolean clicked;
     public static boolean musicPlay;
     //public MusicSetter musicSetter = new MusicSetter();
+    private CarMusic carMusic;
 
     public float width, heigth;
 
@@ -39,6 +41,9 @@ public class SettingsStage extends MyStage{
 
 
     public void init() {
+        carMusic = new CarMusic();
+        carMusic.addMusic(Assets.manager.get(Assets.MOOSE));
+
         addBackEventStackListener();
 
         textButton = new MyButton("Back", game.getTextButtonStyle());
@@ -78,20 +83,19 @@ public class SettingsStage extends MyStage{
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
                 volumeIconSpriteActor.remove();
-                if(MenuStage.music.getMenuVolume() > 0) musicPlay = false;
+                if(CarMusic.getVolume() > 0) musicPlay = false;
                 else musicPlay = true;
                 IngameSettingsStage.musicPlay = musicPlay;
                 if(musicPlay){
                     //MenuStage.music.MenuMusic2();
                     //MenuStage.music = new MusicSetter(true);
-                    MenuStage.music.musicVolume(1f);
-                    MenuStage.music.MenuMusic();
+                    CarMusic.setVolume(1f);
                     volumeArraySettings();
                     //musicOnOff();
                 }else{
                     clicked = false;
                     //MenuStage.music.musicVolume(-0.1f);
-                    MenuStage.music.musicVolume(0f);
+                    CarMusic.setVolume(0f);
                     volumeArraySettings();
                     //musicOnOff();
                 }
@@ -111,23 +115,20 @@ public class SettingsStage extends MyStage{
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                if(!musicPlay && !clicked && PlayScreen.gameMusic.getGameVolume() == 0){
+                if(!musicPlay && !clicked && CarMusic.getVolume() == 0){
                     volumeIconSpriteActor.remove();
                     musicPlay = true;
-                    MenuStage.music.musicVolume(1f);
-                    MenuStage.music.MenuMusic();
+                    //CarMusic.setVolume(1f);
                     musicOnOff();
                 }
-                else if(MenuStage.music.getMenuVolume() == 0){
+                else if(CarMusic.getVolume() == 0){
                     volumeIconSpriteActor.remove();
                     musicPlay = true;
-                    MenuStage.music.musicVolume(0.09999993f);
-                    MenuStage.music.MenuMusic2();
-                    MenuStage.music = new MusicSetter(true);
+                    //CarMusic.setVolume(0.09999993f);
                     musicOnOff();
                 }
-                else if(MenuStage.music.getMenuVolume()<=0.9){
-                    MenuStage.music.musicVolume(MenuStage.music.getMenuVolume()+0.1f);
+                else if(CarMusic.getVolume()<=0.9){
+                    CarMusic.setVolume(CarMusic.getVolume()+0.1f);
                 }
                 //PlayScreen.gameMusic.musicVolume(MenuStage.music.getMenuVolume());
                 volumeArraySettings();
@@ -137,15 +138,15 @@ public class SettingsStage extends MyStage{
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                if(MenuStage.music.getMenuVolume()>=0){
-                    MenuStage.music.musicVolume(MenuStage.music.getMenuVolume()-0.1f);
+                if(CarMusic.getVolume()>=0){
+                    CarMusic.setVolume(CarMusic.getVolume()-0.1f);
                     volumeArraySettings();
                 }
-                if(MenuStage.music.getMenuVolume()<0){
+                if(CarMusic.getVolume()<0){
                     volumeIconSpriteActor.remove();
                     musicPlay = false;
                     IngameSettingsStage.musicPlay = musicPlay;
-                    MenuStage.music.musicVolume(0);
+                    CarMusic.setVolume(0);
                     clicked = true;
                     musicOnOff();
                 }
@@ -158,7 +159,7 @@ public class SettingsStage extends MyStage{
     public void volumeArraySettings(){
         volumeArray = new Array<OneSpriteStaticActor>();
         for(float i=0; i<1; i+=0.1){
-            if(i<MenuStage.music.getMenuVolume()){
+            if(i<CarMusic.getVolume()){
                 volumeArray.add(new OneSpriteStaticActor(Assets.manager.get(Assets.FILLED_VOL)));
                 addActor(volumeArray.get((int)(i*10)));
             }else{
@@ -187,5 +188,15 @@ public class SettingsStage extends MyStage{
         return musicPlay;
     }
 
+    @Override
+    public void act(float delta) {
+        carMusic.act();
+        super.act(delta);
+    }
 
+    @Override
+    public void dispose() {
+        carMusic.dispose();
+        super.dispose();
+    }
 }

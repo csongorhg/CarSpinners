@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g3d.particles.influencers.DynamicsModifier;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -26,6 +27,7 @@ import com.mygdx.game.Graphics.ButtonCaller;
 import com.mygdx.game.Graphics.EnergyTexture;
 import com.mygdx.game.Graphics.Road;
 import com.mygdx.game.Math.Random;
+import com.mygdx.game.Music.CarMusic;
 import com.mygdx.game.Music.MusicSetter;
 import com.mygdx.game.MyBaseClasses.MyLabel;
 import com.mygdx.game.MyBaseClasses.MyStage;
@@ -100,8 +102,14 @@ public class PlayStage extends MyStage {
     private float endLimit;
     private boolean boomPolice;
 
+    private CarMusic carMusic;
+
     public PlayStage(Viewport viewport, Batch batch, MyGdxGame game) {
         super(viewport, batch, game);
+    }
+
+    public void disposeCarMusic(){
+        carMusic.dispose();
     }
 
     @Override
@@ -120,6 +128,12 @@ public class PlayStage extends MyStage {
     protected IngameSettingsStage settingsStage;
 
     public void init() {
+        carMusic = new CarMusic();
+        carMusic.addMusic(Assets.manager.get(Assets.POPDANCE));
+        carMusic.addMusic(Assets.manager.get(Assets.HAPPYROCK));
+        carMusic.addMusic(Assets.manager.get(Assets.EXTREMEACTION));
+        carMusic.addMusic(Assets.manager.get(Assets.DANCE));
+        carMusic.addMusic(Assets.manager.get(Assets.BADASS));
         addBackEventStackListener();
 
         boomPolice = false;
@@ -134,7 +148,7 @@ public class PlayStage extends MyStage {
         boxCountNew = new Vector<Float>(); //ellenőrző összeg a pontozáshoz
         scoreNumber = 0; //pontszám
 
-        settingsStage = new IngameSettingsStage(new ExtendViewport(270,480,new OrthographicCamera(270/2,480/2)), getBatch(), game);
+        settingsStage = new IngameSettingsStage(new ExtendViewport(270,480,new OrthographicCamera(270/2,480/2)), new SpriteBatch(), game);
 
         resized();
 
@@ -335,7 +349,8 @@ public class PlayStage extends MyStage {
 
     @Override
     public void act(float delta) {
-        PlayScreen.gameMusic = new MusicSetter(new Random(1,5).getGenNumber());
+        carMusic.act();
+        //PlayScreen.gameMusic = new MusicSetter(new Random(1,5).getGenNumber());
         if(!menuben) {
             super.act(delta);
             walkActor.setX(walkActor.getX()+1);
@@ -406,7 +421,7 @@ public class PlayStage extends MyStage {
                 if (Car.heart <= 0) {
                     explosion(delta);
                 }
-                if (settingsStage.isB()) new MusicSetter(new Random(1, 5).getGenNumber());
+                //if (settingsStage.isB()) new MusicSetter(new Random(1, 5).getGenNumber());
                 settingsStage.act(delta);
                 isdead();
             }
@@ -660,7 +675,7 @@ public class PlayStage extends MyStage {
 
     private void carPhysic(){
         if (Physics.carspeed>0.01f) {
-            car.carActor.setPosition(car.carActor.getX() - ((Gdx.input.getAccelerometerX() / 4)*Physics.carspeed), car.carActor.getY());
+            car.carActor.setPosition(car.carActor.getX() - ((Gdx.input.getAccelerometerX() / 2)*(float)Math.sqrt(Physics.carspeed)), car.carActor.getY());
         }
         if(car.carActor.getX()+car.carActor.getWidth() > width/5*4) car.carActor.setPosition(width/5*4-car.carActor.getWidth(),car.carActor.getY());
         if(car.carActor.getX()< width/5) car.carActor.setPosition(width/5,car.carActor.getY());
@@ -678,6 +693,7 @@ public class PlayStage extends MyStage {
 
     @Override
     public void dispose() {
+        carMusic.dispose();
         settingsStage.dispose();
         super.dispose();
     }
