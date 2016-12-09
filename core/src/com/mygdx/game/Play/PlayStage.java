@@ -510,6 +510,8 @@ public class PlayStage extends MyStage {
                 else if(l.blocks[i].getWeight() == 1) {
                     if (Car.heart >= 0) {
                         boxCountNew.set(0,0f);
+                        Physics.carspeed -= 3;
+                        if(Physics.carspeed < Physics.MINcarspeed) Physics.carspeed = Physics.MINcarspeed;
                         car.damage();
                         if (Car.heart <= 0) {
                             dead = true;
