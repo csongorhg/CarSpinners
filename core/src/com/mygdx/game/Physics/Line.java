@@ -10,8 +10,8 @@ import com.mygdx.game.GlobalClasses.Assets;
 
 public class Line {
 
-    static int lastEnergy = 0;
-    static int lastHeart = 0;
+    public static int lastEnergy = 0;
+    public static int lastHeart = 0;
 
     public static Block[] allblocks = {
         new Block(1,0,Assets.manager.get(Assets.BLOCAKDE_0)),
@@ -54,7 +54,7 @@ public class Line {
             lastEnergy = 0;
         }
 
-        if(lastHeart > 1){
+        if(lastHeart > 25){
             int i = vel(0,3)-1;
             while(t[i] == 2){
                 i = vel(0,3)-1;
