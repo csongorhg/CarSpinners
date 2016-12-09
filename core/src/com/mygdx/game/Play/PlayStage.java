@@ -97,6 +97,9 @@ public class PlayStage extends MyStage {
 
     private PoliceActor policeActor;
 
+    private float endLimit;
+    private boolean boomPolice;
+
     public PlayStage(Viewport viewport, Batch batch, MyGdxGame game) {
         super(viewport, batch, game);
     }
@@ -118,6 +121,8 @@ public class PlayStage extends MyStage {
 
     public void init() {
         addBackEventStackListener();
+
+        boomPolice = false;
 
         CarEngineStart.played = false;
 
@@ -271,6 +276,12 @@ public class PlayStage extends MyStage {
         policedistance.setPosition(75,4);
         addActor(policedistance);
 
+        //rendőrautó
+        policeActor = new PoliceActor();
+        policeActor.setPosition(car.carActor.getX()-40
+                , 0-policeActor.getHeight());
+        addActor(policeActor);
+
         //score
         Label.LabelStyle labelStyle = game.getLabelStyle();
         //átméretezés
@@ -336,6 +347,7 @@ public class PlayStage extends MyStage {
                 new CarEngineStart();
                 if (!dead) {
                     timer += delta;
+                    policeActor.setZIndex(Integer.MAX_VALUE);
                     strings();
                     layers();
                     carPhysic();
@@ -366,10 +378,34 @@ public class PlayStage extends MyStage {
                     }
 
                     if (timer > 2f) counter.remove();
+                }else {
+                    if (policeActor.getY()+48 >= car.carActor.getY()) {
+                        if (car.carActor.getX() >= width - car.carActor.getWidth()) {
+                            if (!boomPolice) {
+                                policedistance.setText("0");
+                                boomPolice = true;
+                                explosionActor = new ExplosionActor();
+                                explosionActor.setPosition(car.carActor.getX() - car.carActor.getWidth() - 24,
+                                        car.carActor.getY() - car.carActor.getHeight()/2);
+                                car.carActor.remove();
+                                addActor(explosionActor);
+                                endLimit = 2f;
+                                explosion(delta);
+                            }
+                        } else {
+                            policeActor.setX(policeActor.getX() + 2);
+                            policeActor.setY(policeActor.getY() + 1);
+                            car.carActor.setX(car.carActor.getX() + 2);
+                            car.carActor.setY(car.carActor.getY() + 1);
+                        }
+                    }
+                    else {
+                        policeActor.setY(policeActor.getY()+2);
+                    }
                 }
                 crashPhysic();
-
                 if (Car.heart <= 0) {
+                    endLimit = 2f;
                     explosion(delta);
                 }
                 if (settingsStage.isB()) new MusicSetter(new Random(1, 5).getGenNumber());
@@ -397,9 +433,6 @@ public class PlayStage extends MyStage {
     private void isdead() {//Physics.energy
         if(Physics.policedis <= 0){
             if (!dead) {
-                policeActor = new PoliceActor();
-                policeActor.setPosition(100, 100);
-                addActor(policeActor);
             }
             dead = true;
             /*if (scoreNumber>preferences.getInteger(SCORE, 0)){
@@ -416,6 +449,9 @@ public class PlayStage extends MyStage {
                     setPosition(100,100);
                 }
             });*/
+        }
+        if (Physics.energy <= 0) {
+            dead = true;
         }
     }
 
