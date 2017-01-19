@@ -19,7 +19,6 @@ public class CarMusic implements Disposable{
 
     public static void setVolume(float volume) {
         CarMusic.volume = volume;
-        //System.out.println("Setvolume " + volume);
     }
 
     public static void setMusicPlay(boolean musicPlay) {

@@ -189,7 +189,8 @@ public class PlayStage extends MyStage {
         addActor(textButton5);
         textButton5.setZIndex(Integer.MAX_VALUE);
 
-        felulet = new OneSpriteStaticActor(Assets.manager.get(Assets.ROAD_MENU));        float arany = width/felulet.getWidth();
+        felulet = new OneSpriteStaticActor(Assets.manager.get(Assets.ROAD_MENU));
+        float arany = width/felulet.getWidth();
         felulet.setSize(felulet.getWidth()*arany,felulet.getHeight()*arany);
         addActor(felulet);
         felulet.setZIndex(Integer.MAX_VALUE);
@@ -292,8 +293,9 @@ public class PlayStage extends MyStage {
 
         //rendőrautó
         policeActor = new PoliceActor();
-        policeActor.setPosition(car.carActor.getX()-40
-                , 0-policeActor.getHeight());
+        policeActor.setPosition(
+                car.carActor.getX() > getViewport().getWorldWidth()/2?car.carActor.getX()-40:car.carActor.getX()+40,
+                0-policeActor.getHeight());
         addActor(policeActor);
 
         //score
@@ -449,20 +451,6 @@ public class PlayStage extends MyStage {
             if (!dead) {
             }
             dead = true;
-            /*if (scoreNumber>preferences.getInteger(SCORE, 0)){
-                preferences.putInteger(SCORE, scoreNumber);
-            }
-            preferences.flush();
-            timeOutput();
-            game.setScreen(new EndScreen(game));*/
-
-            /*addActor(new MoneyActor(){
-                @Override
-                public void init() {
-                    super.init();
-                    setPosition(100,100);
-                }
-            });*/
         }
         if(Physics.energy <= 0){
             dead = true;
