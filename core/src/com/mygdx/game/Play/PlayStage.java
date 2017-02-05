@@ -518,7 +518,6 @@ public class PlayStage extends MyStage {
     }
 
     private void explosion(float delta) {
-        System.out.println("Lófasz");
         elapseTime += delta;
         if (elapseTime > 1f) {
             explosionActor.remove();
@@ -678,9 +677,9 @@ public class PlayStage extends MyStage {
 
     @Override
     public void dispose() {
+        super.dispose();
         carMusic.dispose();
         disposeCarMusic();
         settingsStage.dispose();
-        super.dispose();
     }
 }
