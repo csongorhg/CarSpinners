@@ -15,7 +15,7 @@ public class EnergyTexture {
     public static Texture getTexture(){
         int e = Physics.energy;
         Pixmap p = new Pixmap(5,17, Pixmap.Format.RGBA8888);
-        Color c = e>10 ? Color.GREEN : e>5 ? Color.ORANGE : Color.RED;
+        Color c = e>20 ? Color.GREEN : e>10 ? Color.ORANGE : Color.RED;
         for (int i = 0; i < p.getWidth(); i++){
             for (int j = 0; j< p.getHeight(); j++){
                 if(i == 0 || i == 4 || j == 0 || j == 16){

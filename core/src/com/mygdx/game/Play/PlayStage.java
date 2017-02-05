@@ -293,10 +293,7 @@ public class PlayStage extends MyStage {
 
         //rendőrautó
         policeActor = new PoliceActor();
-        policeActor.setPosition(
-                car.carActor.getX() > getViewport().getWorldWidth()/2?car.carActor.getX()-40:car.carActor.getX()+40,
-                0-policeActor.getHeight());
-        addActor(policeActor);
+        policeActor.setY(-policeActor.getHeight());
 
         //score
         Label.LabelStyle labelStyle = game.getLabelStyle();
@@ -397,26 +394,25 @@ public class PlayStage extends MyStage {
 
                     if (timer > 2f) counter.remove();
                 }else {
-                    if (policeActor.getY()+48 >= car.carActor.getY()) {
-                        if (explosionActor != null) explosion(delta);
-                        if (car.carActor.getX() >= width - car.carActor.getWidth()) {
-                            if (!boomPolice) {
-                                boomPolice = true;
-                                explosionActor = new ExplosionActor();
-                                explosionActor.setPosition(car.carActor.getX() - car.carActor.getWidth() - 24,
-                                        car.carActor.getY() - car.carActor.getHeight()/2);
-                                car.carActor.remove();
-                                addActor(explosionActor);
-                            }
-                        } else {
-                            policeActor.setX(policeActor.getX() + 2);
-                            policeActor.setY(policeActor.getY() + 1);
-                            car.carActor.setX(car.carActor.getX() + 2);
-                            car.carActor.setY(car.carActor.getY() + 1);
-                        }
+                    if (car.carActor.getX() != policeActor.getX()) policeActor.setX(car.carActor.getX());
+                    if (car.carActor.getY() - car.carActor.getHeight() / 2 - car.carActor.getHeight() <= policeActor.getY()
+                            && explosionActor == null) {
+                            explosionActor = new ExplosionActor();
+                            explosionActor.setSize(explosionActor.getWidth() * 1.5f, explosionActor.getHeight() * 1.5f);
+                            explosionActor.setPosition(car.carActor.getX() + car.carActor.getWidth()/2 - explosionActor.getWidth()/2,
+                                    car.carActor.getY() + car.carActor.getHeight() / 2 - explosionActor.getHeight() / 2);
+                            car.carActor.remove();
+                            policeActor.remove();
+                            addActor(explosionActor);
+
                     }
+                    if (explosionActor != null) explosion(delta);
                     else {
-                        policeActor.setY(policeActor.getY()+2);
+                        addActor(policeActor);
+                        policeActor.setZIndex(felulet.getZIndex() - 1);
+                        policeActor.setY(policeActor.getY() + 3 + Physics.carspeed);
+                        car.carActor.setY(car.carActor.getY() + Physics.carspeed);
+                        policeActor.setX(car.carActor.getX() - car.carActor.getWidth() / 2);
                     }
                 }
                 crashPhysic();
@@ -522,6 +518,7 @@ public class PlayStage extends MyStage {
     }
 
     private void explosion(float delta) {
+        System.out.println("Lófasz");
         elapseTime += delta;
         if (elapseTime > 1f) {
             explosionActor.remove();
@@ -682,6 +679,7 @@ public class PlayStage extends MyStage {
     @Override
     public void dispose() {
         carMusic.dispose();
+        disposeCarMusic();
         settingsStage.dispose();
         super.dispose();
     }
