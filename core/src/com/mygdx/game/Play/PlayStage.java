@@ -204,14 +204,17 @@ public class PlayStage extends MyStage {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 gazisdown = true;
+                System.out.println("gaz is down");
                 return super.touchDown(event, x, y, pointer, button);
             }
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 gazisdown = false;
+                System.out.println("gaz is up");
                 super.touchUp(event, x, y, pointer, button);
             }
+
         });
 
         addActor(p);

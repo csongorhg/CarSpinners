@@ -3,6 +3,8 @@ package com.mygdx.game.Play;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.mygdx.game.DemoMenu.MenuStage;
 import com.mygdx.game.Math.Random;
@@ -29,6 +31,7 @@ public class PlayScreen extends MyScreen {
 
         playStage.act(delta);
         playStage.draw();
+
 
 
         //gameMusic = new MusicSetter(new Random(1,5).getGenNumber());
